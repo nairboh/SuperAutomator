@@ -123,7 +123,7 @@
               <Component id="jScrollPane3" min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace min="0" pref="165" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
@@ -144,7 +144,7 @@
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="scheduleHolidaysButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="73" max="32767" attributes="0"/>
                       <Component id="dateAndTimeLabel" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -190,11 +190,13 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTextArea" name="jTextArea2">
+        <Component class="javax.swing.JTextArea" name="scheduledTaskTextArea">
           <Properties>
-            <Property name="columns" type="int" value="20"/>
-            <Property name="rows" type="int" value="5"/>
-            <Property name="text" type="java.lang.String" value="[8:21:00 - 8:21:30 AM] STAND UP FOR O&apos;CANADA&#xa;[8:21:30 - 8:23:00 AM] O&apos;CANADA&#xa;"/>
+            <Property name="columns" type="int" value="20" postCode="scheduledTaskTextArea.setEditable(false);"/>
+            <Property name="rows" type="int" value="5" postCode="Timer timer = new Timer();&#xa;timer.readFile();"/>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="&quot;[&quot; + timer.getTaskStartTime() + &quot; - 8:21:30 AM] &quot; + timer.getTaskName()" type="code"/>
+            </Property>
           </Properties>
         </Component>
       </SubComponents>

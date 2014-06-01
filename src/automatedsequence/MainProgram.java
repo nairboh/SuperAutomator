@@ -18,7 +18,6 @@ import javax.swing.SwingUtilities;
 public class MainProgram extends javax.swing.JFrame {
     
     MainClass MC = new MainClass();
-    boolean loop = true;
     
     /**
      * Creates new form MainProgram
@@ -41,7 +40,7 @@ public class MainProgram extends javax.swing.JFrame {
         jTextArea1 = new javax.swing.JTextArea();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea2 = new javax.swing.JTextArea();
+        scheduledTaskTextArea = new javax.swing.JTextArea();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTextArea3 = new javax.swing.JTextArea();
@@ -77,10 +76,13 @@ public class MainProgram extends javax.swing.JFrame {
 
         jLabel1.setText("Logger");
 
-        jTextArea2.setColumns(20);
-        jTextArea2.setRows(5);
-        jTextArea2.setText("[8:21:00 - 8:21:30 AM] STAND UP FOR O'CANADA\n[8:21:30 - 8:23:00 AM] O'CANADA\n");
-        jScrollPane2.setViewportView(jTextArea2);
+        scheduledTaskTextArea.setColumns(20);
+        scheduledTaskTextArea.setEditable(false);
+        scheduledTaskTextArea.setRows(5);
+        Timer timer = new Timer();
+        timer.readFile();
+        scheduledTaskTextArea.setText("[" + timer.getTaskStartTime() + " - 8:21:30 AM] " + timer.getTaskName());
+        jScrollPane2.setViewportView(scheduledTaskTextArea);
 
         jLabel2.setText("SCHEDULED TASKS");
 
@@ -234,7 +236,7 @@ public class MainProgram extends javax.swing.JFrame {
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 165, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -252,7 +254,7 @@ public class MainProgram extends javax.swing.JFrame {
                             .addComponent(propertiesButton))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(scheduleHolidaysButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
                         .addComponent(dateAndTimeLabel)))
                 .addGap(14, 14, 14))
         );
@@ -261,28 +263,7 @@ public class MainProgram extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void overrideToggleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_overrideToggleButtonActionPerformed
-        DateFormat df = DateFormat.getDateInstance();
-        SimpleDateFormat sf = new SimpleDateFormat("hh:mm:ss");
-        (new Thread(new Timer())).start();
-        /*do {
-        if (sf.format(new Date()).equals("02:10:40")) {
-            MC.Play("/Users/brianho/Music/Black.mp3");
-            System.out.println("Yoro my polo");
-        
-        int before = 0;
-        
-        while(loop) {
-            if (before != MC.getPosition())
-                
-            System.out.println(Math.round((double) MC.getPosition() / 1000));
-            before = MC.getPosition();  
-            if (MC.getPosition() >= 10000) {
-                MC.Stop();
-                loop = false;
-            }
-        }
-        }
-        } while(!sf.format(new Date()).equals("02:10:40"));*/
+
     }//GEN-LAST:event_overrideToggleButtonActionPerformed
 
     private void scheduleCommandButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_scheduleCommandButtonActionPerformed
@@ -310,26 +291,7 @@ public class MainProgram extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton4MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseReleased
-        DateFormat df = DateFormat.getDateInstance();
-        SimpleDateFormat sf = new SimpleDateFormat("hh:mm:ss");
-        
-        if (sf.format(new Date()).equals("01:56:20")) {
-            MC.Play("/Users/brianho/Music/Black.mp3");
-            System.out.println("Yoro my polo");
-        
-        int before = 0;
-        
-        while(loop) {
-            if (before != MC.getPosition())
-                
-            System.out.println(Math.round((double) MC.getPosition() / 1000));
-            before = MC.getPosition();  
-            if (MC.getPosition() >= 10000) {
-                MC.Stop();
-                loop = false;
-            }
-        }
-        }
+
     }//GEN-LAST:event_jButton4MouseReleased
 
     private void scheduleHolidaysButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_scheduleHolidaysButtonActionPerformed
@@ -362,7 +324,6 @@ public class MainProgram extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextArea jTextArea2;
     private javax.swing.JTextArea jTextArea3;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JToggleButton overrideToggleButton;
@@ -370,5 +331,6 @@ public class MainProgram extends javax.swing.JFrame {
     private javax.swing.JButton propertiesButton;
     private javax.swing.JButton scheduleCommandButton;
     private javax.swing.JButton scheduleHolidaysButton;
+    private javax.swing.JTextArea scheduledTaskTextArea;
     // End of variables declaration//GEN-END:variables
 }

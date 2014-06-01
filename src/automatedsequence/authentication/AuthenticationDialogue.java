@@ -1,6 +1,7 @@
 package automatedsequence.authentication;
 
 import automatedsequence.MainProgram;
+import automatedsequence.Timer;
 import java.awt.Color;
 import java.util.Arrays;
 
@@ -101,6 +102,7 @@ public class AuthenticationDialogue extends javax.swing.JFrame {
             dispose(); // kills the authentication window
             gui.setLocationRelativeTo(null); // centers the main gui 
             gui.setVisible(true); // makes the main gui visible
+            (new Thread(new Timer())).start();
         } else {
             instructionalText.setForeground(Color.red); // makes text below appear red
             instructionalText.setText("You have entered the wrong password, Try Again!");
