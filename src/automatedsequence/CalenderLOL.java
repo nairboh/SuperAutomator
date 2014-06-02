@@ -3,25 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package automatedsequence;
-
-import java.util.Calendar;
 
 /**
  *
  * @author brianho
  */
 public class CalenderLOL {
-    public static void getTime() {
-        
-        Calendar calendar = Calendar.getInstance();
-        
-        byte daysOfWeek = (byte) calendar.get(Calendar.DAY_OF_WEEK);
-        
-        String nameOfDayOfWeek =""; // Initialize 
-        
-        switch(daysOfWeek) {
+
+    public String getDayOfWeek(int dayOfWeek) {
+        String nameOfDayOfWeek = "";
+        switch (dayOfWeek) {
             case 1:
                 nameOfDayOfWeek = "Sunday";
                 break;
@@ -42,14 +34,53 @@ public class CalenderLOL {
                 break;
             case 7:
                 nameOfDayOfWeek = "Saturday";
-                break;     
+                break;
         }
-        
-        System.out.println("Today is " + nameOfDayOfWeek );
+
+        return nameOfDayOfWeek;
     }
     
-    public static void main(String[] args) {
-        getTime();
+    public String getMonth(int month) {
+        String nameOfMonth = "";
+        switch (month) {
+            case 1:
+                nameOfMonth = "January";
+                break;
+            case 2:
+                nameOfMonth = "Febuary";
+                break;
+            case 3:
+                nameOfMonth = "March";
+                break;
+            case 4:
+                nameOfMonth = "April";
+                break;
+            case 5:
+                nameOfMonth = "May";
+                break;
+            case 6:
+                nameOfMonth = "June";
+                break;
+            case 7:
+                nameOfMonth = "July";
+                break;
+            case 8:
+                nameOfMonth = "August";
+                break;
+            case 9:
+                nameOfMonth = "September";
+                break;
+            case 10:
+                nameOfMonth = "October";
+                break;
+            case 11:
+                nameOfMonth = "November";
+                break;
+            case 12:
+                nameOfMonth = "December";
+                break;
+        }
+        return nameOfMonth;
         
-    }
+    } 
 }

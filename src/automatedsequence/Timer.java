@@ -14,7 +14,7 @@ public class Timer implements Runnable {
 
     private Scanner scheduleFile;
     private String taskNumber, name = "", startTime = "", endTime, date;
-
+    
     @Override
     public void run() {
         MainClass MC = new MainClass();
@@ -55,6 +55,7 @@ public class Timer implements Runnable {
         }
          // exits file after reading
         //while (scheduleFile.hasNext()) {
+        int lol = scheduleFile.nextInt();
             name = scheduleFile.next();
             startTime = scheduleFile.next();
             endTime = scheduleFile.next();
