@@ -2,11 +2,17 @@ package automatedsequence.dateAndTime;
 
 /**
  * Purpose: SuperCalendar Class
- * 
+ *
  * @author Brian Ho
  */
 public class SuperCalendar {
 
+    /**
+     * Method returns a string of the day of week
+     *
+     * @param dayOfWeek an integer value of the day of week
+     * @return a string representation of the day of week
+     */
     public String getDayOfWeek(int dayOfWeek) {
         String nameOfDayOfWeek = "";
         switch (dayOfWeek) {
@@ -32,10 +38,15 @@ public class SuperCalendar {
                 nameOfDayOfWeek = "Saturday";
                 break;
         }
-
         return nameOfDayOfWeek;
     }
     
+    /**
+     * Method returns a string of the current month
+     * 
+     * @param month an integer value of the current month
+     * @return a string representation of the current month
+     */
     public String getMonth(int month) {
         String nameOfMonth = "";
         switch (month) {
@@ -77,6 +88,5 @@ public class SuperCalendar {
                 break;
         }
         return nameOfMonth;
-        
-    } 
+    }
 }
