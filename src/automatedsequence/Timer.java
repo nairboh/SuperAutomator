@@ -17,7 +17,7 @@ public class Timer implements Runnable {
     
     @Override
     public void run() {
-        MainClass MC = new MainClass();
+        MP3Player MC = new MP3Player();
         SimpleDateFormat sf = new SimpleDateFormat("hh:mm:ss");
 
         int elaspedTimeInSeconds = 0;
@@ -27,7 +27,7 @@ public class Timer implements Runnable {
 
         while (true) { // loop indefinately
             if (sf.format(new Date()).equals(startTime)) { // if the time is as listed in the file, execute actions below
-                MC.Play("/Users/brianho/Music/Black.mp3");
+                MC.Play("/Users/brianho/Music/hello.mp3");
                 isPlaying = true;
                 
             }
@@ -35,7 +35,7 @@ public class Timer implements Runnable {
                 MC.Stop();
                 isPlaying = false;
             }
-            System.out.println(startTime);
+            //System.out.println(startTime);
             try {
                 Thread.sleep(1000); // loop once every second, reduces toll on cpu
                 if (isPlaying) {
