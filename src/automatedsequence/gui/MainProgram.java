@@ -1,11 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package automatedsequence.gui;
 
-import automatedsequence.CalenderLOL;
+import automatedsequence.dateAndTime.SuperCalendar;
 import automatedsequence.MP3Player;
 import automatedsequence.RandomizeOCanada;
 import automatedsequence.fileInput.ReadFile;
@@ -15,25 +10,21 @@ import javax.swing.ListSelectionModel;
 
 /**
  *
- * @author brianho
+ * @author Brian Ho
  */
 public class MainProgram extends javax.swing.JFrame {
 
     private ReadFile file = new ReadFile();
     private MP3Player player = new MP3Player();
-    private String[] strings;
-    //private Timer timer = new Timer();
     private RandomizeOCanada oCanada = new RandomizeOCanada();
-    private CalenderLOL calender = new CalenderLOL();
-    String time;
+    private SuperCalendar calendar = new SuperCalendar();
+    private String time;
 
     /**
      * Creates new form MainProgram
      */
     public MainProgram() {
-        //timer.readFile();
-        //timer.closeFile();
-        initComponents();
+        initComponents(); // initializes all the components in the gui
     }
 
     /**
@@ -57,7 +48,7 @@ public class MainProgram extends javax.swing.JFrame {
         overrideToggleButton = new javax.swing.JToggleButton();
         propertiesButton = new javax.swing.JButton();
         postponeToggleButton = new javax.swing.JToggleButton();
-        jTextField1 = new javax.swing.JTextField();
+        postponeDurationInMinutes = new javax.swing.JTextField();
         minutesLabel = new javax.swing.JLabel();
         scheduleHolidaysButton = new javax.swing.JButton();
         startNowButton = new javax.swing.JButton();
@@ -115,10 +106,10 @@ public class MainProgram extends javax.swing.JFrame {
             }
         });
 
-        jTextField1.setText("5");
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        postponeDurationInMinutes.setText("5");
+        postponeDurationInMinutes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                postponeDurationInMinutesActionPerformed(evt);
             }
         });
 
@@ -132,11 +123,6 @@ public class MainProgram extends javax.swing.JFrame {
         });
 
         startNowButton.setText("START NOW");
-        startNowButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                startNowButtonMouseReleased(evt);
-            }
-        });
         startNowButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 startNowButtonActionPerformed(evt);
@@ -149,11 +135,6 @@ public class MainProgram extends javax.swing.JFrame {
 
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
-        });
-        scheduledTasks.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
-            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
-                scheduledTasksValueChanged(evt);
-            }
         });
         jScrollPane4.setViewportView(scheduledTasks);
 
@@ -177,7 +158,7 @@ public class MainProgram extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(postponeToggleButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(postponeDurationInMinutes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(minutesLabel)
                         .addGap(51, 51, 51)
@@ -216,7 +197,7 @@ public class MainProgram extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(overrideToggleButton)
                             .addComponent(postponeToggleButton)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(postponeDurationInMinutes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(minutesLabel)
                             .addComponent(startNowButton))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -237,8 +218,8 @@ public class MainProgram extends javax.swing.JFrame {
 
                 while (true){
                     Calendar c= new GregorianCalendar();
-                    String dayOfWeek = (calender.getDayOfWeek(c.get(Calendar.DAY_OF_WEEK)));
-                    String month = (calender.getMonth(c.get(Calendar.MONTH) + 1)); // because starts at 0
+                    String dayOfWeek = (calendar.getDayOfWeek(c.get(Calendar.DAY_OF_WEEK)));
+                    String month = (calendar.getMonth(c.get(Calendar.MONTH) + 1)); // because starts at 0
                     int dayOfMonth = c.get(Calendar.DAY_OF_MONTH);
                     int year = c.get(Calendar.YEAR);
                     int hour = c.get(Calendar.HOUR) + 12;
@@ -258,11 +239,20 @@ public class MainProgram extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-
+    /**
+     * Method stops the music when the override button is toggled true
+     *
+     * @param evt
+     */
     private void overrideToggleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_overrideToggleButtonActionPerformed
-        player.Stop();
+        player.Stop(); // stops the music from playing
     }//GEN-LAST:event_overrideToggleButtonActionPerformed
 
+    /**
+     * Method creates a commandsGUI object and launches a new window
+     *
+     * @param evt
+     */
     private void scheduleCommandButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_scheduleCommandButtonActionPerformed
         CommandScheduler commandsGUI = new CommandScheduler(); // command gui object
         commandsGUI.setLocationRelativeTo(null); // centers window
@@ -273,35 +263,42 @@ public class MainProgram extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_postponeToggleButtonActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void postponeDurationInMinutesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_postponeDurationInMinutesActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_postponeDurationInMinutesActionPerformed
 
+    /**
+     * Method creates a propertiesGUI object and launches a new window
+     *
+     * @param evt
+     */
     private void propertiesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_propertiesButtonActionPerformed
         Properties propertiesGUI = new Properties(); // properties gui object
         propertiesGUI.setLocationRelativeTo(null); // centers window
         propertiesGUI.setVisible(true); // make visible
     }//GEN-LAST:event_propertiesButtonActionPerformed
 
+    /**
+     * Method plays selected file in "SCHEDULED TASKS" box when clicked
+     *
+     * @param evt
+     */
     private void startNowButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startNowButtonActionPerformed
         if (!overrideToggleButton.isSelected()) {
             player.Play(file.getData().get(scheduledTasks.getSelectedIndex()).getPath());
         }
     }//GEN-LAST:event_startNowButtonActionPerformed
 
-    private void startNowButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_startNowButtonMouseReleased
-
-    }//GEN-LAST:event_startNowButtonMouseReleased
-
+    /**
+     * Method creates a holidaysGUI object and launches a new window
+     *
+     * @param evt
+     */
     private void scheduleHolidaysButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_scheduleHolidaysButtonActionPerformed
         HolidayScheduler holidaysGUI = new HolidayScheduler(); // holiday gui object
         holidaysGUI.setLocationRelativeTo(null); // centers window
         holidaysGUI.setVisible(true); // make visible
     }//GEN-LAST:event_scheduleHolidaysButtonActionPerformed
-
-    private void scheduledTasksValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_scheduledTasksValueChanged
-
-    }//GEN-LAST:event_scheduledTasksValueChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -314,9 +311,9 @@ public class MainProgram extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextArea jTextArea3;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel minutesLabel;
     private javax.swing.JToggleButton overrideToggleButton;
+    private javax.swing.JTextField postponeDurationInMinutes;
     private javax.swing.JToggleButton postponeToggleButton;
     private javax.swing.JButton propertiesButton;
     private javax.swing.JButton scheduleCommandButton;

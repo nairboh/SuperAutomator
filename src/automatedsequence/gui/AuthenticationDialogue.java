@@ -1,6 +1,5 @@
 package automatedsequence.gui;
 
-import automatedsequence.Clock;
 import automatedsequence.Timer;
 import java.awt.Color;
 import java.util.Arrays;
@@ -91,11 +90,21 @@ public class AuthenticationDialogue extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    /**
+     * Method runs the passwordFieldActionPerformed method when enter is hit on the keyboard
+     * 
+     * @param evt 
+     */
     private void submitPasswordButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitPasswordButtonActionPerformed
         passwordFieldActionPerformed(evt); // Same result as below, instead of pressing enter, button is pressed
     }//GEN-LAST:event_submitPasswordButtonActionPerformed
-
+    
+    /**
+     * Method launches the main GUI once the correct password is inputted, as well as start background threads
+     * 
+     * @param evt 
+     */
     private void passwordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordFieldActionPerformed
         MainProgram gui = new MainProgram();
         if (Arrays.equals(passwordField.getPassword(), password)) {
@@ -103,7 +112,6 @@ public class AuthenticationDialogue extends javax.swing.JFrame {
             gui.setLocationRelativeTo(null); // centers the main gui 
             gui.setVisible(true); // makes the main gui visible
             (new Thread(new Timer())).start();
-            (new Thread(new Clock())).start();
         } else {
             instructionalText.setForeground(Color.red); // makes text below appear red
             instructionalText.setText("You have entered the wrong password, Try Again!");

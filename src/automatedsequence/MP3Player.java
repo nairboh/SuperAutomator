@@ -8,7 +8,7 @@ import javazoom.jl.player.Player;
 
 /**
  *
- * @author brianho
+ * @author Brian Ho
  */
 public class MP3Player {
 

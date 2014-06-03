@@ -12,7 +12,7 @@ public class RandomizeOCanada {
      * @return An integer representation of the O Canada version generated
      */
     public int getVersion() {
-        oCanadaVersion = (int) (Math.random() * getNumberOfOCanadaVersions() + 1);
+        oCanadaVersion = (int) (Math.random() * getNumberOfOCanadaVersions() + 1); // generates a random number
         return oCanadaVersion;
     }
     

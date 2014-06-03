@@ -42,7 +42,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="postponeToggleButton" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jTextField1" min="-2" max="-2" attributes="0"/>
+                      <Component id="postponeDurationInMinutes" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="minutesLabel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
@@ -91,7 +91,7 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="overrideToggleButton" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="postponeToggleButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="postponeDurationInMinutes" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="minutesLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="startNowButton" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -183,7 +183,7 @@
         </Property>
       </Properties>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="new Thread(){&#xa;public void run(){&#xa;&#xa;while (true){&#xa;Calendar c= new GregorianCalendar();&#xa;String dayOfWeek = (calender.getDayOfWeek(c.get(Calendar.DAY_OF_WEEK)));&#xa;String month = (calender.getMonth(c.get(Calendar.MONTH) + 1)); // because starts at 0&#xa;int dayOfMonth = c.get(Calendar.DAY_OF_MONTH);&#xa;int year = c.get(Calendar.YEAR);&#xa;int hour = c.get(Calendar.HOUR) + 12;&#xa;int minute = c.get(Calendar.MINUTE);&#xa;int sec = c.get(Calendar.SECOND);&#xa;time = dayOfWeek + &quot; &quot; + month + &quot; &quot; + dayOfMonth + &quot; &quot; + year + &quot; [EDT &quot; + hour +&quot;:&quot; + ((minute &lt; 10) ? &quot;0&quot; + minute : minute) + &quot;:&quot; + ((sec &lt; 10) ? &quot;0&quot; + sec : sec) + &quot;]&quot;;&#xa;dateAndTimeLabel.setText(time);&#xa;try {&#xa;                Thread.sleep(1000); // loop once every second, reduces toll on cpu&#xa;            } catch (InterruptedException ex) {&#xa;                System.out.println(ex);&#xa;            }&#xa;}&#xa;}&#xa;}.start();"/>
+        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="new Thread(){&#xa;public void run(){&#xa;&#xa;while (true){&#xa;Calendar c= new GregorianCalendar();&#xa;String dayOfWeek = (calendar.getDayOfWeek(c.get(Calendar.DAY_OF_WEEK)));&#xa;String month = (calendar.getMonth(c.get(Calendar.MONTH) + 1)); // because starts at 0&#xa;int dayOfMonth = c.get(Calendar.DAY_OF_MONTH);&#xa;int year = c.get(Calendar.YEAR);&#xa;int hour = c.get(Calendar.HOUR) + 12;&#xa;int minute = c.get(Calendar.MINUTE);&#xa;int sec = c.get(Calendar.SECOND);&#xa;time = dayOfWeek + &quot; &quot; + month + &quot; &quot; + dayOfMonth + &quot; &quot; + year + &quot; [EDT &quot; + hour +&quot;:&quot; + ((minute &lt; 10) ? &quot;0&quot; + minute : minute) + &quot;:&quot; + ((sec &lt; 10) ? &quot;0&quot; + sec : sec) + &quot;]&quot;;&#xa;dateAndTimeLabel.setText(time);&#xa;try {&#xa;                Thread.sleep(1000); // loop once every second, reduces toll on cpu&#xa;            } catch (InterruptedException ex) {&#xa;                System.out.println(ex);&#xa;            }&#xa;}&#xa;}&#xa;}.start();"/>
       </AuxValues>
     </Component>
     <Component class="javax.swing.JToggleButton" name="overrideToggleButton">
@@ -210,12 +210,12 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="postponeToggleButtonActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextField1">
+    <Component class="javax.swing.JTextField" name="postponeDurationInMinutes">
       <Properties>
         <Property name="text" type="java.lang.String" value="5"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField1ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="postponeDurationInMinutesActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="minutesLabel">
@@ -236,7 +236,6 @@
         <Property name="text" type="java.lang.String" value="START NOW"/>
       </Properties>
       <Events>
-        <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="startNowButtonMouseReleased"/>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="startNowButtonActionPerformed"/>
       </Events>
     </Component>
@@ -253,9 +252,6 @@
               <Connection code="new javax.swing.AbstractListModel() {&#xa;    String[] strings = {&quot;[&quot;  + file.getData().get(0).getStartTime()  + &quot; - 8:21:30 AM] &quot; + file.getData().get(0).getName(), &quot;ajshdjan&quot;};&#xa;&#xa;    public int getSize() { return strings.length; }&#xa;    public Object getElementAt(int i) { return strings[i]; }&#xa;}" type="code"/>
             </Property>
           </Properties>
-          <Events>
-            <EventHandler event="valueChanged" listener="javax.swing.event.ListSelectionListener" parameters="javax.swing.event.ListSelectionEvent" handler="scheduledTasksValueChanged"/>
-          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="scheduledTasks.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);"/>
           </AuxValues>

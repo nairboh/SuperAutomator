@@ -1,15 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package automatedsequence;
+package automatedsequence.dateAndTime;
 
 /**
- *
- * @author brianho
+ * Purpose: SuperCalendar Class
+ * 
+ * @author Brian Ho
  */
-public class CalenderLOL {
+public class SuperCalendar {
 
     public String getDayOfWeek(int dayOfWeek) {
         String nameOfDayOfWeek = "";
