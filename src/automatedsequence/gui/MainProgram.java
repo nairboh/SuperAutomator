@@ -1,12 +1,16 @@
 package automatedsequence.gui;
 
-import automatedsequence.dateAndTime.SuperCalendar;
 import automatedsequence.MP3Player;
 import automatedsequence.RandomizeOCanada;
+import automatedsequence.dateAndTime.SuperCalendar;
 import automatedsequence.fileInput.Line;
 import automatedsequence.fileInput.ReadFile;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import javax.swing.AbstractListModel;
 import javax.swing.ListSelectionModel;
 
 /**
@@ -20,12 +24,47 @@ public class MainProgram extends javax.swing.JFrame {
     private RandomizeOCanada oCanada = new RandomizeOCanada();
     private SuperCalendar calendar = new SuperCalendar();
     private String time;
+    private AbstractListModel tableModel;
+    private AbstractListModel completedModel;
+    private static String[] fileInformation;
 
-    /**
-     * Creates new form MainProgram
-     */
+    //static String[] strings = new String[ReadFile.getGenericEventData().size()];
     public MainProgram() {
+
+        populateScheduledBox(false);
         initComponents(); // initializes all the components in the gui
+    }
+
+    private void populateCompletedBox() {
+
+    }
+
+    public void populateScheduledBox(boolean refresh) {
+        fileInformation = new String[ReadFile.getGenericEventData().size()];
+        for (Line genericEventData : ReadFile.getGenericEventData()) {
+            fileInformation[genericEventData.getEventID()] = "[" + genericEventData.getFormattedTime(ReadFile.getGenericEventData().get(genericEventData.getEventID()).getStartTime()) + " - " + genericEventData.getFormattedTime(ReadFile.getGenericEventData().get(genericEventData.getEventID()).getEndTime()) + "] " + ReadFile.getGenericEventData().get(genericEventData.getEventID()).getName();
+        }
+        tableModel = new AbstractListModel() {
+            public int getSize() {
+                return fileInformation.length;
+            }
+
+            public Object getElementAt(int i) {
+                return fileInformation[i];
+            }
+        };
+        if (refresh) {
+            scheduledTasks.setModel(tableModel);
+            //scheduledTasks.validate();
+            scheduledTasks.repaint();
+        }
+
+    }
+
+    public void checkFinishedMusic() {
+        if (!AuthenticationDialogue.getTimerInstance().getState()) {
+            //scheduledTasks1.ad
+        }
     }
 
     /**
@@ -42,8 +81,6 @@ public class MainProgram extends javax.swing.JFrame {
         jTextArea1 = new javax.swing.JTextArea();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jTextArea3 = new javax.swing.JTextArea();
         jLabel3 = new javax.swing.JLabel();
         dateAndTimeLabel = new javax.swing.JLabel();
         overrideToggleButton = new javax.swing.JToggleButton();
@@ -55,6 +92,10 @@ public class MainProgram extends javax.swing.JFrame {
         startNowButton = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
         scheduledTasks = new javax.swing.JList();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        scheduledTasks1 = new javax.swing.JList();
+        deleteButton = new javax.swing.JButton();
+        modifyTasksButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Super Automator");
@@ -76,11 +117,6 @@ public class MainProgram extends javax.swing.JFrame {
         jLabel1.setText("Logger");
 
         jLabel2.setText("SCHEDULED TASKS");
-
-        jTextArea3.setColumns(20);
-        jTextArea3.setRows(5);
-        jTextArea3.setText("[8:15:00 - 8:20:00 AM] MORNING RUSH");
-        jScrollPane3.setViewportView(jTextArea3);
 
         jLabel3.setText("COMPLETED");
 
@@ -126,13 +162,31 @@ public class MainProgram extends javax.swing.JFrame {
         });
 
         scheduledTasks.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        scheduledTasks.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = {"["  + ReadFile.getGenericEventData().get(0).getStartTime()  + " - 8:21:30 AM] " + ReadFile.getGenericEventData().get(0).getName(), "ajshdjan"};
+        scheduledTasks.setModel(tableModel);
+        jScrollPane4.setViewportView(scheduledTasks);
 
+        scheduledTasks.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        scheduledTasks1.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = {"["  + ReadFile.getGenericEventData().get(0).getStartTime()  + " - 8:21:30 AM] " + ReadFile.getGenericEventData().get(0).getName(), "ajshdjan"};
+            //String[] strings = MainProgram.strings.clone();
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane4.setViewportView(scheduledTasks);
+        jScrollPane5.setViewportView(scheduledTasks1);
+
+        deleteButton.setText("DELETE");
+        deleteButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteButtonActionPerformed(evt);
+            }
+        });
+
+        modifyTasksButton.setText("MODIFY");
+        modifyTasksButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                modifyTasksButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -141,77 +195,84 @@ public class MainProgram extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(scheduleCommandButton)
-                        .addGap(18, 18, 18)
-                        .addComponent(propertiesButton))
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(14, 14, 14)
+                                .addComponent(dateAndTimeLabel))
+                            .addComponent(scheduleHolidaysButton)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(scheduleCommandButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(propertiesButton)
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(deleteButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(modifyTasksButton, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(overrideToggleButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(postponeToggleButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(postponeDurationInMinutes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(minutesLabel)
-                        .addGap(51, 51, 51)
-                        .addComponent(startNowButton)))
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(scheduleHolidaysButton))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(dateAndTimeLabel)))
-                .addGap(300, 300, 300)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(15, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(overrideToggleButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(postponeToggleButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(postponeDurationInMinutes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(minutesLabel)
+                                .addGap(18, 18, 18)
+                                .addComponent(startNowButton, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(overrideToggleButton)
                             .addComponent(postponeToggleButton)
                             .addComponent(postponeDurationInMinutes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(minutesLabel)
                             .addComponent(startNowButton))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(10, 10, 10)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(scheduleCommandButton)
-                            .addComponent(propertiesButton))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(scheduleHolidaysButton)
-                            .addComponent(jLabel1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 140, Short.MAX_VALUE)
-                        .addComponent(dateAndTimeLabel)))
-                .addGap(14, 14, 14))
+                            .addComponent(propertiesButton)
+                            .addComponent(modifyTasksButton))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(deleteButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(scheduleHolidaysButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(dateAndTimeLabel))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(63, 63, 63)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(12, 12, 12))
         );
 
         new Thread(){
             public void run(){
-
                 while (true){
                     Calendar c= new GregorianCalendar();
                     String dayOfWeek = (calendar.getDayOfWeek(c.get(Calendar.DAY_OF_WEEK)));
@@ -223,6 +284,7 @@ public class MainProgram extends javax.swing.JFrame {
                     int sec = c.get(Calendar.SECOND);
                     time = dayOfWeek + " " + month + " " + dayOfMonth + " " + year + " [EDT " + hour +":" + ((minute < 10) ? "0" + minute : minute) + ":" + ((sec < 10) ? "0" + sec : sec) + "]";
                     dateAndTimeLabel.setText(time);
+
                     try {
                         Thread.sleep(1000); // loop once every second, reduces toll on cpu
                     } catch (InterruptedException ex) {
@@ -250,29 +312,37 @@ public class MainProgram extends javax.swing.JFrame {
      * @param evt
      */
     private void scheduleCommandButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_scheduleCommandButtonActionPerformed
-        CommandScheduler commandsGUI = new CommandScheduler(); // command gui object
-        commandsGUI.setLocationRelativeTo(null); // centers window
-        commandsGUI.setVisible(true); // make visible
+        if (!postponeToggleButton.isSelected()) {
+            CommandScheduler commandsGUI = new CommandScheduler(); // command gui object
+            commandsGUI.setLocationRelativeTo(null); // centers window
+            commandsGUI.setVisible(true); // make visible
+        }
     }//GEN-LAST:event_scheduleCommandButtonActionPerformed
-    
+
     /**
-     * Method postpones the events by the duration that the user enters and when button is released, value resets to normal
-     * @param evt 
+     * Method postpones the events by the duration that the user enters and when
+     * button is released, value resets to normal
+     *
+     * @param evt
      */
     private void postponeToggleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_postponeToggleButtonActionPerformed
         for (Line genericEventData : ReadFile.getGenericEventData()) {
             if (postponeToggleButton.isSelected()) {
-                genericEventData.postponeStartTime(Integer.parseInt(postponeDurationInMinutes.getText()));
-                genericEventData.postponeEndTime(Integer.parseInt(postponeDurationInMinutes.getText()));
+                if (!genericEventData.getPath().equalsIgnoreCase("NOPATH")) {
+                    genericEventData.postponeStartTime(Integer.parseInt(postponeDurationInMinutes.getText()));
+                    genericEventData.postponeEndTime(Integer.parseInt(postponeDurationInMinutes.getText()));
+                }
                 postponeDurationInMinutes.setEditable(false); // avoid potential bug, does not let user change value after button is pressed
-                //System.out.println("New start time:" + genericEventData.getStartTime());
-                //System.out.println("New end time:" + genericEventData.getEndTime());
+                System.out.println("New start time:" + genericEventData.getStartTime());
+                System.out.println("New end time:" + genericEventData.getEndTime());
             } else {
-                genericEventData.postponeStartTime(-Integer.parseInt(postponeDurationInMinutes.getText()));
-                genericEventData.postponeEndTime(-Integer.parseInt(postponeDurationInMinutes.getText()));
+                if (!genericEventData.getPath().equalsIgnoreCase("NOPATH")) {
+                    genericEventData.postponeStartTime(-Integer.parseInt(postponeDurationInMinutes.getText()));
+                    genericEventData.postponeEndTime(-Integer.parseInt(postponeDurationInMinutes.getText()));
+                }
                 postponeDurationInMinutes.setEditable(true);
-                //System.out.println("New start time:" + genericEventData.getStartTime());
-                //System.out.println("New end time:" + genericEventData.getEndTime());
+                System.out.println("New start time:" + genericEventData.getStartTime());
+                System.out.println("New end time:" + genericEventData.getEndTime());
             }
         }
     }//GEN-LAST:event_postponeToggleButtonActionPerformed
@@ -283,9 +353,11 @@ public class MainProgram extends javax.swing.JFrame {
      * @param evt
      */
     private void propertiesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_propertiesButtonActionPerformed
-        Properties propertiesGUI = new Properties(); // properties gui object
-        propertiesGUI.setLocationRelativeTo(null); // centers window
-        propertiesGUI.setVisible(true); // make visible
+        if (!postponeToggleButton.isSelected()) {
+            Properties propertiesGUI = new Properties(); // properties gui object
+            propertiesGUI.setLocationRelativeTo(null); // centers window
+            propertiesGUI.setVisible(true); // make visible
+        }
     }//GEN-LAST:event_propertiesButtonActionPerformed
 
     /**
@@ -294,8 +366,10 @@ public class MainProgram extends javax.swing.JFrame {
      * @param evt
      */
     private void startNowButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startNowButtonActionPerformed
-        if (!overrideToggleButton.isSelected()) {
-            player.Play(ReadFile.getGenericEventData().get(scheduledTasks.getSelectedIndex()).getPath());
+        if (!overrideToggleButton.isSelected()) { // if the override button is not selected
+            if (scheduledTasks.getSelectedIndex() >= 0 && scheduledTasks.getSelectedIndex() < ReadFile.getGenericEventData().size()) {
+                player.Play(ReadFile.getGenericEventData().get(scheduledTasks.getSelectedIndex()).getPath());
+            }
         }
     }//GEN-LAST:event_startNowButtonActionPerformed
 
@@ -305,23 +379,58 @@ public class MainProgram extends javax.swing.JFrame {
      * @param evt
      */
     private void scheduleHolidaysButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_scheduleHolidaysButtonActionPerformed
-        HolidayScheduler holidaysGUI = new HolidayScheduler(); // holiday gui object
-        holidaysGUI.setLocationRelativeTo(null); // centers window
-        holidaysGUI.setVisible(true); // make visible
+        if (!postponeToggleButton.isSelected()) {
+            HolidayScheduler holidaysGUI = new HolidayScheduler(); // holiday gui object
+            holidaysGUI.setLocationRelativeTo(null); // centers window
+            holidaysGUI.setVisible(true); // make visible
+        }
     }//GEN-LAST:event_scheduleHolidaysButtonActionPerformed
+
+    private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
+        if (!overrideToggleButton.isSelected()) { // if the override button is not selected
+            if (scheduledTasks.getSelectedIndex() >= 0 && scheduledTasks.getSelectedIndex() < ReadFile.getGenericEventData().size()) {
+                ReadFile.getGenericEventData().remove(scheduledTasks.getSelectedIndex());
+                int counter = 0;
+                try (BufferedWriter bw = new BufferedWriter(new FileWriter("/Users/brianho/Music/schedule.txt"))) {
+                    for (Line genericEventData : ReadFile.getGenericEventData()) {
+                        genericEventData.setEventID(counter);
+                        bw.write(genericEventData.getEventID() + " @ " + genericEventData.getName() + " @ " + genericEventData.getPath() + " @ " + genericEventData.getStartTime() + " @ " + genericEventData.getEndTime() + " @ " + genericEventData.getDate() + " @ ");
+                        counter++;
+                        bw.newLine();
+                    }
+                    bw.flush();
+                    bw.close();
+                } catch (IOException e) {
+                    System.out.println("IO Exception");
+                }
+                populateScheduledBox(true);
+            }
+        }
+    }//GEN-LAST:event_deleteButtonActionPerformed
+
+    private void modifyTasksButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modifyTasksButtonActionPerformed
+        if (!postponeToggleButton.isSelected()) {
+            if (scheduledTasks.getSelectedIndex() >= 0) {
+                ModifyTask modifyGUI = new ModifyTask(scheduledTasks.getSelectedIndex()); // modify task gui object
+                modifyGUI.setLocationRelativeTo(null); // centers window
+                modifyGUI.setVisible(true); // make visible
+            }
+        }
+    }//GEN-LAST:event_modifyTasksButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel dateAndTimeLabel;
+    private javax.swing.JButton deleteButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextArea jTextArea3;
     private javax.swing.JLabel minutesLabel;
+    private javax.swing.JButton modifyTasksButton;
     private javax.swing.JToggleButton overrideToggleButton;
     private javax.swing.JTextField postponeDurationInMinutes;
     private javax.swing.JToggleButton postponeToggleButton;
@@ -329,6 +438,7 @@ public class MainProgram extends javax.swing.JFrame {
     private javax.swing.JButton scheduleCommandButton;
     private javax.swing.JButton scheduleHolidaysButton;
     private javax.swing.JList scheduledTasks;
+    private javax.swing.JList scheduledTasks1;
     private javax.swing.JButton startNowButton;
     // End of variables declaration//GEN-END:variables
 }

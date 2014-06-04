@@ -14,12 +14,14 @@ public class Timer implements Runnable {
 
     private SuperCalendar calendar = new SuperCalendar();
     private MP3Player player = new MP3Player();
-
+    int startTime = 0, endTime = 0;
+    String path;
+    boolean isPlaying = false; // is there an audio file currently playing
     @Override
     public void run() {
         int elaspedTimeInSeconds = 0;
-        int startTime = 0, endTime = 0;
-        boolean isPlaying = false; // is there an audio file currently playing
+        
+  
 
         while (true) { // loop indefinately
             Calendar c = new GregorianCalendar();
@@ -32,10 +34,11 @@ public class Timer implements Runnable {
             int sec = c.get(Calendar.SECOND);
             
             for (Line genericEventData : ReadFile.getGenericEventData()) {
-                if (((hour * 3600) + (minute * 60) + sec) == genericEventData.getStartTime() && (genericEventData.getDate().equalsIgnoreCase("EVERYDAY") || genericEventData.getDate().equals(dayOfMonth + "/" + month + "/" + year) || genericEventData.getDate().equals(dayOfMonth + "/" + month + "/YEARLY"))) { // if the time is as listed in the file, execute actions below
+                if ((((hour * 3600) + (minute * 60) + sec) == genericEventData.getStartTime()) && ((genericEventData.getDate().equalsIgnoreCase("EVERYDAY") || genericEventData.getDate().equals(month + "/" + dayOfMonth + "/" + year) || genericEventData.getDate().equals(month + "/" + dayOfMonth + "/YEARLY")))) { // if the time is as listed in the file, execute actions below
                     if(!genericEventData.getPath().equalsIgnoreCase("NOPATH")) {
                         player.Play(genericEventData.getPath());
                         isPlaying = true;
+                        path = genericEventData.getPath();
                         startTime = genericEventData.getStartTime();
                         endTime = genericEventData.getEndTime();
                     }
@@ -56,5 +59,12 @@ public class Timer implements Runnable {
                 System.out.println(ex);
             }
         }
+    }
+    public boolean getState() {
+        return isPlaying;
+    }
+    
+    public String getCurrentPlayingPath() {
+        return path;
     }
 }

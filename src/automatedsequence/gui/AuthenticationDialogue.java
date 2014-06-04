@@ -11,6 +11,8 @@ import java.util.Arrays;
 public class AuthenticationDialogue extends javax.swing.JFrame {
 
     char[] password = new char[]{'t', 'e', 's', 't'};
+    private static MainProgram mainProgram;
+    private static Timer timer;
 
     /**
      * Creates new form AuthenticationDialogue
@@ -106,18 +108,27 @@ public class AuthenticationDialogue extends javax.swing.JFrame {
      * @param evt 
      */
     private void passwordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordFieldActionPerformed
-        MainProgram gui = new MainProgram();
+        mainProgram = new MainProgram();
+        timer = new Timer();
         if (Arrays.equals(passwordField.getPassword(), password)) {
             dispose(); // kills the authentication window
-            gui.setLocationRelativeTo(null); // centers the main gui 
-            gui.setVisible(true); // makes the main gui visible
-            (new Thread(new Timer())).start();
+            mainProgram.setLocationRelativeTo(null); // centers the main gui 
+            mainProgram.setVisible(true); // makes the main gui visible
+            (new Thread(timer)).start();
         } else {
             instructionalText.setForeground(Color.red); // makes text below appear red
             instructionalText.setText("You have entered the wrong password, Try Again!");
         }
     }//GEN-LAST:event_passwordFieldActionPerformed
 
+    public static MainProgram getMainProgramInstance() {
+        return mainProgram;
+    }
+    
+    public static Timer getTimerInstance() {
+        return timer;
+    }
+    
     /**
      * @param args the command line arguments
      */

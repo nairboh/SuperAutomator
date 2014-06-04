@@ -25,49 +25,55 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
+          <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jLabel2" alignment="0" min="-2" pref="159" max="-2" attributes="0"/>
-                  <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="scheduleCommandButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="propertiesButton" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
+                              <Component id="dateAndTimeLabel" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="scheduleHolidaysButton" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="scheduleCommandButton" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="propertiesButton" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="deleteButton" max="32767" attributes="0"/>
+                                  <Component id="modifyTasksButton" pref="115" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
+                      </Group>
+                      <EmptySpace pref="65" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jScrollPane1" min="-2" pref="454" max="-2" attributes="0"/>
+                          <Component id="jLabel1" min="-2" pref="52" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
-                  <Component id="jScrollPane4" alignment="0" min="-2" pref="410" max="-2" attributes="0"/>
-                  <Component id="jScrollPane3" alignment="0" min="-2" pref="410" max="-2" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="overrideToggleButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="postponeToggleButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="postponeDurationInMinutes" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="minutesLabel" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
-                      <Component id="startNowButton" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jLabel2" alignment="0" min="-2" pref="159" max="-2" attributes="0"/>
+                          <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jScrollPane4" alignment="0" min="-2" pref="410" max="-2" attributes="0"/>
+                          <Component id="jScrollPane5" alignment="0" min="-2" pref="410" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="overrideToggleButton" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="postponeToggleButton" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="postponeDurationInMinutes" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="minutesLabel" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="startNowButton" min="-2" pref="135" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-          </Group>
-          <Group type="102" alignment="0" attributes="0">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="scheduleHolidaysButton" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-                      <Component id="dateAndTimeLabel" min="-2" max="-2" attributes="0"/>
-                  </Group>
-              </Group>
-              <EmptySpace min="-2" pref="300" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                  <Component id="jScrollPane1" min="-2" pref="454" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace pref="15" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -75,19 +81,16 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" attributes="0">
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                      <Component id="jScrollPane1" min="-2" pref="96" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" attributes="0">
-                      <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jScrollPane4" min="-2" pref="90" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jScrollPane3" min="-2" max="-2" attributes="0"/>
+              <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jScrollPane4" min="-2" pref="90" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jScrollPane5" min="-2" pref="90" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="overrideToggleButton" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="postponeToggleButton" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -95,21 +98,27 @@
                           <Component id="minutesLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="startNowButton" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="scheduleCommandButton" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="propertiesButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="modifyTasksButton" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="scheduleHolidaysButton" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace pref="140" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="deleteButton" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="scheduleHolidaysButton" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="dateAndTimeLabel" min="-2" max="-2" attributes="0"/>
                   </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
+                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jScrollPane1" min="-2" pref="96" max="-2" attributes="0"/>
+                  </Group>
               </Group>
-              <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -155,22 +164,6 @@
         <Property name="text" type="java.lang.String" value="SCHEDULED TASKS"/>
       </Properties>
     </Component>
-    <Container class="javax.swing.JScrollPane" name="jScrollPane3">
-      <AuxValues>
-        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
-      </AuxValues>
-
-      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
-      <SubComponents>
-        <Component class="javax.swing.JTextArea" name="jTextArea3">
-          <Properties>
-            <Property name="columns" type="int" value="20"/>
-            <Property name="rows" type="int" value="5"/>
-            <Property name="text" type="java.lang.String" value="[8:15:00 - 8:20:00 AM] MORNING RUSH"/>
-          </Properties>
-        </Component>
-      </SubComponents>
-    </Container>
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
         <Property name="text" type="java.lang.String" value="COMPLETED"/>
@@ -183,7 +176,7 @@
         </Property>
       </Properties>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="new Thread(){&#xa;public void run(){&#xa;&#xa;while (true){&#xa;Calendar c= new GregorianCalendar();&#xa;String dayOfWeek = (calendar.getDayOfWeek(c.get(Calendar.DAY_OF_WEEK)));&#xa;String month = (calendar.getMonth(c.get(Calendar.MONTH) + 1)); // because starts at 0&#xa;int dayOfMonth = c.get(Calendar.DAY_OF_MONTH);&#xa;int year = c.get(Calendar.YEAR);&#xa;int hour = c.get(Calendar.HOUR_OF_DAY);&#xa;int minute = c.get(Calendar.MINUTE);&#xa;int sec = c.get(Calendar.SECOND);&#xa;time = dayOfWeek + &quot; &quot; + month + &quot; &quot; + dayOfMonth + &quot; &quot; + year + &quot; [EDT &quot; + hour +&quot;:&quot; + ((minute &lt; 10) ? &quot;0&quot; + minute : minute) + &quot;:&quot; + ((sec &lt; 10) ? &quot;0&quot; + sec : sec) + &quot;]&quot;;&#xa;dateAndTimeLabel.setText(time);&#xa;try {&#xa;                Thread.sleep(1000); // loop once every second, reduces toll on cpu&#xa;            } catch (InterruptedException ex) {&#xa;                System.out.println(ex);&#xa;            }&#xa;}&#xa;}&#xa;}.start();"/>
+        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="new Thread(){&#xa;public void run(){&#xa;while (true){&#xa;Calendar c= new GregorianCalendar();&#xa;String dayOfWeek = (calendar.getDayOfWeek(c.get(Calendar.DAY_OF_WEEK)));&#xa;String month = (calendar.getMonth(c.get(Calendar.MONTH) + 1)); // because starts at 0&#xa;int dayOfMonth = c.get(Calendar.DAY_OF_MONTH);&#xa;int year = c.get(Calendar.YEAR);&#xa;int hour = c.get(Calendar.HOUR_OF_DAY);&#xa;int minute = c.get(Calendar.MINUTE);&#xa;int sec = c.get(Calendar.SECOND);&#xa;time = dayOfWeek + &quot; &quot; + month + &quot; &quot; + dayOfMonth + &quot; &quot; + year + &quot; [EDT &quot; + hour +&quot;:&quot; + ((minute &lt; 10) ? &quot;0&quot; + minute : minute) + &quot;:&quot; + ((sec &lt; 10) ? &quot;0&quot; + sec : sec) + &quot;]&quot;;&#xa;dateAndTimeLabel.setText(time);&#xa;&#xa;try {&#xa;                Thread.sleep(1000); // loop once every second, reduces toll on cpu&#xa;            } catch (InterruptedException ex) {&#xa;                System.out.println(ex);&#xa;            }&#xa;}&#xa;}&#xa;}.start();"/>
       </AuxValues>
     </Component>
     <Component class="javax.swing.JToggleButton" name="overrideToggleButton">
@@ -246,7 +239,7 @@
         <Component class="javax.swing.JList" name="scheduledTasks">
           <Properties>
             <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="new javax.swing.AbstractListModel() {&#xa;    String[] strings = {&quot;[&quot;  + ReadFile.getGenericEventData().get(0).getStartTime()  + &quot; - 8:21:30 AM] &quot; + ReadFile.getGenericEventData().get(0).getName(), &quot;ajshdjan&quot;};&#xa;&#xa;    public int getSize() { return strings.length; }&#xa;    public Object getElementAt(int i) { return strings[i]; }&#xa;}" type="code"/>
+              <Connection code="tableModel" type="code"/>
             </Property>
           </Properties>
           <AuxValues>
@@ -255,5 +248,40 @@
         </Component>
       </SubComponents>
     </Container>
+    <Container class="javax.swing.JScrollPane" name="jScrollPane5">
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JList" name="scheduledTasks1">
+          <Properties>
+            <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new javax.swing.AbstractListModel() {&#xa;    String[] strings = {&quot;[&quot;  + ReadFile.getGenericEventData().get(0).getStartTime()  + &quot; - 8:21:30 AM] &quot; + ReadFile.getGenericEventData().get(0).getName(), &quot;ajshdjan&quot;};&#xa;    //String[] strings = MainProgram.strings.clone();&#xa;    public int getSize() { return strings.length; }&#xa;    public Object getElementAt(int i) { return strings[i]; }&#xa;}" type="code"/>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="scheduledTasks.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);"/>
+          </AuxValues>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JButton" name="deleteButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="DELETE"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deleteButtonActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="modifyTasksButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="MODIFY"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="modifyTasksButtonActionPerformed"/>
+      </Events>
+    </Component>
   </SubComponents>
 </Form>
