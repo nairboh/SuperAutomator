@@ -130,7 +130,7 @@ public class HolidayScheduler extends javax.swing.JFrame {
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
         int id = ReadFile.getGenericEventData().size();
         String date = recurringYearlyCheckbox.isSelected() ? (monthDropdown.getSelectedIndex() + 1) + "/" + (dayDropdown.getSelectedIndex() + 1) +  "/YEARLY" : (monthDropdown.getSelectedIndex() + 1) + "/" + (dayDropdown.getSelectedIndex() + 1) +  "/" + (yearDropdown.getSelectedIndex() + 2014); // formats date string
-        ReadFile.getGenericEventData().add(new Line(id , "HOLIDAY", "NOPATH", 0 , date)); // cretes a new line object and adds to arraylist
+        ReadFile.getGenericEventData().add(new Line(id , "HOLIDAY", "NOPATH", 0, 0 , date)); // cretes a new line object and adds to arraylist
         System.out.println(id + " " + ReadFile.getGenericEventData().get(id).getName() + " " + ReadFile.getGenericEventData().get(id).getPath() + " " + ReadFile.getGenericEventData().get(id).getStartTime() + " " + ReadFile.getGenericEventData().get(id).getDate()); // DEBUG
         dispose(); // close the window
     }//GEN-LAST:event_saveButtonActionPerformed

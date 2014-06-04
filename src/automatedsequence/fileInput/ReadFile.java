@@ -39,8 +39,9 @@ public class ReadFile {
             String name = scheduleFile.next();
             String path = scheduleFile.next();
             int startTimeInSeconds = scheduleFile.nextInt();
+            int endTimeInSeconds = scheduleFile.nextInt();
             String date = scheduleFile.next();
-            genericEventLines.add(new Line(id, name, path, startTimeInSeconds, date));
+            genericEventLines.add(new Line(id, name, path, startTimeInSeconds, endTimeInSeconds, date));
         }
         scheduleFile.close();
     }

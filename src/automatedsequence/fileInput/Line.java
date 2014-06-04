@@ -6,7 +6,7 @@ package automatedsequence.fileInput;
  */
 public class Line {
 
-    private final int id, startTimeInSeconds;
+    private final int id, startTimeInSeconds, endTimeInSeconds;
     private final String name, path, date;
 
     /**
@@ -16,13 +16,15 @@ public class Line {
      * @param name the name of the event
      * @param path the path of the mp3 file to be played during the event execution
      * @param startTime the time that the event needs to be started by in milliseconds
+     * @param endTime
      * @param date the date(s) that the event is set to execute on
      */
-    public Line(int id, String name, String path, int startTime, String date) {
+    public Line(int id, String name, String path, int startTime, int endTime, String date) {
         this.id = id;
         this.name = name;
         this.path = path;
         this.startTimeInSeconds = startTime;
+        this.endTimeInSeconds = endTime;
         this.date = date;
     }
     
@@ -32,12 +34,14 @@ public class Line {
      * @param id the id of the event
      * @param path the path of the mp3 file to be played during the event execution
      * @param startTime the time that the event needs to be started by in milliseconds
+     * @param endTime the time that the event needs to stop by
      */
-    public Line(int id, String path, int startTime) {
+    public Line(int id, String path, int startTime, int endTime) {
         this.id = id;
         this.name = "";
         this.path = path;
         this.startTimeInSeconds = startTime;
+        this.endTimeInSeconds = endTime;
         this.date = "";
     }
 
@@ -78,11 +82,20 @@ public class Line {
     }
     
     /**
-     * Method returns the time in milliseconds that the event needs to start by
+     * Method returns the time in seconds that the event needs to start by
      * 
-     * @return the time in milliseconds that the event needs to start by
+     * @return the time in seconds that the event needs to start by
      */
     public int getStartTime() {
         return startTimeInSeconds;
+    }
+    
+    /**
+     * Method returns the time in seconds that the event needs to start by
+     * 
+     * @return the time in seconds that the event needs to start by
+     */
+    public int getEndTime() {
+        return endTimeInSeconds;
     }
 }

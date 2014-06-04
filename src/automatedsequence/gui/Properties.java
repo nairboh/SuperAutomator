@@ -161,7 +161,7 @@ public class Properties extends javax.swing.JFrame {
         try {
             String pathOfFile = fileToChoose.getAbsolutePath();
             oCanadaPathTextBox.setText(pathOfFile);
-            ReadFile.getGenericEventData().add(new Line(ReadFile.getGenericEventData().size() , pathOfFile, 100000));
+            //ReadFile.getGenericEventData().add(new Line(ReadFile.getGenericEventData().size() , pathOfFile, 100000));
             System.out.println(ReadFile.getGenericEventData().get(0).getPath());
         } catch (NullPointerException e) {
             System.out.println("No File Selected");
