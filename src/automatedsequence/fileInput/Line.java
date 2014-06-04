@@ -6,8 +6,8 @@ package automatedsequence.fileInput;
  */
 public class Line {
 
-    private final int id, startTimeInSeconds, endTimeInSeconds;
-    private final String name, path, date;
+    private int id, startTimeInSeconds, endTimeInSeconds;
+    private String name, path, date;
 
     /**
      * Overloaded Constructor
@@ -91,11 +91,27 @@ public class Line {
     }
     
     /**
-     * Method returns the time in seconds that the event needs to start by
+     * Method returns the time in seconds that the event needs to end by
      * 
      * @return the time in seconds that the event needs to start by
      */
     public int getEndTime() {
         return endTimeInSeconds;
+    }
+    
+    /**
+     * Method sets the time in seconds that the event needs to start by
+     * @param postponeLength
+     */
+    public void postponeStartTime(int postponeLength) {
+        startTimeInSeconds += (postponeLength * 60);
+    }
+    
+    /**
+     * Method sets the time in seconds that the event needs to end by
+     * @param postponeLength
+     */
+    public void postponeEndTime(int postponeLength) {
+        endTimeInSeconds += (postponeLength * 60);
     }
 }

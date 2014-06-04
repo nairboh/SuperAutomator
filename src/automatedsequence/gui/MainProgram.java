@@ -3,6 +3,7 @@ package automatedsequence.gui;
 import automatedsequence.dateAndTime.SuperCalendar;
 import automatedsequence.MP3Player;
 import automatedsequence.RandomizeOCanada;
+import automatedsequence.fileInput.Line;
 import automatedsequence.fileInput.ReadFile;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -107,11 +108,6 @@ public class MainProgram extends javax.swing.JFrame {
         });
 
         postponeDurationInMinutes.setText("5");
-        postponeDurationInMinutes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                postponeDurationInMinutesActionPerformed(evt);
-            }
-        });
 
         minutesLabel.setText("Minutes");
 
@@ -258,14 +254,28 @@ public class MainProgram extends javax.swing.JFrame {
         commandsGUI.setLocationRelativeTo(null); // centers window
         commandsGUI.setVisible(true); // make visible
     }//GEN-LAST:event_scheduleCommandButtonActionPerformed
-
+    
+    /**
+     * Method postpones the events by the duration that the user enters and when button is released, value resets to normal
+     * @param evt 
+     */
     private void postponeToggleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_postponeToggleButtonActionPerformed
-        // TODO add your handling code here:
+        for (Line genericEventData : ReadFile.getGenericEventData()) {
+            if (postponeToggleButton.isSelected()) {
+                genericEventData.postponeStartTime(Integer.parseInt(postponeDurationInMinutes.getText()));
+                genericEventData.postponeEndTime(Integer.parseInt(postponeDurationInMinutes.getText()));
+                postponeDurationInMinutes.setEditable(false); // avoid potential bug, does not let user change value after button is pressed
+                //System.out.println("New start time:" + genericEventData.getStartTime());
+                //System.out.println("New end time:" + genericEventData.getEndTime());
+            } else {
+                genericEventData.postponeStartTime(-Integer.parseInt(postponeDurationInMinutes.getText()));
+                genericEventData.postponeEndTime(-Integer.parseInt(postponeDurationInMinutes.getText()));
+                postponeDurationInMinutes.setEditable(true);
+                //System.out.println("New start time:" + genericEventData.getStartTime());
+                //System.out.println("New end time:" + genericEventData.getEndTime());
+            }
+        }
     }//GEN-LAST:event_postponeToggleButtonActionPerformed
-
-    private void postponeDurationInMinutesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_postponeDurationInMinutesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_postponeDurationInMinutesActionPerformed
 
     /**
      * Method creates a propertiesGUI object and launches a new window
