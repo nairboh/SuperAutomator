@@ -32,7 +32,7 @@ public class Timer implements Runnable {
             int sec = c.get(Calendar.SECOND);
             
             for (Line genericEventData : ReadFile.getGenericEventData()) {
-                if (((hour * 3600) + (minute * 60) + sec) == genericEventData.getStartTime() && (genericEventData.getDate().equalsIgnoreCase("EVERYDAY") || genericEventData.getDate().equals(dayOfMonth + "/" + month + "/" + year))) { // if the time is as listed in the file, execute actions below
+                if (((hour * 3600) + (minute * 60) + sec) == genericEventData.getStartTime() && (genericEventData.getDate().equalsIgnoreCase("EVERYDAY") || genericEventData.getDate().equals(dayOfMonth + "/" + month + "/" + year) || genericEventData.getDate().equals(dayOfMonth + "/" + month + "/YEARLY"))) { // if the time is as listed in the file, execute actions below
                     if(!genericEventData.getPath().equalsIgnoreCase("NOPATH")) {
                         player.Play(genericEventData.getPath());
                         isPlaying = true;

@@ -2,7 +2,10 @@ package automatedsequence.gui;
 
 import automatedsequence.fileInput.Line;
 import automatedsequence.fileInput.ReadFile;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import javax.swing.JFileChooser;
 
 /**
@@ -258,9 +261,20 @@ public class CommandScheduler extends javax.swing.JFrame {
         int id = ReadFile.getGenericEventData().size();
         int startTimeInSeconds = (secondDropboxStart.getSelectedIndex() + (minuteDropdownStart.getSelectedIndex() * 60) + (hourDropdownStart.getSelectedIndex() * 3600)); // converts all values into seconds
         int endTimeInSeconds = (secondDropboxEnd.getSelectedIndex() + (minuteDropdownEnd.getSelectedIndex() * 60) + (hourDropdownEnd.getSelectedIndex() * 3600)); // converts all values into seconds
-        String date = recurDailyCheckbox.isSelected() ? "EVERYDAY" : (monthDropdownStart.getSelectedIndex() + 1) + "/" + (dayDropdownStart.getSelectedIndex() + 1) +  "/" + (yearDropdownStart.getSelectedIndex() + 2014); // formats date string
-        ReadFile.getGenericEventData().add(new Line(id , nameOfEvent.getText(), pathOfMP3.getText(), startTimeInSeconds, endTimeInSeconds , date)); // cretes a new line object and adds to arraylist
+        String date = recurDailyCheckbox.isSelected() ? "EVERYDAY" : (monthDropdownStart.getSelectedIndex() + 1) + "/" + (dayDropdownStart.getSelectedIndex() + 1) + "/" + (yearDropdownStart.getSelectedIndex() + 2014); // formats date string
+        ReadFile.getGenericEventData().add(new Line(id, nameOfEvent.getText(), pathOfMP3.getText(), startTimeInSeconds, endTimeInSeconds, date)); // cretes a new line object and adds to arraylist
         System.out.println(id + " " + ReadFile.getGenericEventData().get(id).getName() + " " + ReadFile.getGenericEventData().get(id).getPath() + " " + ReadFile.getGenericEventData().get(id).getStartTime() + " " + ReadFile.getGenericEventData().get(id).getEndTime() + " " + ReadFile.getGenericEventData().get(id).getDate()); // DEBUG
+
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter("/Users/brianho/Music/schedule.txt"))) {
+            for (Line genericEventData : ReadFile.getGenericEventData()) {
+                bw.write(genericEventData.getEventID() + " @ " + genericEventData.getName() + " @ " + genericEventData.getPath() + " @ " + genericEventData.getStartTime() + " @ " + genericEventData.getEndTime() + " @ " + genericEventData.getDate() + " @ "); 
+                bw.newLine();
+            }
+            bw.flush();
+            bw.close();
+        } catch (IOException e) {
+            System.out.println("IO Exception");
+        }
         dispose(); // close the window
     }//GEN-LAST:event_saveButtonActionPerformed
 

@@ -8,6 +8,9 @@ package automatedsequence.gui;
 
 import automatedsequence.fileInput.Line;
 import automatedsequence.fileInput.ReadFile;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 
 /**
  *
@@ -131,7 +134,17 @@ public class HolidayScheduler extends javax.swing.JFrame {
         int id = ReadFile.getGenericEventData().size();
         String date = recurringYearlyCheckbox.isSelected() ? (monthDropdown.getSelectedIndex() + 1) + "/" + (dayDropdown.getSelectedIndex() + 1) +  "/YEARLY" : (monthDropdown.getSelectedIndex() + 1) + "/" + (dayDropdown.getSelectedIndex() + 1) +  "/" + (yearDropdown.getSelectedIndex() + 2014); // formats date string
         ReadFile.getGenericEventData().add(new Line(id , "HOLIDAY", "NOPATH", 0, 0 , date)); // cretes a new line object and adds to arraylist
-        System.out.println(id + " " + ReadFile.getGenericEventData().get(id).getName() + " " + ReadFile.getGenericEventData().get(id).getPath() + " " + ReadFile.getGenericEventData().get(id).getStartTime() + " " + ReadFile.getGenericEventData().get(id).getDate()); // DEBUG
+        //System.out.println(id + " " + ReadFile.getGenericEventData().get(id).getName() + " " + ReadFile.getGenericEventData().get(id).getPath() + " " + ReadFile.getGenericEventData().get(id).getStartTime() + " " + ReadFile.getGenericEventData().get(id).getDate()); // DEBUG
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter("/Users/brianho/Music/schedule.txt"))) {
+            for (Line genericEventData : ReadFile.getGenericEventData()) {
+                bw.write(genericEventData.getEventID() + " @ " + genericEventData.getName() + " @ " + genericEventData.getPath() + " @ " + genericEventData.getStartTime() + " @ " + genericEventData.getEndTime() + " @ " + genericEventData.getDate() + " @ "); 
+                bw.newLine();
+            }
+            bw.flush();
+            bw.close();
+        } catch (IOException e) {
+            System.out.println("IO Exception");
+        }
         dispose(); // close the window
     }//GEN-LAST:event_saveButtonActionPerformed
 
