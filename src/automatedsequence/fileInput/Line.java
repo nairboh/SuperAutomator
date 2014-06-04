@@ -10,7 +10,7 @@ public class Line {
     private final String name, path, date;
 
     /**
-     * Constructor
+     * Overloaded Constructor
      *
      * @param id the id of the event
      * @param name the name of the event
@@ -24,6 +24,21 @@ public class Line {
         this.path = path;
         this.startTimeInSeconds = startTime;
         this.date = date;
+    }
+    
+     /**
+     * Overloaded Constructor 2
+     *
+     * @param id the id of the event
+     * @param path the path of the mp3 file to be played during the event execution
+     * @param startTime the time that the event needs to be started by in milliseconds
+     */
+    public Line(int id, String path, int startTime) {
+        this.id = id;
+        this.name = "";
+        this.path = path;
+        this.startTimeInSeconds = startTime;
+        this.date = "";
     }
 
     /**

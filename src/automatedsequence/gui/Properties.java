@@ -5,6 +5,11 @@
  */
 package automatedsequence.gui;
 
+import automatedsequence.fileInput.Line;
+import automatedsequence.fileInput.ReadFile;
+import java.io.File;
+import javax.swing.JFileChooser;
+
 /**
  *
  * @author Brian
@@ -28,48 +33,43 @@ public class Properties extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        morningRushPathTextBox = new javax.swing.JTextField();
+        browseForMorningRush = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
+        oCanadaPathTextBox = new javax.swing.JTextField();
+        browseForOCanada = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        addButton = new javax.swing.JButton();
+        removeButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("Current Morning Rush Song:");
 
-        jTextField1.setText("Path to morningrushsong.mp3");
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        morningRushPathTextBox.setText(ReadFile.getGenericEventData().get(0).getPath());
+        morningRushPathTextBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                morningRushPathTextBoxActionPerformed(evt);
             }
         });
 
-        jButton1.setText("Browse");
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                jButton1MouseReleased(evt);
-            }
-        });
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        browseForMorningRush.setText("Browse");
+        browseForMorningRush.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                browseForMorningRushActionPerformed(evt);
             }
         });
 
         jLabel2.setText("\"Please stand up for O'Canada\":");
 
-        jTextField2.setText("Path to standupforocanada.mp3");
+        oCanadaPathTextBox.setText(ReadFile.getGenericEventData().get(0).getPath());
 
-        jButton2.setText("Browse");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        browseForOCanada.setText("Browse");
+        browseForOCanada.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                browseForOCanadaActionPerformed(evt);
             }
         });
 
@@ -80,9 +80,9 @@ public class Properties extends javax.swing.JFrame {
         jTextArea1.setText("Path to OCanadaVersion1.mp3\nPath to OCanadaVersion2.mp3\nPath to OCanadaVersion3.mp3\nPath to OCanadaVersion4.mp3");
         jScrollPane1.setViewportView(jTextArea1);
 
-        jButton3.setText("Add");
+        addButton.setText("Add");
 
-        jButton4.setText("Remove");
+        removeButton.setText("Remove");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -96,26 +96,23 @@ public class Properties extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel1)
-                                        .addGap(23, 23, 23))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(jLabel2)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jTextField1)
-                                    .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE))
+                                    .addComponent(morningRushPathTextBox)
+                                    .addComponent(oCanadaPathTextBox, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jButton1)
-                                    .addComponent(jButton2)))
+                                    .addComponent(browseForMorningRush)
+                                    .addComponent(browseForOCanada)))
                             .addComponent(jLabel3))
-                        .addGap(0, 22, Short.MAX_VALUE))
+                        .addGap(22, 22, 22))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton3)
+                        .addComponent(addButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton4)))
+                        .addComponent(removeButton)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -124,12 +121,12 @@ public class Properties extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(morningRushPathTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(browseForMorningRush))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2)
+                    .addComponent(oCanadaPathTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(browseForOCanada)
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel3)
@@ -137,31 +134,43 @@ public class Properties extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4))
+                    .addComponent(addButton)
+                    .addComponent(removeButton))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    private void browseForMorningRushActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browseForMorningRushActionPerformed
+        JFileChooser chooser = new JFileChooser();
+        chooser.showOpenDialog(null);
+        File fileToChoose = chooser.getSelectedFile();
+        try {
+            String pathOfFile = fileToChoose.getAbsolutePath();
+            morningRushPathTextBox.setText(pathOfFile);
+        } catch (NullPointerException e) {
+            System.out.println("No File Selected");
+        }
+    }//GEN-LAST:event_browseForMorningRushActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void browseForOCanadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browseForOCanadaActionPerformed
+        JFileChooser chooser = new JFileChooser();
+        chooser.showOpenDialog(null);
+        File fileToChoose = chooser.getSelectedFile();
+        try {
+            String pathOfFile = fileToChoose.getAbsolutePath();
+            oCanadaPathTextBox.setText(pathOfFile);
+            ReadFile.getGenericEventData().add(new Line(ReadFile.getGenericEventData().size() , pathOfFile, 100000));
+            System.out.println(ReadFile.getGenericEventData().get(0).getPath());
+        } catch (NullPointerException e) {
+            System.out.println("No File Selected");
+        }
+    }//GEN-LAST:event_browseForOCanadaActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void morningRushPathTextBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_morningRushPathTextBoxActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jButton1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseReleased
-        BrowseWindow gui = new BrowseWindow();
-        gui.setLocationRelativeTo(null); // centers the gui 
-        gui.setVisible(true); // makes the gui visible
-    }//GEN-LAST:event_jButton1MouseReleased
+    }//GEN-LAST:event_morningRushPathTextBoxActionPerformed
 
     /**
      * @param args the command line arguments
@@ -199,16 +208,16 @@ public class Properties extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton addButton;
+    private javax.swing.JButton browseForMorningRush;
+    private javax.swing.JButton browseForOCanada;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField morningRushPathTextBox;
+    private javax.swing.JTextField oCanadaPathTextBox;
+    private javax.swing.JButton removeButton;
     // End of variables declaration//GEN-END:variables
 }

@@ -1,9 +1,14 @@
 package automatedsequence;
 
+import automatedsequence.dateAndTime.SuperCalendar;
+import automatedsequence.fileInput.Line;
+import automatedsequence.fileInput.ReadFile;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Scanner;
 
 /**
@@ -12,30 +17,40 @@ import java.util.Scanner;
  */
 public class Timer implements Runnable {
 
-    private Scanner scheduleFile;
-    private String taskNumber, name = "", startTime = "", endTime, date;
-    
     @Override
     public void run() {
-        MP3Player MC = new MP3Player();
-        SimpleDateFormat sf = new SimpleDateFormat("hh:mm:ss");
+
+        Calendar c = new GregorianCalendar();
+        SuperCalendar calendar = new SuperCalendar();
+        MP3Player player = new MP3Player();
 
         int elaspedTimeInSeconds = 0;
         boolean isPlaying = false; // is there an audio file currently playing
 
-       readFile();
-
         while (true) { // loop indefinately
-            if (sf.format(new Date()).equals(startTime)) { // if the time is as listed in the file, execute actions below
-                MC.Play("/Users/brianho/Music/hello.mp3");
-                isPlaying = true;
-                
+
+            String month = (calendar.getMonth(c.get(Calendar.MONTH) + 1)); // because starts at 0
+            int dayOfMonth = c.get(Calendar.DAY_OF_MONTH);
+            int year = c.get(Calendar.YEAR);
+            int hour = c.get(Calendar.HOUR_OF_DAY);
+            int minute = c.get(Calendar.MINUTE);
+            int sec = c.get(Calendar.SECOND);
+
+            for (Line genericEventData : ReadFile.getGenericEventData()) {
+                if (((hour * 3600) + (minute * 60) + sec) == genericEventData.getStartTime()) { // if the time is as listed in the file, execute actions below
+                    player.Play(genericEventData.getPath());
+                    isPlaying = true;
+                }
             }
-            if (elaspedTimeInSeconds == 10) {
-                MC.Stop();
-                isPlaying = false;
+            
+            //if (elaspedTimeInSeconds == 10) {
+              //  player.Stop();
+                //isPlaying = false;
+            //}
+            if (player.isComplete()) {
+                System.out.println("COMPLETED MUDA ASSHORE");
             }
-            //System.out.println(startTime);
+
             try {
                 Thread.sleep(1000); // loop once every second, reduces toll on cpu
                 if (isPlaying) {
@@ -45,38 +60,5 @@ public class Timer implements Runnable {
                 System.out.println(ex);
             }
         }
-    }
-
-    public void readFile() {
-        try {
-            scheduleFile = new Scanner(new File("/Users/brianho/Music/schedule.txt")); // path of file to store scheduled information
-        } catch (FileNotFoundException e) {
-            System.out.println("Could not find file");
-        }
-         // exits file after reading
-        //while (scheduleFile.hasNext()) {
-        int lol = scheduleFile.nextInt();
-            name = scheduleFile.next();
-            startTime = scheduleFile.next();
-            endTime = scheduleFile.next();
-            date = scheduleFile.next(); // date of schedule
-        //}
-        closeFile();
-    }
-
-    public void closeFile() {
-        scheduleFile.close();
-    }
-    
-    public String getTaskName() {
-        return name;
-    }
-    
-    public String getTaskStartTime() {
-        return startTime;
-    }
-    
-    public String getTaskDate() {
-        return date;
     }
 }

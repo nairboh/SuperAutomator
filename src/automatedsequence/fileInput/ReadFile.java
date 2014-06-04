@@ -12,16 +12,19 @@ import java.util.Scanner;
 public class ReadFile {
 
     private Scanner scheduleFile;
-    private static ArrayList<Line> lines; // share amongst all instances
+    private Scanner oCanadaFile;
+    private static ArrayList<Line> genericEventLines; // share amongst all instances
+    //private static ArrayList<Line> oCanadaEventLines; // share amongst all instances
     
     /**
      * Constructor - Creates an arrayList and a scanner object with the schedule.text as the input
      */
     public ReadFile() {
-        lines = new ArrayList();
+        genericEventLines = new ArrayList();
+        //oCanadaEventLines = new ArrayList();
         try {
             scheduleFile = new Scanner(new File("/Users/brianho/Music/schedule.txt")).useDelimiter("\\s*@\\s*"); // path of file to store scheduled information, delimiter is set to @
-            createLineObject();
+            createGenericLineObject();
         } catch (FileNotFoundException e) {
             System.out.println("[ERROR] Could not find file.");
         }
@@ -30,23 +33,42 @@ public class ReadFile {
     /**
      * Creates a line object with the values scanned on each line of schedule.txt
      */
-    private void createLineObject() {
+    private void createGenericLineObject() {
         while(scheduleFile.hasNext()) {
             int id = scheduleFile.nextInt();
             String name = scheduleFile.next();
             String path = scheduleFile.next();
             int startTimeInSeconds = scheduleFile.nextInt();
             String date = scheduleFile.next();
-            lines.add(new Line(id, name, path, startTimeInSeconds, date));
+            genericEventLines.add(new Line(id, name, path, startTimeInSeconds, date));
         }
         scheduleFile.close();
+    }
+    
+    private void createOCanadaLineObject() {
+        while(oCanadaFile.hasNext()) {
+            int id = scheduleFile.nextInt();
+            String path = scheduleFile.next();
+            int startTimeInSeconds = scheduleFile.nextInt();
+           // oCanadaEventLines.add(new Line(id, path, startTimeInSeconds));
+        }
+        oCanadaFile.close();
     }
     
     /**
      * Method returns the array list of type line to be used by other classes
      * @return an array list of type line
      */
-    public static ArrayList<Line> getData() {
-        return lines;
+    public static ArrayList<Line> getGenericEventData() {
+        return genericEventLines;
+    }
+    
+    /**
+     * Method returns the array list of type line to be used by other classes
+     * @return an array list of type line
+     */
+    public static ArrayList<Line> getOCanadaEventData() {
+        //return oCanadaEventLines;
+        return null;
     }
 }

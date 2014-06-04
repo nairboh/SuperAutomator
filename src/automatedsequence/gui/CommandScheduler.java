@@ -2,6 +2,8 @@ package automatedsequence.gui;
 
 import automatedsequence.fileInput.Line;
 import automatedsequence.fileInput.ReadFile;
+import java.io.File;
+import javax.swing.JFileChooser;
 
 /**
  *
@@ -33,7 +35,7 @@ public class CommandScheduler extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         pathOfMP3 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        browseButton = new javax.swing.JButton();
         recurDailyCheckbox = new javax.swing.JCheckBox();
         saveButton = new javax.swing.JButton();
         yearDropdown = new javax.swing.JComboBox();
@@ -61,9 +63,12 @@ public class CommandScheduler extends javax.swing.JFrame {
 
         jLabel7.setText("MP3 File To Play:");
 
-        pathOfMP3.setText("Path to filetoplay.mp3");
-
-        jButton1.setText("Browse");
+        browseButton.setText("Browse");
+        browseButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                browseButtonActionPerformed(evt);
+            }
+        });
 
         recurDailyCheckbox.setText("Recur Daily");
 
@@ -76,7 +81,7 @@ public class CommandScheduler extends javax.swing.JFrame {
 
         yearDropdown.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030", "2031", "2032", "2033", "2034", "2035", "2036", "2037", "2038", "2039", "2040", "2041", "2042", "2043", "2044", "2045", "2046", "2047", "2048", "2049", "2050", "2051", "2052", "2053", "2054", "2055", "2056", "2057", "2058", "2059", "2060", "2061", "2062", "2063", "2064", "2065", "2066", "2067", "2068"}));
 
-        hourDropdown.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00" , "01", "02", "03", "04", "05" , "06", "07", "08", "09" ,"10" , "11", "12", "13", "14", "15" , "16", "17", "18", "19", "20", "21", "22", "23", "24"}));
+        hourDropdown.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00" , "01", "02", "03", "04", "05" , "06", "07", "08", "09" ,"10" , "11", "12", "13", "14", "15" , "16", "17", "18", "19", "20", "21", "22", "23"}));
 
         monthDropdown.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
 
@@ -140,7 +145,7 @@ public class CommandScheduler extends javax.swing.JFrame {
                                     .addComponent(nameOfEvent)
                                     .addComponent(pathOfMP3, javax.swing.GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton1)))
+                                .addComponent(browseButton)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -174,7 +179,7 @@ public class CommandScheduler extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(pathOfMP3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(browseButton))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(recurDailyCheckbox)
@@ -186,13 +191,25 @@ public class CommandScheduler extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
-        int id = ReadFile.getData().size();
+        int id = ReadFile.getGenericEventData().size();
         int timeInSeconds = (secondDropbox.getSelectedIndex() + (minuteDropdown.getSelectedIndex() * 60) + (hourDropdown.getSelectedIndex() * 3600)); // converts all values into seconds
         String date = recurDailyCheckbox.isSelected() ? "EVERYDAY" : (monthDropdown.getSelectedIndex() + 1) + "/" + (dayDropdown.getSelectedIndex() + 1) +  "/" + (yearDropdown.getSelectedIndex() + 2014); // formats date string
-        ReadFile.getData().add(new Line(id , nameOfEvent.getText(), pathOfMP3.getText(), timeInSeconds , date)); // cretes a new line object and adds to arraylist
-        //System.out.println(id + " " + nameOfEvent.getText() + " " + pathOfMP3.getText() + " " + timeInSeconds + " " + date); // DEBUG
+        ReadFile.getGenericEventData().add(new Line(id , nameOfEvent.getText(), pathOfMP3.getText(), timeInSeconds , date)); // cretes a new line object and adds to arraylist
+        System.out.println(id + " " + ReadFile.getGenericEventData().get(id).getName() + " " + ReadFile.getGenericEventData().get(id).getPath() + " " + ReadFile.getGenericEventData().get(id).getStartTime() + " " + ReadFile.getGenericEventData().get(id).getDate()); // DEBUG
         dispose(); // close the window
     }//GEN-LAST:event_saveButtonActionPerformed
+
+    private void browseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browseButtonActionPerformed
+        JFileChooser chooser = new JFileChooser();
+        chooser.showOpenDialog(null);
+        File fileToChoose = chooser.getSelectedFile();
+        try {
+            String pathOfFile = fileToChoose.getAbsolutePath();
+            pathOfMP3.setText(pathOfFile);
+        } catch (NullPointerException e) {
+            System.out.println("No File Selected");
+        }
+    }//GEN-LAST:event_browseButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -230,9 +247,9 @@ public class CommandScheduler extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton browseButton;
     private javax.swing.JComboBox dayDropdown;
     private javax.swing.JComboBox hourDropdown;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

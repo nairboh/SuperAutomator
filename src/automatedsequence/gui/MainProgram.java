@@ -14,8 +14,8 @@ import javax.swing.ListSelectionModel;
  */
 public class MainProgram extends javax.swing.JFrame {
 
-    private ReadFile file = new ReadFile();
     private MP3Player player = new MP3Player();
+    private ReadFile file = new ReadFile(); // run the constructor
     private RandomizeOCanada oCanada = new RandomizeOCanada();
     private SuperCalendar calendar = new SuperCalendar();
     private String time;
@@ -131,7 +131,7 @@ public class MainProgram extends javax.swing.JFrame {
 
         scheduledTasks.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         scheduledTasks.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = {"["  + file.getData().get(0).getStartTime()  + " - 8:21:30 AM] " + file.getData().get(0).getName(), "ajshdjan"};
+            String[] strings = {"["  + ReadFile.getGenericEventData().get(0).getStartTime()  + " - 8:21:30 AM] " + ReadFile.getGenericEventData().get(0).getName(), "ajshdjan"};
 
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
@@ -208,7 +208,7 @@ public class MainProgram extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(scheduleHolidaysButton)
                             .addComponent(jLabel1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 125, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 140, Short.MAX_VALUE)
                         .addComponent(dateAndTimeLabel)))
                 .addGap(14, 14, 14))
         );
@@ -222,7 +222,7 @@ public class MainProgram extends javax.swing.JFrame {
                     String month = (calendar.getMonth(c.get(Calendar.MONTH) + 1)); // because starts at 0
                     int dayOfMonth = c.get(Calendar.DAY_OF_MONTH);
                     int year = c.get(Calendar.YEAR);
-                    int hour = c.get(Calendar.HOUR) + 12;
+                    int hour = c.get(Calendar.HOUR_OF_DAY);
                     int minute = c.get(Calendar.MINUTE);
                     int sec = c.get(Calendar.SECOND);
                     time = dayOfWeek + " " + month + " " + dayOfMonth + " " + year + " [EDT " + hour +":" + ((minute < 10) ? "0" + minute : minute) + ":" + ((sec < 10) ? "0" + sec : sec) + "]";
@@ -285,7 +285,7 @@ public class MainProgram extends javax.swing.JFrame {
      */
     private void startNowButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startNowButtonActionPerformed
         if (!overrideToggleButton.isSelected()) {
-            player.Play(file.getData().get(scheduledTasks.getSelectedIndex()).getPath());
+            player.Play(ReadFile.getGenericEventData().get(scheduledTasks.getSelectedIndex()).getPath());
         }
     }//GEN-LAST:event_startNowButtonActionPerformed
 
