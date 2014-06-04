@@ -23,7 +23,6 @@ public class Timer implements Runnable {
 
         while (true) { // loop indefinately
             Calendar c = new GregorianCalendar();
-            String dayOfWeek = (calendar.getDayOfWeek(c.get(Calendar.DAY_OF_WEEK)));
             String month = (calendar.getMonth(c.get(Calendar.MONTH) + 1)); // because starts at 0
             int dayOfMonth = c.get(Calendar.DAY_OF_MONTH);
             int year = c.get(Calendar.YEAR);
@@ -33,11 +32,13 @@ public class Timer implements Runnable {
             int sec = c.get(Calendar.SECOND);
             
             for (Line genericEventData : ReadFile.getGenericEventData()) {
-                if (((hour * 3600) + (minute * 60) + sec) == genericEventData.getStartTime()) { // if the time is as listed in the file, execute actions below
-                    player.Play(genericEventData.getPath());
-                    isPlaying = true;
-                    startTime = genericEventData.getStartTime();
-                    endTime = genericEventData.getEndTime();
+                if (((hour * 3600) + (minute * 60) + sec) == genericEventData.getStartTime() && (genericEventData.getDate().equalsIgnoreCase("EVERYDAY") || genericEventData.getDate().equals(dayOfMonth + "/" + month + "/" + year))) { // if the time is as listed in the file, execute actions below
+                    if(!genericEventData.getPath().equalsIgnoreCase("NOPATH")) {
+                        player.Play(genericEventData.getPath());
+                        isPlaying = true;
+                        startTime = genericEventData.getStartTime();
+                        endTime = genericEventData.getEndTime();
+                    }
                 }
             }
             
