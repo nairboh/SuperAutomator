@@ -1,5 +1,6 @@
 package automatedsequence.fileInput;
 
+import automatedsequence.constants.PathConstants;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -14,7 +15,7 @@ public class ReadFile {
     private Scanner scheduleFile;
     private Scanner oCanadaFile;
     private static ArrayList<Line> genericEventLines; // share amongst all instances
-    //private static ArrayList<Line> oCanadaEventLines; // share amongst all instances
+    private static ArrayList<Line> oCanadaPaths; // share amongst all instances
     
     /**
      * Constructor - Creates an arrayList and a scanner object with the schedule.text as the input
@@ -23,7 +24,7 @@ public class ReadFile {
         genericEventLines = new ArrayList();
         //oCanadaEventLines = new ArrayList();
         try {
-            scheduleFile = new Scanner(new File("/Users/brianho/Music/schedule.txt")).useDelimiter("\\s*@\\s*"); // path of file to store scheduled information, delimiter is set to @
+            scheduleFile = new Scanner(new File(PathConstants.schedulePathFile)).useDelimiter("\\s*@\\s*"); // path of file to store scheduled information, delimiter is set to @
             createGenericLineObject();
         } catch (FileNotFoundException e) {
             System.out.println("[ERROR] Could not find file.");

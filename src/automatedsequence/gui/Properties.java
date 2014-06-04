@@ -1,11 +1,13 @@
 package automatedsequence.gui;
 
+import automatedsequence.constants.PathConstants;
 import automatedsequence.fileInput.Line;
 import automatedsequence.fileInput.ReadFile;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import javax.swing.AbstractListModel;
 import javax.swing.JFileChooser;
 
 /**
@@ -13,14 +15,37 @@ import javax.swing.JFileChooser;
  * @author Brian
  */
 public class Properties extends javax.swing.JFrame {
-
+    
+    private AbstractListModel tableModel, completedModel;
+    private static String[] fileInformation;
     /**
      * Creates new form Properties
      */
     public Properties() {
+        populatePathBox(false);
         initComponents();
     }
+    
+    public void populatePathBox(boolean refresh) {
+        fileInformation = new String[ReadFile.getGenericEventData().size()];
+        for (Line genericEventData : ReadFile.getGenericEventData()) {
+            fileInformation[genericEventData.getEventID()] = genericEventData.getPath();
+        }
+        tableModel = new AbstractListModel() {
+            @Override
+            public int getSize() {
+                return fileInformation.length;
+            }
 
+            @Override
+            public Object getElementAt(int i) {
+                return fileInformation[i];
+            }
+        };
+        if (refresh) {
+            oCanadaVersions.repaint(); // refreshes
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -37,10 +62,10 @@ public class Properties extends javax.swing.JFrame {
         oCanadaPathTextBox = new javax.swing.JTextField();
         browseForOCanada = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
         addButton = new javax.swing.JButton();
         removeButton = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        oCanadaVersions = new javax.swing.JList();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -73,14 +98,12 @@ public class Properties extends javax.swing.JFrame {
 
         jLabel3.setText("O'Canada Versions:");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jTextArea1.setText("Path to OCanadaVersion1.mp3\nPath to OCanadaVersion2.mp3\nPath to OCanadaVersion3.mp3\nPath to OCanadaVersion4.mp3");
-        jScrollPane1.setViewportView(jTextArea1);
-
         addButton.setText("Add");
 
         removeButton.setText("Remove");
+
+        oCanadaVersions.setModel(tableModel);
+        jScrollPane2.setViewportView(oCanadaVersions);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -89,7 +112,9 @@ public class Properties extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 564, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 8, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -129,12 +154,12 @@ public class Properties extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addButton)
                     .addComponent(removeButton))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         pack();
@@ -148,7 +173,7 @@ public class Properties extends javax.swing.JFrame {
         try {
             String pathOfFile = fileToChoose.getAbsolutePath();
             morningRushPathTextBox.setText(pathOfFile);
-            try (BufferedWriter bw = new BufferedWriter(new FileWriter("/Users/brianho/Music/schedule.txt"))) {
+            try (BufferedWriter bw = new BufferedWriter(new FileWriter(PathConstants.schedulePathFile))) {
                 for (Line genericEventData : ReadFile.getGenericEventData()) {
                     bw.write(genericEventData.getEventID() + " @ " + genericEventData.getName() + " @ " + genericEventData.getPath() + " @ " + genericEventData.getStartTime() + " @ " + genericEventData.getEndTime() + " @ " + genericEventData.getDate() + " @ ");
                     bw.newLine();
@@ -171,7 +196,7 @@ public class Properties extends javax.swing.JFrame {
             String pathOfFile = fileToChoose.getAbsolutePath();
             oCanadaPathTextBox.setText(pathOfFile);
             //ReadFile.getGenericEventData().add(new Line(ReadFile.getGenericEventData().size() , pathOfFile, 100000));
-            try (BufferedWriter bw = new BufferedWriter(new FileWriter("/Users/brianho/Music/schedule.txt"))) {
+            try (BufferedWriter bw = new BufferedWriter(new FileWriter(PathConstants.schedulePathFile))) {
                 for (Line genericEventData : ReadFile.getGenericEventData()) {
                     bw.write(genericEventData.getEventID() + " @ " + genericEventData.getName() + " @ " + genericEventData.getPath() + " @ " + genericEventData.getStartTime() + " @ " + genericEventData.getEndTime() + " @ " + genericEventData.getDate() + " @ ");
                     bw.newLine();
@@ -198,10 +223,10 @@ public class Properties extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField morningRushPathTextBox;
     private javax.swing.JTextField oCanadaPathTextBox;
+    private javax.swing.JList oCanadaVersions;
     private javax.swing.JButton removeButton;
     // End of variables declaration//GEN-END:variables
 }

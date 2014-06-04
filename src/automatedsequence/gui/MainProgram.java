@@ -2,6 +2,7 @@ package automatedsequence.gui;
 
 import automatedsequence.MP3Player;
 import automatedsequence.RandomizeOCanada;
+import automatedsequence.constants.PathConstants;
 import automatedsequence.dateAndTime.SuperCalendar;
 import automatedsequence.fileInput.Line;
 import automatedsequence.fileInput.ReadFile;
@@ -22,15 +23,13 @@ public class MainProgram extends javax.swing.JFrame {
     private MP3Player player = new MP3Player();
     private ReadFile file = new ReadFile(); // run the constructor
     private RandomizeOCanada oCanada = new RandomizeOCanada();
-    private SuperCalendar calendar = new SuperCalendar();
     private String time;
-    private AbstractListModel tableModel;
-    private AbstractListModel completedModel;
+    private SuperCalendar calendar = new SuperCalendar();
+    
+    private AbstractListModel tableModel, completedModel;
     private static String[] fileInformation;
 
-    //static String[] strings = new String[ReadFile.getGenericEventData().size()];
     public MainProgram() {
-
         populateScheduledBox(false);
         initComponents(); // initializes all the components in the gui
     }
@@ -42,23 +41,22 @@ public class MainProgram extends javax.swing.JFrame {
     public void populateScheduledBox(boolean refresh) {
         fileInformation = new String[ReadFile.getGenericEventData().size()];
         for (Line genericEventData : ReadFile.getGenericEventData()) {
-            fileInformation[genericEventData.getEventID()] = "[" + genericEventData.getFormattedTime(ReadFile.getGenericEventData().get(genericEventData.getEventID()).getStartTime()) + " - " + genericEventData.getFormattedTime(ReadFile.getGenericEventData().get(genericEventData.getEventID()).getEndTime()) + "] " + ReadFile.getGenericEventData().get(genericEventData.getEventID()).getName();
+            fileInformation[genericEventData.getEventID()] = "[" + Line.getFormattedTime(ReadFile.getGenericEventData().get(genericEventData.getEventID()).getStartTime()) + " - " + Line.getFormattedTime(ReadFile.getGenericEventData().get(genericEventData.getEventID()).getEndTime()) + "] " + ReadFile.getGenericEventData().get(genericEventData.getEventID()).getName();
         }
         tableModel = new AbstractListModel() {
+            @Override
             public int getSize() {
                 return fileInformation.length;
             }
 
+            @Override
             public Object getElementAt(int i) {
                 return fileInformation[i];
             }
         };
         if (refresh) {
-            scheduledTasks.setModel(tableModel);
-            //scheduledTasks.validate();
-            scheduledTasks.repaint();
+            scheduledTasks.repaint(); // refreshes
         }
-
     }
 
     public void checkFinishedMusic() {
@@ -333,16 +331,14 @@ public class MainProgram extends javax.swing.JFrame {
                     genericEventData.postponeEndTime(Integer.parseInt(postponeDurationInMinutes.getText()));
                 }
                 postponeDurationInMinutes.setEditable(false); // avoid potential bug, does not let user change value after button is pressed
-                System.out.println("New start time:" + genericEventData.getStartTime());
-                System.out.println("New end time:" + genericEventData.getEndTime());
+                populateScheduledBox(true); // refreshes info box
             } else {
                 if (!genericEventData.getPath().equalsIgnoreCase("NOPATH")) {
                     genericEventData.postponeStartTime(-Integer.parseInt(postponeDurationInMinutes.getText()));
                     genericEventData.postponeEndTime(-Integer.parseInt(postponeDurationInMinutes.getText()));
                 }
                 postponeDurationInMinutes.setEditable(true);
-                System.out.println("New start time:" + genericEventData.getStartTime());
-                System.out.println("New end time:" + genericEventData.getEndTime());
+                populateScheduledBox(true); // refreshes info box
             }
         }
     }//GEN-LAST:event_postponeToggleButtonActionPerformed
@@ -391,7 +387,7 @@ public class MainProgram extends javax.swing.JFrame {
             if (scheduledTasks.getSelectedIndex() >= 0 && scheduledTasks.getSelectedIndex() < ReadFile.getGenericEventData().size()) {
                 ReadFile.getGenericEventData().remove(scheduledTasks.getSelectedIndex());
                 int counter = 0;
-                try (BufferedWriter bw = new BufferedWriter(new FileWriter("/Users/brianho/Music/schedule.txt"))) {
+                try (BufferedWriter bw = new BufferedWriter(new FileWriter(PathConstants.schedulePathFile))) {
                     for (Line genericEventData : ReadFile.getGenericEventData()) {
                         genericEventData.setEventID(counter);
                         bw.write(genericEventData.getEventID() + " @ " + genericEventData.getName() + " @ " + genericEventData.getPath() + " @ " + genericEventData.getStartTime() + " @ " + genericEventData.getEndTime() + " @ " + genericEventData.getDate() + " @ ");

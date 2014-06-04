@@ -120,11 +120,21 @@ public class AuthenticationDialogue extends javax.swing.JFrame {
             instructionalText.setText("You have entered the wrong password, Try Again!");
         }
     }//GEN-LAST:event_passwordFieldActionPerformed
-
+    
+    /**
+     * Returns the current instance of the main program
+     * 
+     * @return current instance of main program
+     */
     public static MainProgram getMainProgramInstance() {
         return mainProgram;
     }
     
+    /**
+     * Returns the current instance of timer
+     * 
+     * @return current instance of timer
+     */
     public static Timer getTimerInstance() {
         return timer;
     }

@@ -1,5 +1,6 @@
 package automatedsequence.gui;
 
+import automatedsequence.constants.PathConstants;
 import automatedsequence.fileInput.Line;
 import automatedsequence.fileInput.ReadFile;
 import java.io.BufferedWriter;
@@ -169,7 +170,7 @@ public class ModifyTask extends javax.swing.JFrame {
 
         ReadFile.getGenericEventData().get(indexOfEvent).setDate(recurCheckbox.isSelected() ? "EVERYDAY" : dateField.getText());
 
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter("/Users/brianho/Music/schedule.txt"))) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(PathConstants.schedulePathFile))) {
             for (Line genericEventData : ReadFile.getGenericEventData()) {
                 bw.write(genericEventData.getEventID() + " @ " + genericEventData.getName() + " @ " + genericEventData.getPath() + " @ " + genericEventData.getStartTime() + " @ " + genericEventData.getEndTime() + " @ " + genericEventData.getDate() + " @ ");
                 bw.newLine();
