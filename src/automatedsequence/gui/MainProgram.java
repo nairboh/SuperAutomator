@@ -19,8 +19,7 @@ import javax.swing.ListSelectionModel;
 /**
  * Purpose: Main Program Class
  *
- * @author Brian Ho, Max Romanoff, Conor Norman 
- * June 5 2014
+ * @author Brian Ho, Max Romanoff, Conor Norman June 5 2014
  */
 public class MainProgram extends javax.swing.JFrame {
 
@@ -30,7 +29,9 @@ public class MainProgram extends javax.swing.JFrame {
     private RandomizeOCanada oCanada = new RandomizeOCanada();
     private String time, information; // storing time and ocanada info
     private SuperCalendar calendar = new SuperCalendar();
-
+    private String dayOfWeek, month;
+    private int dayOfMonth, year, hour, minute, sec;
+    
     private AbstractListModel tableModel;
     private String[] fileInformation;
     private boolean isStopped = false; // stopped or not
@@ -94,7 +95,7 @@ public class MainProgram extends javax.swing.JFrame {
         infoLabel = new javax.swing.JLabel();
         scheduledTasksLabel = new javax.swing.JLabel();
         dateAndTimeLabel = new javax.swing.JLabel();
-        overrideToggleButton = new javax.swing.JToggleButton();
+        stopToggleButton = new javax.swing.JToggleButton();
         propertiesButton = new javax.swing.JButton();
         postponeToggleButton = new javax.swing.JToggleButton();
         postponeDurationInMinutes = new javax.swing.JTextField();
@@ -130,10 +131,10 @@ public class MainProgram extends javax.swing.JFrame {
 
         dateAndTimeLabel.setText(time);
 
-        overrideToggleButton.setText("Stop");
-        overrideToggleButton.addActionListener(new java.awt.event.ActionListener() {
+        stopToggleButton.setText("Stop");
+        stopToggleButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                overrideToggleButtonActionPerformed(evt);
+                stopToggleButtonActionPerformed(evt);
             }
         });
 
@@ -209,7 +210,7 @@ public class MainProgram extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(propertiesButton))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(overrideToggleButton, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(stopToggleButton, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(postponeToggleButton)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -246,7 +247,7 @@ public class MainProgram extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(overrideToggleButton)
+                                    .addComponent(stopToggleButton)
                                     .addComponent(postponeToggleButton)
                                     .addComponent(postponeDurationInMinutes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(minutesLabel))
@@ -276,14 +277,14 @@ public class MainProgram extends javax.swing.JFrame {
         new Thread(){
             public void run(){
                 while (true){
-                    Calendar c= new GregorianCalendar();
-                    String dayOfWeek = (calendar.getDayOfWeek(c.get(Calendar.DAY_OF_WEEK)));
-                    String month = (calendar.getMonth(c.get(Calendar.MONTH) + 1)); // because starts at 0
-                    int dayOfMonth = c.get(Calendar.DAY_OF_MONTH);
-                    int year = c.get(Calendar.YEAR);
-                    int hour = c.get(Calendar.HOUR_OF_DAY);
-                    int minute = c.get(Calendar.MINUTE);
-                    int sec = c.get(Calendar.SECOND);
+                    Calendar c = new GregorianCalendar();
+                    dayOfWeek = (calendar.getDayOfWeek(c.get(Calendar.DAY_OF_WEEK)));
+                    month = (calendar.getMonth(c.get(Calendar.MONTH) + 1)); // because starts at 0
+                    dayOfMonth = c.get(Calendar.DAY_OF_MONTH);
+                    year = c.get(Calendar.YEAR);
+                    hour = c.get(Calendar.HOUR_OF_DAY);
+                    minute = c.get(Calendar.MINUTE);
+                    sec = c.get(Calendar.SECOND);
                     time = dayOfWeek + " " + month + " " + dayOfMonth + " " + year + " [EDT " + hour +":" + ((minute < 10) ? "0" + minute : minute) + ":" + ((sec < 10) ? "0" + sec : sec) + "]";
                     dateAndTimeLabel.setText(time);
                     information = "[INFO] O'CANADA VERSION " + Timer.getOCanadaVersion() +" SELECTED";
@@ -306,16 +307,16 @@ public class MainProgram extends javax.swing.JFrame {
      *
      * @param evt
      */
-    private void overrideToggleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_overrideToggleButtonActionPerformed
+    private void stopToggleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stopToggleButtonActionPerformed
         if (!isStopped) {
-            overrideToggleButton.setText("Stopped");
+            stopToggleButton.setText("Stopped");
             isStopped = true;
         } else { // reset text
-            overrideToggleButton.setText("Stop"); 
+            stopToggleButton.setText("Stop");
             isStopped = false;
         }
         player.Stop(); // stops the music from playing
-    }//GEN-LAST:event_overrideToggleButtonActionPerformed
+    }//GEN-LAST:event_stopToggleButtonActionPerformed
 
     /**
      * Method creates a commandsGUI object and launches a new window
@@ -327,6 +328,10 @@ public class MainProgram extends javax.swing.JFrame {
             CommandScheduler commandsGUI = new CommandScheduler(); // command gui object
             commandsGUI.setLocationRelativeTo(null); // centers window
             commandsGUI.setVisible(true); // make visible
+        } else { // is postponed
+            Error errorPopup = new Error("Please de-select the postpone button!"); // passes string
+            errorPopup.setLocationRelativeTo(null); // centers window
+            errorPopup.setVisible(true); // make visible
         }
     }//GEN-LAST:event_scheduleCommandButtonActionPerformed
 
@@ -366,6 +371,10 @@ public class MainProgram extends javax.swing.JFrame {
             Properties propertiesGUI = new Properties(); // properties gui object
             propertiesGUI.setLocationRelativeTo(null); // centers window
             propertiesGUI.setVisible(true); // make visible
+        } else { // is postponed
+            Error errorPopup = new Error("Please de-select the postpone button!"); // passes string
+            errorPopup.setLocationRelativeTo(null); // centers window
+            errorPopup.setVisible(true); // make visible
         }
     }//GEN-LAST:event_propertiesButtonActionPerformed
 
@@ -375,10 +384,27 @@ public class MainProgram extends javax.swing.JFrame {
      * @param evt
      */
     private void startNowButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startNowButtonActionPerformed
-        if (!overrideToggleButton.isSelected()) { // if the override button is not selected
+        if (!stopToggleButton.isSelected()) { // if the override button is not selected
             if (scheduledTasks.getSelectedIndex() >= 0 && scheduledTasks.getSelectedIndex() < ReadScheduleFile.getScheduledEventData().size()) {
-                player.Play(ReadScheduleFile.getScheduledEventData().get(scheduledTasks.getSelectedIndex()).getPath());
+                int durationOfEvent = ReadScheduleFile.getScheduledEventData().get(scheduledTasks.getSelectedIndex()).getDuration(); // get duration of event
+                int currentTimeInSeconds = Timer.getCurrentTimeInSeconds(); // get current time in seconds
+                int initialStartTime = ReadScheduleFile.getScheduledEventData().get(scheduledTasks.getSelectedIndex()).getStartTime(); // save the original start time to memory
+                int initialEndTime = ReadScheduleFile.getScheduledEventData().get(scheduledTasks.getSelectedIndex()).getEndTime(); // save the original end time to memory
+                
+                ReadScheduleFile.getScheduledEventData().get(scheduledTasks.getSelectedIndex()).setStartTime(currentTimeInSeconds + 1); // set time to now (1 sec delay incase of latency)
+                ReadScheduleFile.getScheduledEventData().get(scheduledTasks.getSelectedIndex()).setEndTime(currentTimeInSeconds + durationOfEvent + 1); // set end time (1 sec delay incase of latency)
+                
+                Timer.isForcedStart(true, scheduledTasks.getSelectedIndex(), initialStartTime, initialEndTime); // passes information to timer to know it is a forced start
+                populateScheduledBox(true); // resets the box
+            } else { // no selection
+                Error errorPopup = new Error("Please select an item in Scheduled Tasks!"); // passes string
+                errorPopup.setLocationRelativeTo(null); // centers window
+                errorPopup.setVisible(true); // make visible
             }
+        } else { // schedule stopped
+            Error errorPopup = new Error("Please de-select the stop button!"); // passes string
+            errorPopup.setLocationRelativeTo(null); // centers window
+            errorPopup.setVisible(true); // make visible
         }
     }//GEN-LAST:event_startNowButtonActionPerformed
 
@@ -392,6 +418,10 @@ public class MainProgram extends javax.swing.JFrame {
             HolidayScheduler holidaysGUI = new HolidayScheduler(); // holiday gui object
             holidaysGUI.setLocationRelativeTo(null); // centers window
             holidaysGUI.setVisible(true); // make visible
+        } else { // is postponed
+            Error errorPopup = new Error("Please de-select the postpone button!"); // passes string
+            errorPopup.setLocationRelativeTo(null); // centers window
+            errorPopup.setVisible(true); // make visible
         }
     }//GEN-LAST:event_scheduleHolidaysButtonActionPerformed
 
@@ -418,7 +448,15 @@ public class MainProgram extends javax.swing.JFrame {
                     System.out.println("IO Exception");
                 }
                 populateScheduledBox(true); // update scheduled box
+            } else { // no selection
+                Error errorPopup = new Error("Please select an item in Scheduled Tasks!"); // passes string
+                errorPopup.setLocationRelativeTo(null); // centers window
+                errorPopup.setVisible(true); // make visible
             }
+        } else { // is postponed
+            Error errorPopup = new Error("Please de-select the postpone button!"); // passes string
+            errorPopup.setLocationRelativeTo(null); // centers window
+            errorPopup.setVisible(true); // make visible
         }
     }//GEN-LAST:event_deleteButtonActionPerformed
 
@@ -433,7 +471,15 @@ public class MainProgram extends javax.swing.JFrame {
                 ModifyTask modifyGUI = new ModifyTask(scheduledTasks.getSelectedIndex()); // modify task gui object
                 modifyGUI.setLocationRelativeTo(null); // centers window
                 modifyGUI.setVisible(true); // make visible
+            } else { // no selection
+                Error errorPopup = new Error("Please select an item in Scheduled Tasks!"); // passes string
+                errorPopup.setLocationRelativeTo(null); // centers window
+                errorPopup.setVisible(true); // make visible
             }
+        } else { // is postponed
+            Error errorPopup = new Error("Please de-select the postpone button!"); // passes string
+            errorPopup.setLocationRelativeTo(null); // centers window
+            errorPopup.setVisible(true); // make visible
         }
     }//GEN-LAST:event_modifyTasksButtonActionPerformed
 
@@ -447,7 +493,6 @@ public class MainProgram extends javax.swing.JFrame {
     private javax.swing.JLabel logo;
     private javax.swing.JLabel minutesLabel;
     private javax.swing.JButton modifyTasksButton;
-    private javax.swing.JToggleButton overrideToggleButton;
     private javax.swing.JTextField postponeDurationInMinutes;
     private javax.swing.JToggleButton postponeToggleButton;
     private javax.swing.JButton propertiesButton;
@@ -457,5 +502,6 @@ public class MainProgram extends javax.swing.JFrame {
     private javax.swing.JLabel scheduledTasksLabel;
     private javax.swing.JScrollPane scheduledTasksPane;
     private javax.swing.JButton startNowButton;
+    private javax.swing.JToggleButton stopToggleButton;
     // End of variables declaration//GEN-END:variables
 }

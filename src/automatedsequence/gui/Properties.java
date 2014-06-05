@@ -275,6 +275,10 @@ public class Properties extends javax.swing.JFrame {
                 System.out.println("IO Exception");
             }
             populatePathBox(true); // update the box to show deletion
+        } else { // nothing selected
+            Error errorPopup = new Error("Please select an item to remove!"); // passes string
+            errorPopup.setLocationRelativeTo(null); // centers window
+            errorPopup.setVisible(true); // make visible
         }
     }//GEN-LAST:event_removeButtonActionPerformed
 

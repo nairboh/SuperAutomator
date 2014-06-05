@@ -43,7 +43,7 @@
                               <Component id="propertiesButton" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="overrideToggleButton" min="-2" pref="95" max="-2" attributes="0"/>
+                              <Component id="stopToggleButton" min="-2" pref="95" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="postponeToggleButton" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
@@ -91,7 +91,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="overrideToggleButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="stopToggleButton" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="postponeToggleButton" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="postponeDurationInMinutes" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="minutesLabel" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -176,15 +176,15 @@
         </Property>
       </Properties>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="new Thread(){&#xa;public void run(){&#xa;while (true){&#xa;Calendar c= new GregorianCalendar();&#xa;String dayOfWeek = (calendar.getDayOfWeek(c.get(Calendar.DAY_OF_WEEK)));&#xa;String month = (calendar.getMonth(c.get(Calendar.MONTH) + 1)); // because starts at 0&#xa;int dayOfMonth = c.get(Calendar.DAY_OF_MONTH);&#xa;int year = c.get(Calendar.YEAR);&#xa;int hour = c.get(Calendar.HOUR_OF_DAY);&#xa;int minute = c.get(Calendar.MINUTE);&#xa;int sec = c.get(Calendar.SECOND);&#xa;time = dayOfWeek + &quot; &quot; + month + &quot; &quot; + dayOfMonth + &quot; &quot; + year + &quot; [EDT &quot; + hour +&quot;:&quot; + ((minute &lt; 10) ? &quot;0&quot; + minute : minute) + &quot;:&quot; + ((sec &lt; 10) ? &quot;0&quot; + sec : sec) + &quot;]&quot;;&#xa;dateAndTimeLabel.setText(time);&#xa;information = &quot;[INFO] O&apos;CANADA VERSION &quot; + Timer.getOCanadaVersion() +&quot; SELECTED&quot;;&#xa;informationBox.setText(!Timer.isOCanadaPlaying() ? &quot;Waiting to start O&apos;Canada...&quot; : information);&#xa;&#xa;try {&#xa;                Thread.sleep(1000); // loop once every second, reduces toll on cpu&#xa;            } catch (InterruptedException ex) {&#xa;                System.out.println(ex);&#xa;            }&#xa;}&#xa;}&#xa;}.start();"/>
+        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="new Thread(){&#xa;public void run(){&#xa;while (true){&#xa;Calendar c = new GregorianCalendar();&#xa;dayOfWeek = (calendar.getDayOfWeek(c.get(Calendar.DAY_OF_WEEK)));&#xa;month = (calendar.getMonth(c.get(Calendar.MONTH) + 1)); // because starts at 0&#xa;dayOfMonth = c.get(Calendar.DAY_OF_MONTH);&#xa;year = c.get(Calendar.YEAR);&#xa;hour = c.get(Calendar.HOUR_OF_DAY);&#xa;minute = c.get(Calendar.MINUTE);&#xa;sec = c.get(Calendar.SECOND);&#xa;time = dayOfWeek + &quot; &quot; + month + &quot; &quot; + dayOfMonth + &quot; &quot; + year + &quot; [EDT &quot; + hour +&quot;:&quot; + ((minute &lt; 10) ? &quot;0&quot; + minute : minute) + &quot;:&quot; + ((sec &lt; 10) ? &quot;0&quot; + sec : sec) + &quot;]&quot;;&#xa;dateAndTimeLabel.setText(time);&#xa;information = &quot;[INFO] O&apos;CANADA VERSION &quot; + Timer.getOCanadaVersion() +&quot; SELECTED&quot;;&#xa;informationBox.setText(!Timer.isOCanadaPlaying() ? &quot;Waiting to start O&apos;Canada...&quot; : information);&#xa;&#xa;try {&#xa;                Thread.sleep(1000); // loop once every second, reduces toll on cpu&#xa;            } catch (InterruptedException ex) {&#xa;                System.out.println(ex);&#xa;            }&#xa;}&#xa;}&#xa;}.start();"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JToggleButton" name="overrideToggleButton">
+    <Component class="javax.swing.JToggleButton" name="stopToggleButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Stop"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="overrideToggleButtonActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="stopToggleButtonActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="propertiesButton">

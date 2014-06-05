@@ -5,6 +5,7 @@ import automatedsequence.dateAndTime.SuperCalendar;
 import automatedsequence.fileInput.Line;
 import automatedsequence.fileInput.ReadOCanadaFile;
 import automatedsequence.fileInput.ReadScheduleFile;
+import automatedsequence.gui.AuthenticationDialogue;
 import automatedsequence.gui.MainProgram;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -12,15 +13,17 @@ import java.util.GregorianCalendar;
 /**
  * Purpose: Timer Class; runs in background and starts events automatically
  *
- * @author Brian Ho, Max Romanoff, Conor Norman 
- * June 5 2014
+ * @author Brian Ho, Max Romanoff, Conor Norman June 5 2014
  */
 public class Timer implements Runnable {
 
     private SuperCalendar calendar = new SuperCalendar();
     private RandomizeOCanada randomOCanada = new RandomizeOCanada();
     private int startTime = 0, endTime = 0;
+    private static int currentTimeInSeconds = 0;
     private static int oCanadaVersion; // to hold random number
+    private static int id = 0, originalStartTime = 0, originalEndTime = 0; // information for forced start events
+    private static boolean forcedStart = false; // is the event manually initiated
     private boolean isPlaying = false; // is there an audio file currently playing
     private static boolean isOCanadaPlaying = false;
 
@@ -41,9 +44,10 @@ public class Timer implements Runnable {
             int hour = c.get(Calendar.HOUR_OF_DAY);
             int minute = c.get(Calendar.MINUTE);
             int sec = c.get(Calendar.SECOND);
+            currentTimeInSeconds = ((hour * 3600) + (minute * 60) + sec);
 
             for (Line genericEventData : ReadScheduleFile.getScheduledEventData()) { // loop through all arraylist indexes
-                if ((((hour * 3600) + (minute * 60) + sec) == genericEventData.getStartTime()) && ((genericEventData.getDate().equalsIgnoreCase("EVERYDAY") || genericEventData.getDate().equals(month + "/" + dayOfMonth + "/" + year) || genericEventData.getDate().equals(month + "/" + dayOfMonth + "/YEARLY")))) { // if the time and date is the same as listed in the file or if file is set to yearly or everyday (yearly is used for holidays), execute actions below
+                if ((currentTimeInSeconds == genericEventData.getStartTime()) && ((genericEventData.getDate().equalsIgnoreCase("EVERYDAY") || genericEventData.getDate().equals(month + "/" + dayOfMonth + "/" + year) || genericEventData.getDate().equals(month + "/" + dayOfMonth + "/YEARLY")))) { // if the time and date is the same as listed in the file or if file is set to yearly or everyday (yearly is used for holidays), execute actions below
                     if (!genericEventData.getPath().equalsIgnoreCase("NOPATH") && (!nameOfDayOfWeek.equalsIgnoreCase("Saturday") || !nameOfDayOfWeek.equalsIgnoreCase("Saturday"))) { // holidays are assigned no path, therefore on holidays this does nothing
                         if (genericEventData.getEventID() == PathConstants.oCanadaID) { // get the default id of OCanada
                             oCanadaVersion = randomOCanada.getVersion(); // get randomly generated version
@@ -55,7 +59,7 @@ public class Timer implements Runnable {
                         isPlaying = true; // set song as playing
                         startTime = genericEventData.getStartTime();
                         endTime = genericEventData.getEndTime();
-                    } else {  // if anything is played during a holiday, kill it (stop)
+                    } else {  // if anything is played during a holiday, and it is not a forced start, kill it (stop)
                         MainProgram.getMP3PlayerInstance().Stop(); // stops song
                         isPlaying = false; // reset
                         isOCanadaPlaying = false; // reset
@@ -67,6 +71,12 @@ public class Timer implements Runnable {
                 MainProgram.getMP3PlayerInstance().Stop(); // stops song
                 isPlaying = false; // reset
                 isOCanadaPlaying = false; // reset
+                if (forcedStart) { // if this event is a forced start
+                    ReadScheduleFile.getScheduledEventData().get(id).setStartTime(originalStartTime); // set the time back to original
+                    ReadScheduleFile.getScheduledEventData().get(id).setEndTime(originalEndTime); // set the end time back to original
+                    AuthenticationDialogue.getMainProgramInstance().populateScheduledBox(true); // reset box to show updated changes
+                    forcedStart = false; // set forced start to false
+                }
             }
 
             try {
@@ -96,5 +106,29 @@ public class Timer implements Runnable {
      */
     public static boolean isOCanadaPlaying() {
         return isOCanadaPlaying;
+    }
+
+    /**
+     * Method returns the current time in seconds
+     *
+     * @return current time in seconds
+     */
+    public static int getCurrentTimeInSeconds() {
+        return currentTimeInSeconds;
+    }
+    
+    /**
+     * Method gets information on manually started events
+     * 
+     * @param isForced is the event manually started
+     * @param idOfForcedStart what is the event started
+     * @param initialStartTime what is the original event start time
+     * @param initialEndTime  what is the original event end time
+     */
+    public static void isForcedStart(boolean isForced, int idOfForcedStart, int initialStartTime, int initialEndTime) {
+        forcedStart = true;
+        id = idOfForcedStart;
+        originalStartTime = initialStartTime;
+        originalEndTime = initialEndTime;
     }
 }

@@ -160,6 +160,15 @@ public class Line {
     }
 
     /**
+     * Method returns the duration of the event
+     *
+     * @return the scheduled duration of the event
+     */
+    public int getDuration() {
+        return endTimeInSeconds - startTimeInSeconds;
+    }
+
+    /**
      * Method accepts the time in seconds and formats it into 24hour time
      *
      * @param timeInSeconds the time in seconds
