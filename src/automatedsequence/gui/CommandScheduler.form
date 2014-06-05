@@ -35,8 +35,8 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
+                                  <Component id="mp3FileLabel" min="-2" max="-2" attributes="0"/>
+                                  <Component id="nameOfEventLabel" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -48,9 +48,9 @@
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Group type="102" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabel15" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="startYearLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="startDayLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="startTimeLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -59,7 +59,7 @@
                                       </Group>
                                   </Group>
                                   <Group type="102" attributes="0">
-                                      <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                                      <Component id="startMonthLabel" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="32767" attributes="0"/>
                                       <Component id="monthDropdownStart" min="-2" max="-2" attributes="0"/>
                                   </Group>
@@ -68,8 +68,8 @@
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="jLabel4" min="-2" pref="43" max="-2" attributes="0"/>
-                                          <Component id="jLabel5" min="-2" pref="45" max="-2" attributes="0"/>
+                                          <Component id="startHourLabel" min="-2" pref="43" max="-2" attributes="0"/>
+                                          <Component id="startMinuteLabel" min="-2" pref="45" max="-2" attributes="0"/>
                                       </Group>
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Group type="102" alignment="1" attributes="0">
@@ -85,7 +85,7 @@
                                           </Group>
                                       </Group>
                                   </Group>
-                                  <Component id="jLabel6" min="-2" pref="58" max="-2" attributes="0"/>
+                                  <Component id="startSecondLabel" min="-2" pref="58" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -93,13 +93,13 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jLabel9" alignment="0" min="-2" pref="58" max="-2" attributes="0"/>
+                                  <Component id="endSecondLabel" alignment="0" min="-2" pref="58" max="-2" attributes="0"/>
                                   <Group type="103" alignment="0" groupAlignment="1" attributes="0">
                                       <Component id="browseButton" min="-2" max="-2" attributes="0"/>
                                       <Group type="102" attributes="0">
                                           <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="jLabel11" alignment="0" min="-2" pref="43" max="-2" attributes="0"/>
-                                              <Component id="jLabel10" alignment="0" min="-2" pref="45" max="-2" attributes="0"/>
+                                              <Component id="endHourLabel" alignment="0" min="-2" pref="43" max="-2" attributes="0"/>
+                                              <Component id="endMinuteLabel" alignment="0" min="-2" pref="45" max="-2" attributes="0"/>
                                           </Group>
                                           <Group type="103" groupAlignment="0" attributes="0">
                                               <Group type="102" alignment="1" attributes="0">
@@ -120,7 +120,7 @@
                               <EmptySpace pref="25" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
-                              <Component id="jLabel16" min="-2" max="-2" attributes="0"/>
+                              <Component id="endTimeLabel" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
@@ -135,30 +135,30 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel15" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel16" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="startTimeLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="endTimeLabel" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="startYearLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="startHourLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="yearDropdownStart" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="hourDropdownStart" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="startMonthLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="startMinuteLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="minuteDropdownStart" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="monthDropdownStart" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                              <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="startDayLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="startSecondLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="secondDropboxStart" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Component id="dayDropdownStart" min="-2" pref="27" max="-2" attributes="0"/>
@@ -166,17 +166,17 @@
                   </Group>
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel11" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="endHourLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="hourDropdownEnd" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="endMinuteLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="minuteDropdownEnd" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="endSecondLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="secondDropboxEnd" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -184,11 +184,11 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="nameOfEvent" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="nameOfEventLabel" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="mp3FileLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="pathOfMP3" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="browseButton" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
@@ -203,37 +203,37 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JLabel" name="jLabel1">
+    <Component class="javax.swing.JLabel" name="startYearLabel">
       <Properties>
         <Property name="text" type="java.lang.String" value="Year"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel2">
+    <Component class="javax.swing.JLabel" name="startMonthLabel">
       <Properties>
         <Property name="text" type="java.lang.String" value="Month"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel3">
+    <Component class="javax.swing.JLabel" name="startDayLabel">
       <Properties>
         <Property name="text" type="java.lang.String" value="Day"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel4">
+    <Component class="javax.swing.JLabel" name="startHourLabel">
       <Properties>
         <Property name="text" type="java.lang.String" value="Hour"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel5">
+    <Component class="javax.swing.JLabel" name="startMinuteLabel">
       <Properties>
         <Property name="text" type="java.lang.String" value="Minute"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel6">
+    <Component class="javax.swing.JLabel" name="startSecondLabel">
       <Properties>
         <Property name="text" type="java.lang.String" value="Second"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel7">
+    <Component class="javax.swing.JLabel" name="mp3FileLabel">
       <Properties>
         <Property name="text" type="java.lang.String" value="MP3 File To Play:"/>
       </Properties>
@@ -305,7 +305,7 @@
     </Component>
     <Component class="javax.swing.JTextField" name="nameOfEvent">
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel8">
+    <Component class="javax.swing.JLabel" name="nameOfEventLabel">
       <Properties>
         <Property name="text" type="java.lang.String" value="Name of event:"/>
       </Properties>
@@ -331,27 +331,27 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel9">
+    <Component class="javax.swing.JLabel" name="endSecondLabel">
       <Properties>
         <Property name="text" type="java.lang.String" value="Second"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel10">
+    <Component class="javax.swing.JLabel" name="endMinuteLabel">
       <Properties>
         <Property name="text" type="java.lang.String" value="Minute"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel11">
+    <Component class="javax.swing.JLabel" name="endHourLabel">
       <Properties>
         <Property name="text" type="java.lang.String" value="Hour"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel15">
+    <Component class="javax.swing.JLabel" name="startTimeLabel">
       <Properties>
         <Property name="text" type="java.lang.String" value="Start Time"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel16">
+    <Component class="javax.swing.JLabel" name="endTimeLabel">
       <Properties>
         <Property name="text" type="java.lang.String" value="End Time"/>
       </Properties>

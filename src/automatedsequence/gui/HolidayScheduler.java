@@ -8,13 +8,15 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 /**
+ * Purpose: Holiday Scheduler Class
  *
- * @author Brian
+ * @author Brian Ho, Max Romanoff, Conor Norman 
+ * June 5 2014
  */
 public class HolidayScheduler extends javax.swing.JFrame {
 
     /**
-     * Creates new form HolidayScheduler
+     * Creates new form HolidayScheduler and initializes components
      */
     public HolidayScheduler() {
         initComponents();
@@ -31,13 +33,13 @@ public class HolidayScheduler extends javax.swing.JFrame {
 
         yearDropdown = new javax.swing.JComboBox();
         saveButton = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
+        monthLabel = new javax.swing.JLabel();
         recurringYearlyCheckbox = new javax.swing.JCheckBox();
-        jLabel1 = new javax.swing.JLabel();
+        yearLabel = new javax.swing.JLabel();
         dayDropdown = new javax.swing.JComboBox();
-        jLabel3 = new javax.swing.JLabel();
+        dayLabel = new javax.swing.JLabel();
         monthDropdown = new javax.swing.JComboBox();
-        jLabel4 = new javax.swing.JLabel();
+        noteLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -50,19 +52,19 @@ public class HolidayScheduler extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setText("Month");
+        monthLabel.setText("Month");
 
         recurringYearlyCheckbox.setText("Recur Yearly");
 
-        jLabel1.setText("Year");
+        yearLabel.setText("Year");
 
         dayDropdown.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" , "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"}));
 
-        jLabel3.setText("Day");
+        dayLabel.setText("Day");
 
         monthDropdown.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
 
-        jLabel4.setText("Note: Weekends are already set as holidays");
+        noteLabel.setText("Note: Weekends are already set as holidays");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -84,12 +86,12 @@ public class HolidayScheduler extends javax.swing.JFrame {
                         .addGap(23, 23, 23))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4))
+                            .addComponent(yearLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(dayLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(noteLabel))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(monthLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(monthDropdown, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(46, 46, 46))))
@@ -99,59 +101,60 @@ public class HolidayScheduler extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
+                    .addComponent(yearLabel)
                     .addComponent(yearDropdown, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
+                    .addComponent(monthLabel)
                     .addComponent(monthDropdown, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
+                    .addComponent(dayLabel)
                     .addComponent(dayDropdown, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(recurringYearlyCheckbox)
                     .addComponent(saveButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel4)
+                .addComponent(noteLabel)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
+
     /**
-     * 
-     * @param evt 
+     * Action performed method for the save button
+     *
+     * @param evt
      */
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
-        int id = ReadScheduleFile.getScheduledEventData().size();
-        String date = recurringYearlyCheckbox.isSelected() ? (monthDropdown.getSelectedIndex() + 1) + "/" + (dayDropdown.getSelectedIndex() + 1) +  "/YEARLY" : (monthDropdown.getSelectedIndex() + 1) + "/" + (dayDropdown.getSelectedIndex() + 1) +  "/" + (yearDropdown.getSelectedIndex() + 2014); // formats date string
-        ReadScheduleFile.getScheduledEventData().add(new Line(id , "HOLIDAY", "NOPATH", 0, 0 , date)); // cretes a new line object and adds to arraylist
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(PathConstants.scheduleFilePath))) {
-            for (Line genericEventData : ReadScheduleFile.getScheduledEventData()) {
-                bw.write(genericEventData.getEventID() + " @ " + genericEventData.getName() + " @ " + genericEventData.getPath() + " @ " + genericEventData.getStartTime() + " @ " + genericEventData.getEndTime() + " @ " + genericEventData.getDate() + " @ "); 
-                bw.newLine();
+        int id = ReadScheduleFile.getScheduledEventData().size(); // size of array list
+        String date = recurringYearlyCheckbox.isSelected() ? (monthDropdown.getSelectedIndex() + 1) + "/" + (dayDropdown.getSelectedIndex() + 1) + "/YEARLY" : (monthDropdown.getSelectedIndex() + 1) + "/" + (dayDropdown.getSelectedIndex() + 1) + "/" + (yearDropdown.getSelectedIndex() + 2014); // formats date string
+        ReadScheduleFile.getScheduledEventData().add(new Line(id, "HOLIDAY", "NOPATH", 0, 0, date)); // cretes a new line object and adds to arraylist
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(PathConstants.scheduleFilePath))) { // writes to file
+            for (Line genericEventData : ReadScheduleFile.getScheduledEventData()) { // loop through all indexes
+                bw.write(genericEventData.getEventID() + " @ " + genericEventData.getName() + " @ " + genericEventData.getPath() + " @ " + genericEventData.getStartTime() + " @ " + genericEventData.getEndTime() + " @ " + genericEventData.getDate() + " @ "); // format and write
+                bw.newLine(); // new line
             }
-            bw.flush();
-            bw.close();
+            bw.flush(); // flush the stream
+            bw.close(); // close file
         } catch (IOException e) {
             System.out.println("IO Exception");
         }
-        AuthenticationDialogue.getMainProgramInstance().populateScheduledBox(true);
+        AuthenticationDialogue.getMainProgramInstance().populateScheduledBox(true); // update scheduled box
         dispose(); // close the window
     }//GEN-LAST:event_saveButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox dayDropdown;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel dayLabel;
     private javax.swing.JComboBox monthDropdown;
+    private javax.swing.JLabel monthLabel;
+    private javax.swing.JLabel noteLabel;
     private javax.swing.JCheckBox recurringYearlyCheckbox;
     private javax.swing.JButton saveButton;
     private javax.swing.JComboBox yearDropdown;
+    private javax.swing.JLabel yearLabel;
     // End of variables declaration//GEN-END:variables
 }

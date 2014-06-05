@@ -10,27 +10,30 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 /**
+ * Purpose: Timer Class; runs in background and starts events automatically
  *
- * @author Brian Ho, Max Romanoff
+ * @author Brian Ho, Max Romanoff, Conor Norman 
+ * June 5 2014
  */
 public class Timer implements Runnable {
 
     private SuperCalendar calendar = new SuperCalendar();
-    //private MP3Player player = new MP3Player();
     private RandomizeOCanada randomOCanada = new RandomizeOCanada();
     private int startTime = 0, endTime = 0;
-    private static int oCanadaVersion;
-    private String path;
-    private boolean isPlaying = false;
-    private static boolean isOCanadaPlaying = false; // is there an audio file currently playing
+    private static int oCanadaVersion; // to hold random number
+    private boolean isPlaying = false; // is there an audio file currently playing
+    private static boolean isOCanadaPlaying = false;
 
+    /**
+     * Thread for handling playing music at specific times
+     */
     @Override
     public void run() {
-        int elaspedTimeInSeconds = 0;
+        int elaspedTimeInSeconds = 0; // counter for elasped time
 
         while (true) { // loop indefinately
             Calendar c = new GregorianCalendar();
-            String month = (calendar.getMonth(c.get(Calendar.MONTH) + 1)); // because starts at 0
+            int month = (c.get(Calendar.MONTH) + 1); // because starts at 0
             int dayOfMonth = c.get(Calendar.DAY_OF_MONTH);
             int year = c.get(Calendar.YEAR);
 
@@ -38,35 +41,33 @@ public class Timer implements Runnable {
             int minute = c.get(Calendar.MINUTE);
             int sec = c.get(Calendar.SECOND);
 
-            for (Line genericEventData : ReadScheduleFile.getScheduledEventData()) {
-                if ((((hour * 3600) + (minute * 60) + sec) == genericEventData.getStartTime()) && ((genericEventData.getDate().equalsIgnoreCase("EVERYDAY") || genericEventData.getDate().equals(month + "/" + dayOfMonth + "/" + year) || genericEventData.getDate().equals(month + "/" + dayOfMonth + "/YEARLY")))) { // if the time is as listed in the file, execute actions below
-                    if (!genericEventData.getPath().equalsIgnoreCase("NOPATH")) {
-                        if (genericEventData.getEventID() == PathConstants.oCanadaID) {
-                            oCanadaVersion = randomOCanada.getVersion();
-                            System.out.println(oCanadaVersion);
-                            genericEventData.setPath(ReadOCanadaFile.getOCanadaVersionData().get(oCanadaVersion).getPath());
-                            isOCanadaPlaying = true;
+            for (Line genericEventData : ReadScheduleFile.getScheduledEventData()) { // loop through all arraylist indexes
+                if ((((hour * 3600) + (minute * 60) + sec) == genericEventData.getStartTime()) && ((genericEventData.getDate().equalsIgnoreCase("EVERYDAY") || genericEventData.getDate().equals(month + "/" + dayOfMonth + "/" + year) || genericEventData.getDate().equals(month + "/" + dayOfMonth + "/YEARLY")))) { // if the time and date is the same as listed in the file or if file is set to yearly or everyday (yearly is used for holidays), execute actions below
+                    if (!genericEventData.getPath().equalsIgnoreCase("NOPATH")) { // holidays are assigned no path, therefore on holidays this does nothing
+                        if (genericEventData.getEventID() == PathConstants.oCanadaID) { // get the default id of OCanada
+                            oCanadaVersion = randomOCanada.getVersion(); // get randomly generated version
+                            genericEventData.setPath(ReadOCanadaFile.getOCanadaVersionData().get(oCanadaVersion).getPath()); // get path of randomly generated version
+                            isOCanadaPlaying = true; // set ocanada as playing for logger update
                         }
-                        MainProgram.player.Play(genericEventData.getPath());
-                        elaspedTimeInSeconds = 0;
-                        isPlaying = true;
-                        path = genericEventData.getPath();
+                        MainProgram.getMP3PlayerInstance().Play(genericEventData.getPath()); // play song
+                        elaspedTimeInSeconds = 0; // reset the elasped time to 0
+                        isPlaying = true; // set song as playing
                         startTime = genericEventData.getStartTime();
                         endTime = genericEventData.getEndTime();
                     }
                 }
             }
 
-            if (elaspedTimeInSeconds == (endTime - startTime)) {
-                MainProgram.player.Stop();
-                isPlaying = false;
-                isOCanadaPlaying = false;
+            if (elaspedTimeInSeconds == (endTime - startTime)) { // calculate elasped time, used for stopping the song
+                MainProgram.getMP3PlayerInstance().Stop(); // stops song
+                isPlaying = false; // reset
+                isOCanadaPlaying = false; // reset
             }
 
             try {
                 Thread.sleep(1000); // loop once every second, reduces toll on cpu
                 if (isPlaying) {
-                    elaspedTimeInSeconds++;
+                    elaspedTimeInSeconds++; // increment
                 }
             } catch (InterruptedException ex) {
                 System.out.println(ex);
@@ -74,19 +75,21 @@ public class Timer implements Runnable {
         }
     }
 
-    public boolean getState() {
-        return isPlaying;
+    /**
+     * Method returns the generated oCanada version
+     *
+     * @return randomly generated OCanada version
+     */
+    public static int getOCanadaVersion() {
+        return oCanadaVersion + 1; // dont want it to say version 0
     }
 
-    public static int getOCanadaVersion() {
-        return oCanadaVersion + 1;
-    }
-    
+    /**
+     * Method returns if OCanada is playing or not
+     *
+     * @return if OCanada is playing or not
+     */
     public static boolean isOCanadaPlaying() {
         return isOCanadaPlaying;
-    }
-    
-    public String getCurrentPlayingPath() {
-        return path;
     }
 }

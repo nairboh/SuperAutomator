@@ -10,8 +10,10 @@ import java.io.IOException;
 import javax.swing.JFileChooser;
 
 /**
+ * Purpose: Command Scheduler Class
  *
- * @author Brian Ho
+ * @author Brian Ho, Max Romanoff, Conor Norman 
+ * June 5 2014
  */
 public class CommandScheduler extends javax.swing.JFrame {
 
@@ -31,13 +33,13 @@ public class CommandScheduler extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        startYearLabel = new javax.swing.JLabel();
+        startMonthLabel = new javax.swing.JLabel();
+        startDayLabel = new javax.swing.JLabel();
+        startHourLabel = new javax.swing.JLabel();
+        startMinuteLabel = new javax.swing.JLabel();
+        startSecondLabel = new javax.swing.JLabel();
+        mp3FileLabel = new javax.swing.JLabel();
         pathOfMP3 = new javax.swing.JTextField();
         browseButton = new javax.swing.JButton();
         recurDailyCheckbox = new javax.swing.JCheckBox();
@@ -49,31 +51,31 @@ public class CommandScheduler extends javax.swing.JFrame {
         dayDropdownStart = new javax.swing.JComboBox();
         secondDropboxStart = new javax.swing.JComboBox();
         nameOfEvent = new javax.swing.JTextField();
-        jLabel8 = new javax.swing.JLabel();
+        nameOfEventLabel = new javax.swing.JLabel();
         hourDropdownEnd = new javax.swing.JComboBox();
         minuteDropdownEnd = new javax.swing.JComboBox();
         secondDropboxEnd = new javax.swing.JComboBox();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
+        endSecondLabel = new javax.swing.JLabel();
+        endMinuteLabel = new javax.swing.JLabel();
+        endHourLabel = new javax.swing.JLabel();
+        startTimeLabel = new javax.swing.JLabel();
+        endTimeLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabel1.setText("Year");
+        startYearLabel.setText("Year");
 
-        jLabel2.setText("Month");
+        startMonthLabel.setText("Month");
 
-        jLabel3.setText("Day");
+        startDayLabel.setText("Day");
 
-        jLabel4.setText("Hour");
+        startHourLabel.setText("Hour");
 
-        jLabel5.setText("Minute");
+        startMinuteLabel.setText("Minute");
 
-        jLabel6.setText("Second");
+        startSecondLabel.setText("Second");
 
-        jLabel7.setText("MP3 File To Play:");
+        mp3FileLabel.setText("MP3 File To Play:");
 
         browseButton.setText("Browse");
         browseButton.addActionListener(new java.awt.event.ActionListener() {
@@ -103,7 +105,7 @@ public class CommandScheduler extends javax.swing.JFrame {
 
         secondDropboxStart.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
 
-        jLabel8.setText("Name of event:");
+        nameOfEventLabel.setText("Name of event:");
 
         hourDropdownEnd.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00" , "01", "02", "03", "04", "05" , "06", "07", "08", "09" ,"10" , "11", "12", "13", "14", "15" , "16", "17", "18", "19", "20", "21", "22", "23"}));
 
@@ -111,15 +113,15 @@ public class CommandScheduler extends javax.swing.JFrame {
 
         secondDropboxEnd.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
 
-        jLabel9.setText("Second");
+        endSecondLabel.setText("Second");
 
-        jLabel10.setText("Minute");
+        endMinuteLabel.setText("Minute");
 
-        jLabel11.setText("Hour");
+        endHourLabel.setText("Hour");
 
-        jLabel15.setText("Start Time");
+        startTimeLabel.setText("Start Time");
 
-        jLabel16.setText("End Time");
+        endTimeLabel.setText("End Time");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -136,8 +138,8 @@ public class CommandScheduler extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel7)
-                                    .addComponent(jLabel8))
+                                    .addComponent(mp3FileLabel)
+                                    .addComponent(nameOfEventLabel))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(nameOfEvent)
@@ -146,23 +148,23 @@ public class CommandScheduler extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel1)
-                                            .addComponent(jLabel3)
-                                            .addComponent(jLabel15))
+                                            .addComponent(startYearLabel)
+                                            .addComponent(startDayLabel)
+                                            .addComponent(startTimeLabel))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addComponent(yearDropdownStart, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                             .addComponent(dayDropdownStart, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel2)
+                                        .addComponent(startMonthLabel)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(monthDropdownStart, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(20, 20, 20)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(startHourLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(startMinuteLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                                 .addGap(16, 16, 16)
@@ -172,18 +174,18 @@ public class CommandScheduler extends javax.swing.JFrame {
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                     .addComponent(secondDropboxStart, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                     .addComponent(minuteDropdownStart, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(startSecondLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(endSecondLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                         .addComponent(browseButton)
                                         .addGroup(layout.createSequentialGroup()
                                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addComponent(endHourLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(endMinuteLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                                     .addGap(16, 16, 16)
@@ -195,7 +197,7 @@ public class CommandScheduler extends javax.swing.JFrame {
                                                         .addComponent(minuteDropdownEnd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel16)
+                                .addComponent(endTimeLabel)
                                 .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
@@ -204,48 +206,48 @@ public class CommandScheduler extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel15)
-                    .addComponent(jLabel16))
+                    .addComponent(startTimeLabel)
+                    .addComponent(endTimeLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel4)
+                            .addComponent(startYearLabel)
+                            .addComponent(startHourLabel)
                             .addComponent(yearDropdownStart, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(hourDropdownStart, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel5)
+                            .addComponent(startMonthLabel)
+                            .addComponent(startMinuteLabel)
                             .addComponent(minuteDropdownStart, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(monthDropdownStart))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel3)
-                                .addComponent(jLabel6)
+                                .addComponent(startDayLabel)
+                                .addComponent(startSecondLabel)
                                 .addComponent(secondDropboxStart, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(dayDropdownStart, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel11)
+                            .addComponent(endHourLabel)
                             .addComponent(hourDropdownEnd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel10)
+                            .addComponent(endMinuteLabel)
                             .addComponent(minuteDropdownEnd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel9)
+                            .addComponent(endSecondLabel)
                             .addComponent(secondDropboxEnd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(nameOfEvent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8))
+                    .addComponent(nameOfEventLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
+                    .addComponent(mp3FileLabel)
                     .addComponent(pathOfMP3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(browseButton))
                 .addGap(18, 18, 18)
@@ -258,35 +260,44 @@ public class CommandScheduler extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Action performed method for save button
+     *
+     * @param evt
+     */
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
-        int id = ReadScheduleFile.getScheduledEventData().size();
+        int id = ReadScheduleFile.getScheduledEventData().size(); // size of arraylist
         int startTimeInSeconds = (secondDropboxStart.getSelectedIndex() + (minuteDropdownStart.getSelectedIndex() * 60) + (hourDropdownStart.getSelectedIndex() * 3600)); // converts all values into seconds
         int endTimeInSeconds = (secondDropboxEnd.getSelectedIndex() + (minuteDropdownEnd.getSelectedIndex() * 60) + (hourDropdownEnd.getSelectedIndex() * 3600)); // converts all values into seconds
         String date = recurDailyCheckbox.isSelected() ? "EVERYDAY" : (monthDropdownStart.getSelectedIndex() + 1) + "/" + (dayDropdownStart.getSelectedIndex() + 1) + "/" + (yearDropdownStart.getSelectedIndex() + 2014); // formats date string
         ReadScheduleFile.getScheduledEventData().add(new Line(id, nameOfEvent.getText(), pathOfMP3.getText(), startTimeInSeconds, endTimeInSeconds, date)); // cretes a new line object and adds to arraylist
-        System.out.println(id + " " + ReadScheduleFile.getScheduledEventData().get(id).getName() + " " + ReadScheduleFile.getScheduledEventData().get(id).getPath() + " " + ReadScheduleFile.getScheduledEventData().get(id).getStartTime() + " " + ReadScheduleFile.getScheduledEventData().get(id).getEndTime() + " " + ReadScheduleFile.getScheduledEventData().get(id).getDate()); // DEBUG
 
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(PathConstants.scheduleFilePath))) {
-            for (Line genericEventData : ReadScheduleFile.getScheduledEventData()) {
-                bw.write(genericEventData.getEventID() + " @ " + genericEventData.getName() + " @ " + genericEventData.getPath() + " @ " + genericEventData.getStartTime() + " @ " + genericEventData.getEndTime() + " @ " + genericEventData.getDate() + " @ "); 
-                bw.newLine();
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(PathConstants.scheduleFilePath))) { // write to file
+            for (Line genericEventData : ReadScheduleFile.getScheduledEventData()) { // loop through all indexes
+                bw.write(genericEventData.getEventID() + " @ " + genericEventData.getName() + " @ " + genericEventData.getPath() + " @ " + genericEventData.getStartTime() + " @ " + genericEventData.getEndTime() + " @ " + genericEventData.getDate() + " @ "); // format and write
+                bw.newLine(); // new line
             }
-            bw.flush();
-            bw.close();
+            bw.flush(); // flush stream
+            bw.close(); // close file
         } catch (IOException e) {
             System.out.println("IO Exception");
         }
-        AuthenticationDialogue.getMainProgramInstance().populateScheduledBox(true);
+        AuthenticationDialogue.getMainProgramInstance().populateScheduledBox(true); // update schedule box
         dispose(); // close the window
     }//GEN-LAST:event_saveButtonActionPerformed
 
+    /**
+     * Action performed method for browse button
+     *
+     * @param evt
+     */
     private void browseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browseButtonActionPerformed
-        JFileChooser chooser = new JFileChooser();
+        JFileChooser chooser = new JFileChooser(); // new file chooser
         chooser.showOpenDialog(null);
-        File fileToChoose = chooser.getSelectedFile();
+        File fileToChoose = chooser.getSelectedFile(); // get file
         try {
-            String pathOfFile = fileToChoose.getAbsolutePath();
-            pathOfMP3.setText(pathOfFile);
+            String pathOfFile = fileToChoose.getAbsolutePath(); // get path
+            pathOfMP3.setText(pathOfFile); // sets the text in the field to be the path
         } catch (NullPointerException e) {
             System.out.println("No File Selected");
         }
@@ -295,30 +306,30 @@ public class CommandScheduler extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton browseButton;
     private javax.swing.JComboBox dayDropdownStart;
+    private javax.swing.JLabel endHourLabel;
+    private javax.swing.JLabel endMinuteLabel;
+    private javax.swing.JLabel endSecondLabel;
+    private javax.swing.JLabel endTimeLabel;
     private javax.swing.JComboBox hourDropdownEnd;
     private javax.swing.JComboBox hourDropdownStart;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JComboBox minuteDropdownEnd;
     private javax.swing.JComboBox minuteDropdownStart;
     private javax.swing.JComboBox monthDropdownStart;
+    private javax.swing.JLabel mp3FileLabel;
     private javax.swing.JTextField nameOfEvent;
+    private javax.swing.JLabel nameOfEventLabel;
     private javax.swing.JTextField pathOfMP3;
     private javax.swing.JCheckBox recurDailyCheckbox;
     private javax.swing.JButton saveButton;
     private javax.swing.JComboBox secondDropboxEnd;
     private javax.swing.JComboBox secondDropboxStart;
+    private javax.swing.JLabel startDayLabel;
+    private javax.swing.JLabel startHourLabel;
+    private javax.swing.JLabel startMinuteLabel;
+    private javax.swing.JLabel startMonthLabel;
+    private javax.swing.JLabel startSecondLabel;
+    private javax.swing.JLabel startTimeLabel;
+    private javax.swing.JLabel startYearLabel;
     private javax.swing.JComboBox yearDropdownStart;
     // End of variables declaration//GEN-END:variables
 }

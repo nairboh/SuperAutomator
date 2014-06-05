@@ -1,9 +1,10 @@
 package automatedsequence.dateAndTime;
 
 /**
- * Purpose: SuperCalendar Class
+ * Purpose: Super Calendar Class; returns strings of the date
  *
- * @author Brian Ho
+ * @author Brian Ho, Max Romanoff, Conor Norman 
+ * June 5 2014
  */
 public class SuperCalendar {
 

@@ -3,8 +3,10 @@ package automatedsequence;
 import automatedsequence.fileInput.ReadOCanadaFile;
 
 /**
- *
- * @author Brian Ho
+ * Purpose: Randomize OCanada Class
+ * 
+ * @author Brian Ho, Max Romanoff, Conor Norman
+ * June 5 2014
  */
 public class RandomizeOCanada {
     private static int oCanadaVersion, numberOfOCanadaVersions;

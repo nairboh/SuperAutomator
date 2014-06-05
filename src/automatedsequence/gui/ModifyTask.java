@@ -10,8 +10,10 @@ import java.io.IOException;
 import javax.swing.JFileChooser;
 
 /**
+ * Purpose: Modify Events Class
  *
- * @author brianho
+ * @author Brian Ho, Max Romanoff, Conor Norman 
+ * June 5 2014
  */
 public class ModifyTask extends javax.swing.JFrame {
 
@@ -24,7 +26,7 @@ public class ModifyTask extends javax.swing.JFrame {
      * modify
      */
     public ModifyTask(int indexOfEvent) {
-        this.indexOfEvent = indexOfEvent;
+        this.indexOfEvent = indexOfEvent; // gets the index of event from mainprogram
         initComponents();
     }
 
@@ -38,13 +40,13 @@ public class ModifyTask extends javax.swing.JFrame {
     private void initComponents() {
 
         pathField = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
+        pathLabel = new javax.swing.JLabel();
         browseButton = new javax.swing.JButton();
         nameField = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        nameLabel = new javax.swing.JLabel();
+        startTimeLabel = new javax.swing.JLabel();
+        endTimeLabel = new javax.swing.JLabel();
+        dateLabel = new javax.swing.JLabel();
         startTimeField = new javax.swing.JTextField();
         endTimeField = new javax.swing.JTextField();
         dateField = new javax.swing.JTextField();
@@ -55,7 +57,7 @@ public class ModifyTask extends javax.swing.JFrame {
 
         pathField.setText(automatedsequence.fileInput.ReadScheduleFile.getScheduledEventData().get(indexOfEvent).getPath());
 
-        jLabel1.setText("Path to MP3");
+        pathLabel.setText("Path to MP3");
 
         browseButton.setText("Browse");
         browseButton.addActionListener(new java.awt.event.ActionListener() {
@@ -66,13 +68,13 @@ public class ModifyTask extends javax.swing.JFrame {
 
         nameField.setText(ReadScheduleFile.getScheduledEventData().get(indexOfEvent).getName());
 
-        jLabel2.setText("Name of event");
+        nameLabel.setText("Name of event");
 
-        jLabel3.setText("Start Time");
+        startTimeLabel.setText("Start Time");
 
-        jLabel4.setText("End Time");
+        endTimeLabel.setText("End Time");
 
-        jLabel5.setText("Day to Execute");
+        dateLabel.setText("Day to Execute");
 
         startTimeField.setText(Line.getFormattedTime(automatedsequence.fileInput.ReadScheduleFile.getScheduledEventData().get(indexOfEvent).getStartTime()));
 
@@ -96,11 +98,11 @@ public class ModifyTask extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5))
+                    .addComponent(pathLabel)
+                    .addComponent(nameLabel)
+                    .addComponent(startTimeLabel)
+                    .addComponent(endTimeLabel)
+                    .addComponent(dateLabel))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(4, 4, 4)
@@ -128,25 +130,25 @@ public class ModifyTask extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
+                    .addComponent(nameLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(pathField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1)
+                    .addComponent(pathLabel)
                     .addComponent(browseButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
+                    .addComponent(startTimeLabel)
                     .addComponent(startTimeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
+                    .addComponent(endTimeLabel)
                     .addComponent(endTimeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(dateField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(recurCheckbox)
-                    .addComponent(jLabel5))
+                    .addComponent(dateLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
                 .addComponent(saveButton))
         );
@@ -154,43 +156,53 @@ public class ModifyTask extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Action performed handler for the save button
+     *
+     * @param evt
+     */
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
-        ReadScheduleFile.getScheduledEventData().get(indexOfEvent).setName(nameField.getText());
-        ReadScheduleFile.getScheduledEventData().get(indexOfEvent).setPath(pathField.getText());
+        ReadScheduleFile.getScheduledEventData().get(indexOfEvent).setName(nameField.getText()); // write name changes to array index
+        ReadScheduleFile.getScheduledEventData().get(indexOfEvent).setPath(pathField.getText()); // write path changes to array index
 
-        int startHour = ((startTimeField.getText().charAt(0) - 48) * 10 + (startTimeField.getText().charAt(1) - 48)) * 3600;
-        int startMin = ((startTimeField.getText().charAt(3) - 48) * 10 + (startTimeField.getText().charAt(4) - 48)) * 60;
-        int startSecond = (startTimeField.getText().charAt(6) - 48) * 10 + (startTimeField.getText().charAt(7) - 48);
-        ReadScheduleFile.getScheduledEventData().get(indexOfEvent).setStartTime(startHour + startMin + startSecond);
+        int startHour = ((startTimeField.getText().charAt(0) - 48) * 10 + (startTimeField.getText().charAt(1) - 48)) * 3600; // get the start hour
+        int startMin = ((startTimeField.getText().charAt(3) - 48) * 10 + (startTimeField.getText().charAt(4) - 48)) * 60; // get the start min
+        int startSecond = (startTimeField.getText().charAt(6) - 48) * 10 + (startTimeField.getText().charAt(7) - 48); // get the start second
+        ReadScheduleFile.getScheduledEventData().get(indexOfEvent).setStartTime(startHour + startMin + startSecond); // write the start time changes to array index
 
-        int endHour = ((endTimeField.getText().charAt(0) - 48) * 10 + (endTimeField.getText().charAt(1) - 48)) * 3600;
-        int endMin = ((endTimeField.getText().charAt(3) - 48) * 10 + (endTimeField.getText().charAt(4) - 48)) * 60;
-        int endSecond = (endTimeField.getText().charAt(6) - 48) * 10 + (endTimeField.getText().charAt(7) - 48);
-        ReadScheduleFile.getScheduledEventData().get(indexOfEvent).setEndTime(endHour + endMin + endSecond);
+        int endHour = ((endTimeField.getText().charAt(0) - 48) * 10 + (endTimeField.getText().charAt(1) - 48)) * 3600; // get the end hour
+        int endMin = ((endTimeField.getText().charAt(3) - 48) * 10 + (endTimeField.getText().charAt(4) - 48)) * 60; // get the end minute
+        int endSecond = (endTimeField.getText().charAt(6) - 48) * 10 + (endTimeField.getText().charAt(7) - 48); // get the end second
+        ReadScheduleFile.getScheduledEventData().get(indexOfEvent).setEndTime(endHour + endMin + endSecond); // write end time changes to array index
 
-        ReadScheduleFile.getScheduledEventData().get(indexOfEvent).setDate(recurCheckbox.isSelected() ? "EVERYDAY" : dateField.getText());
+        ReadScheduleFile.getScheduledEventData().get(indexOfEvent).setDate(recurCheckbox.isSelected() ? "EVERYDAY" : dateField.getText()); // if checkbox is checked write "EVERYDAY" otherwise write the value inside the textbox
 
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(PathConstants.scheduleFilePath))) {
-            for (Line genericEventData : ReadScheduleFile.getScheduledEventData()) {
-                bw.write(genericEventData.getEventID() + " @ " + genericEventData.getName() + " @ " + genericEventData.getPath() + " @ " + genericEventData.getStartTime() + " @ " + genericEventData.getEndTime() + " @ " + genericEventData.getDate() + " @ ");
-                bw.newLine();
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(PathConstants.scheduleFilePath))) { // write to file
+            for (Line genericEventData : ReadScheduleFile.getScheduledEventData()) { // loop through all indexes
+                bw.write(genericEventData.getEventID() + " @ " + genericEventData.getName() + " @ " + genericEventData.getPath() + " @ " + genericEventData.getStartTime() + " @ " + genericEventData.getEndTime() + " @ " + genericEventData.getDate() + " @ "); // format and write
+                bw.newLine(); // new line
             }
-            bw.flush();
-            bw.close();
+            bw.flush(); // flush stream
+            bw.close(); // close file
         } catch (IOException e) {
             System.out.println("IO Exception");
         }
-        AuthenticationDialogue.getMainProgramInstance().populateScheduledBox(true);
+        AuthenticationDialogue.getMainProgramInstance().populateScheduledBox(true); // update scheduled box
         dispose();
     }//GEN-LAST:event_saveButtonActionPerformed
 
+    /**
+     * Action performed handler for the browser button
+     *
+     * @param evt
+     */
     private void browseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browseButtonActionPerformed
-        JFileChooser chooser = new JFileChooser();
+        JFileChooser chooser = new JFileChooser(); // new file chooser window
         chooser.showOpenDialog(null);
-        File fileToChoose = chooser.getSelectedFile();
+        File fileToChoose = chooser.getSelectedFile(); // get file
         try {
-            String pathOfFile = fileToChoose.getAbsolutePath();
-            pathField.setText(pathOfFile);
+            String pathOfFile = fileToChoose.getAbsolutePath(); // get path
+            pathField.setText(pathOfFile); // set the path to the textbox
         } catch (NullPointerException e) {
             System.out.println("No File Selected");
         }
@@ -200,16 +212,16 @@ public class ModifyTask extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton browseButton;
     private javax.swing.JTextField dateField;
+    private javax.swing.JLabel dateLabel;
     private javax.swing.JTextField endTimeField;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel endTimeLabel;
     private javax.swing.JTextField nameField;
+    private javax.swing.JLabel nameLabel;
     private javax.swing.JTextField pathField;
+    private javax.swing.JLabel pathLabel;
     private javax.swing.JCheckBox recurCheckbox;
     private javax.swing.JButton saveButton;
     private javax.swing.JTextField startTimeField;
+    private javax.swing.JLabel startTimeLabel;
     // End of variables declaration//GEN-END:variables
 }

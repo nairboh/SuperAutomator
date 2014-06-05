@@ -13,26 +13,34 @@ import javax.swing.AbstractListModel;
 import javax.swing.JFileChooser;
 
 /**
+ * Purpose: Properties Class
  *
- * @author Brian
+ * @author Brian Ho, Max Romanoff, Conor Norman 
+ * June 5 2014
  */
 public class Properties extends javax.swing.JFrame {
 
     private AbstractListModel tableModel;
-    private static String[] fileInformation;
+    private String[] fileInformation;
 
     /**
-     * Creates new form Properties
+     * Creates new form Properties and initializes it's components
      */
     public Properties() {
         populatePathBox(false);
         initComponents();
     }
 
+    /**
+     * Method populates the path box with O'Canada paths
+     *
+     * @param refresh true if updating
+     */
     public void populatePathBox(boolean refresh) {
-        fileInformation = new String[ReadOCanadaFile.getOCanadaVersionData().size()];
-        for (OCanada oCanadaVersionData : ReadOCanadaFile.getOCanadaVersionData()) {
-            fileInformation[oCanadaVersionData.getID()] = oCanadaVersionData.getPath();
+        fileInformation = new String[ReadOCanadaFile.getOCanadaVersionData().size()]; // make an array the same size as the OCanadaVersion arraylist
+
+        for (OCanada oCanadaVersionData : ReadOCanadaFile.getOCanadaVersionData()) { // loops through all indexes
+            fileInformation[oCanadaVersionData.getID()] = oCanadaVersionData.getPath(); // populates the array
         }
         tableModel = new AbstractListModel() {
             @Override
@@ -45,9 +53,9 @@ public class Properties extends javax.swing.JFrame {
                 return fileInformation[i];
             }
         };
-        if (refresh) {
-            oCanadaVersions.setModel(tableModel);
-            oCanadaVersions.revalidate();
+        if (refresh) { // true if updating
+            oCanadaVersions.setModel(tableModel); // set the model
+            oCanadaVersions.revalidate(); // revalidate
             oCanadaVersions.repaint(); // refreshes
         }
     }
@@ -61,21 +69,22 @@ public class Properties extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        morningRushLabel = new javax.swing.JLabel();
         morningRushPathTextBox = new javax.swing.JTextField();
         browseForMorningRush = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
+        standUpForOCanadaLabel = new javax.swing.JLabel();
         oCanadaPathTextBox = new javax.swing.JTextField();
         browseForOCanada = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
+        oCanadaVersionsLabel = new javax.swing.JLabel();
         addButton = new javax.swing.JButton();
         removeButton = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         oCanadaVersions = new javax.swing.JList();
+        doneButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabel1.setText("Current Morning Rush Song:");
+        morningRushLabel.setText("Current Morning Rush Song:");
 
         morningRushPathTextBox.setText(automatedsequence.fileInput.ReadScheduleFile.getScheduledEventData().get(PathConstants.morningRushEventID).getPath());
 
@@ -86,7 +95,7 @@ public class Properties extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setText("\"Please stand up for O'Canada\":");
+        standUpForOCanadaLabel.setText("\"Please stand up for O'Canada\":");
 
         oCanadaPathTextBox.setText(automatedsequence.fileInput.ReadScheduleFile.getScheduledEventData().get(PathConstants.pleaseStandUpForOCanadaEventID).getPath());
 
@@ -97,7 +106,7 @@ public class Properties extends javax.swing.JFrame {
             }
         });
 
-        jLabel3.setText("O'Canada Versions:");
+        oCanadaVersionsLabel.setText("O'Canada Versions:");
 
         addButton.setText("Add");
         addButton.addActionListener(new java.awt.event.ActionListener() {
@@ -116,6 +125,13 @@ public class Properties extends javax.swing.JFrame {
         oCanadaVersions.setModel(tableModel);
         jScrollPane2.setViewportView(oCanadaVersions);
 
+        doneButton.setText("Done");
+        doneButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                doneButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -130,8 +146,8 @@ public class Properties extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(standUpForOCanadaLabel)
+                                    .addComponent(morningRushLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(morningRushPathTextBox)
@@ -140,13 +156,15 @@ public class Properties extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(browseForMorningRush)
                                     .addComponent(browseForOCanada)))
-                            .addComponent(jLabel3))
+                            .addComponent(oCanadaVersionsLabel))
                         .addGap(22, 22, 22))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(addButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(removeButton)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(doneButton)
+                            .addComponent(removeButton))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -154,43 +172,49 @@ public class Properties extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
+                    .addComponent(morningRushLabel)
                     .addComponent(morningRushPathTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(browseForMorningRush))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(oCanadaPathTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(browseForOCanada)
-                    .addComponent(jLabel2))
+                    .addComponent(standUpForOCanadaLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel3)
+                .addComponent(oCanadaVersionsLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addButton)
                     .addComponent(removeButton))
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(doneButton))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Action performed method for browse button for morning rush song
+     *
+     * @param evt
+     */
     private void browseForMorningRushActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browseForMorningRushActionPerformed
-        JFileChooser chooser = new JFileChooser();
+        JFileChooser chooser = new JFileChooser(); // makes a new file chooser window appear
         chooser.showOpenDialog(null);
-        File fileToChoose = chooser.getSelectedFile();
+        File fileToChoose = chooser.getSelectedFile(); // get the file
         try {
-            String pathOfFile = fileToChoose.getAbsolutePath();
-            morningRushPathTextBox.setText(pathOfFile);
-            ReadScheduleFile.getScheduledEventData().get(PathConstants.morningRushEventID).setPath(morningRushPathTextBox.getText());
-            try (BufferedWriter bw = new BufferedWriter(new FileWriter(PathConstants.scheduleFilePath))) {
-                for (Line genericEventData : ReadScheduleFile.getScheduledEventData()) {
+            String pathOfFile = fileToChoose.getAbsolutePath(); // get the path of the file
+            morningRushPathTextBox.setText(pathOfFile); // write the path into the text field
+            ReadScheduleFile.getScheduledEventData().get(PathConstants.morningRushEventID).setPath(morningRushPathTextBox.getText()); // change the path in the List arraylist
+            try (BufferedWriter bw = new BufferedWriter(new FileWriter(PathConstants.scheduleFilePath))) { // writes to file
+                for (Line genericEventData : ReadScheduleFile.getScheduledEventData()) { // loops through each array index (line) and writes them to the file
                     bw.write(genericEventData.getEventID() + " @ " + genericEventData.getName() + " @ " + genericEventData.getPath() + " @ " + genericEventData.getStartTime() + " @ " + genericEventData.getEndTime() + " @ " + genericEventData.getDate() + " @ ");
-                    bw.newLine();
+                    bw.newLine(); // new line
                 }
-                bw.flush();
-                bw.close();
+                bw.flush(); // flush the stream
+                bw.close(); // close the file
             } catch (IOException e) {
                 System.out.println("IO Exception");
             }
@@ -199,83 +223,110 @@ public class Properties extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_browseForMorningRushActionPerformed
 
+    /**
+     * Action performed method for browse button for browse button for stand up
+     * for oCanada song
+     *
+     * @param evt
+     */
     private void browseForOCanadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browseForOCanadaActionPerformed
-        JFileChooser chooser = new JFileChooser();
+        JFileChooser chooser = new JFileChooser(); // make a new file choose window appear
         chooser.showOpenDialog(null);
-        File fileToChoose = chooser.getSelectedFile();
+        File fileToChoose = chooser.getSelectedFile(); // get the file
         try {
-            String pathOfFile = fileToChoose.getAbsolutePath();
-            oCanadaPathTextBox.setText(pathOfFile);
+            String pathOfFile = fileToChoose.getAbsolutePath(); // get the path of the file
+            oCanadaPathTextBox.setText(pathOfFile); // write the path into the text field
+            ReadScheduleFile.getScheduledEventData().get(PathConstants.pleaseStandUpForOCanadaEventID).setPath(oCanadaPathTextBox.getText()); // change the path in the List arraylist
             try (BufferedWriter bw = new BufferedWriter(new FileWriter(PathConstants.scheduleFilePath))) {
-                for (Line genericEventData : ReadScheduleFile.getScheduledEventData()) {
+                for (Line genericEventData : ReadScheduleFile.getScheduledEventData()) { // loops through each array index (line) and writes them to the file
                     bw.write(genericEventData.getEventID() + " @ " + genericEventData.getName() + " @ " + genericEventData.getPath() + " @ " + genericEventData.getStartTime() + " @ " + genericEventData.getEndTime() + " @ " + genericEventData.getDate() + " @ ");
-                    bw.newLine();
+                    bw.newLine(); // new line
                 }
-                bw.flush();
-                bw.close();
+                bw.flush(); // flish the stream
+                bw.close(); // close the file
             } catch (IOException e) {
                 System.out.println("IO Exception");
             }
-            System.out.println(ReadScheduleFile.getScheduledEventData().get(0).getPath());
         } catch (NullPointerException e) {
             System.out.println("No File Selected");
         }
     }//GEN-LAST:event_browseForOCanadaActionPerformed
 
+    /**
+     * Action performed method for the remove button, it removes any selected
+     * ocanada version
+     *
+     * @param evt
+     */
     private void removeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeButtonActionPerformed
-        if (oCanadaVersions.getSelectedIndex() >= 0 && oCanadaVersions.getSelectedIndex() < ReadOCanadaFile.getOCanadaVersionData().size()) {
-            ReadOCanadaFile.getOCanadaVersionData().remove(oCanadaVersions.getSelectedIndex());
-            int counter = 0;
-            try (BufferedWriter bw = new BufferedWriter(new FileWriter(PathConstants.oCanadaFilePath))) {
-                for (OCanada oCanadaVersionData : ReadOCanadaFile.getOCanadaVersionData()) {
-                    oCanadaVersionData.setID(counter);
-                    bw.write(oCanadaVersionData.getID() + " @ " + oCanadaVersionData.getPath() + " @ ");
-                    counter++;
-                    bw.newLine();
+        if (oCanadaVersions.getSelectedIndex() >= 0 && oCanadaVersions.getSelectedIndex() < ReadOCanadaFile.getOCanadaVersionData().size()) { // if there is a selection
+            ReadOCanadaFile.getOCanadaVersionData().remove(oCanadaVersions.getSelectedIndex()); // remove the index
+            int counter = 0; // counter
+            try (BufferedWriter bw = new BufferedWriter(new FileWriter(PathConstants.oCanadaFilePath))) { // write to file
+                for (OCanada oCanadaVersionData : ReadOCanadaFile.getOCanadaVersionData()) { // loop through all the files
+                    oCanadaVersionData.setID(counter); // set ids to reorder then ascendingly
+                    bw.write(oCanadaVersionData.getID() + " @ " + oCanadaVersionData.getPath() + " @ "); // format and write
+                    counter++; // increment
+                    bw.newLine(); // new line
                 }
-                bw.flush();
-                bw.close();
+                bw.flush(); // flush stream
+                bw.close(); // close file
             } catch (IOException e) {
                 System.out.println("IO Exception");
             }
-            populatePathBox(true);
+            populatePathBox(true); // update the box to show deletion
         }
     }//GEN-LAST:event_removeButtonActionPerformed
 
+    /**
+     * Action performed method for the add button, opens a browse window
+     *
+     * @param evt
+     */
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
-        JFileChooser chooser = new JFileChooser();
+        JFileChooser chooser = new JFileChooser(); // file chooser window
         chooser.showOpenDialog(null);
-        File fileToChoose = chooser.getSelectedFile();
+        File fileToChoose = chooser.getSelectedFile(); // get the selected file
         try {
-            String pathOfFile = fileToChoose.getAbsolutePath();
-            ReadOCanadaFile.getOCanadaVersionData().add(new OCanada(ReadOCanadaFile.getOCanadaVersionData().size(), pathOfFile));
-            try (BufferedWriter bw = new BufferedWriter(new FileWriter(PathConstants.oCanadaFilePath))) {
-                for (OCanada oCanadaVersionData : ReadOCanadaFile.getOCanadaVersionData()) {
-                    bw.write(oCanadaVersionData.getID() + " @ " + oCanadaVersionData.getPath() + " @ ");
-                    bw.newLine();
+            String pathOfFile = fileToChoose.getAbsolutePath(); // get the path
+            ReadOCanadaFile.getOCanadaVersionData().add(new OCanada(ReadOCanadaFile.getOCanadaVersionData().size(), pathOfFile)); // make a new object 
+            try (BufferedWriter bw = new BufferedWriter(new FileWriter(PathConstants.oCanadaFilePath))) { // write to file
+                for (OCanada oCanadaVersionData : ReadOCanadaFile.getOCanadaVersionData()) { // loop through all indexes
+                    bw.write(oCanadaVersionData.getID() + " @ " + oCanadaVersionData.getPath() + " @ "); // formats and write
+                    bw.newLine(); // new line
                 }
-                bw.flush();
-                bw.close();
+                bw.flush(); // flush stream
+                bw.close(); // close file
             } catch (IOException e) {
                 System.out.println("IO Exception");
             }
         } catch (NullPointerException e) {
             System.out.println("No File Selected");
         }
-        populatePathBox(true);
+        populatePathBox(true); // update box to show addition
     }//GEN-LAST:event_addButtonActionPerformed
+
+    /**
+     * Action performed method for done button
+     *
+     * @param evt
+     */
+    private void doneButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doneButtonActionPerformed
+        dispose(); // close window
+    }//GEN-LAST:event_doneButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addButton;
     private javax.swing.JButton browseForMorningRush;
     private javax.swing.JButton browseForOCanada;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JButton doneButton;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel morningRushLabel;
     private javax.swing.JTextField morningRushPathTextBox;
     private javax.swing.JTextField oCanadaPathTextBox;
     private javax.swing.JList oCanadaVersions;
+    private javax.swing.JLabel oCanadaVersionsLabel;
     private javax.swing.JButton removeButton;
+    private javax.swing.JLabel standUpForOCanadaLabel;
     // End of variables declaration//GEN-END:variables
 }

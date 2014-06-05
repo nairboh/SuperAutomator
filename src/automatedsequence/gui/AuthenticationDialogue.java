@@ -5,12 +5,15 @@ import java.awt.Color;
 import java.util.Arrays;
 
 /**
+ * Purpose: Authentication Dialogue (accepts password form user before launching
+ * main program)
  *
- * @author brianho
+ * @author Brian Ho, Max Romanoff, Conor Norman 
+ * June 5 2014
  */
 public class AuthenticationDialogue extends javax.swing.JFrame {
 
-    char[] password = new char[]{'t', 'e', 's', 't'};
+    private char[] password = new char[]{'t', 'e', 's', 't'};
     private static MainProgram mainProgram;
     private static Timer timer;
 
@@ -92,58 +95,62 @@ public class AuthenticationDialogue extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
+
     /**
-     * Method runs the passwordFieldActionPerformed method when enter is hit on the keyboard
-     * 
-     * @param evt 
+     * Method runs the passwordFieldActionPerformed method when enter is hit on
+     * the keyboard
+     *
+     * @param evt
      */
     private void submitPasswordButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitPasswordButtonActionPerformed
         passwordFieldActionPerformed(evt); // Same result as below, instead of pressing enter, button is pressed
     }//GEN-LAST:event_submitPasswordButtonActionPerformed
-    
+
     /**
-     * Method launches the main GUI once the correct password is inputted, as well as start background threads
-     * 
-     * @param evt 
+     * Method launches the main GUI once the correct password is inputted, as
+     * well as start background threads
+     *
+     * @param evt
      */
     private void passwordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordFieldActionPerformed
-        mainProgram = new MainProgram();
-        timer = new Timer();
-        if (Arrays.equals(passwordField.getPassword(), password)) {
+        mainProgram = new MainProgram(); // mainprogram object; opens gui
+        timer = new Timer(); // timer object
+        if (Arrays.equals(passwordField.getPassword(), password)) { // if the array is equal to password
             dispose(); // kills the authentication window
             mainProgram.setLocationRelativeTo(null); // centers the main gui 
             mainProgram.setVisible(true); // makes the main gui visible
-            (new Thread(timer)).start();
+            (new Thread(timer)).start(); // starts the timer thread
         } else {
             instructionalText.setForeground(Color.red); // makes text below appear red
             instructionalText.setText("You have entered the wrong password, Try Again!");
         }
     }//GEN-LAST:event_passwordFieldActionPerformed
-    
+
     /**
      * Returns the current instance of the main program
-     * 
+     *
      * @return current instance of main program
      */
     public static MainProgram getMainProgramInstance() {
         return mainProgram;
     }
-    
+
     /**
      * Returns the current instance of timer
-     * 
+     *
      * @return current instance of timer
      */
     public static Timer getTimerInstance() {
         return timer;
     }
-    
+
     /**
+     * Main method for running gui
+     *
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        
+
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.

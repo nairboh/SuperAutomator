@@ -7,29 +7,27 @@ import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.Player;
 
 /**
+ * Purpose: MP3 Player Class
  *
- * @author Brian Ho
+ * @author Brian Ho, Max Romanoff, Conor Norman 
+ * June 5 2014
  */
 public class MP3Player {
 
-    FileInputStream FIS;
-    BufferedInputStream BIS;
-    private boolean stop;
-    
+    private FileInputStream FIS;
+    private BufferedInputStream BIS;
     public Player player;
 
-    public void Stop() {
-        if (player != null) {
-            player.close();
-            player = null;
-        }
-    }
-
+    /**
+     * Method starts the song
+     *
+     * @param path path of the song
+     */
     public void Play(String path) {
-        if (player == null) {
+        if (player == null) { // if there is no player
             try {
-                FIS = new FileInputStream(path);
-                BIS = new BufferedInputStream(FIS);
+                FIS = new FileInputStream(path); // assigns path to the file input stream 
+                BIS = new BufferedInputStream(FIS); // assigns the file input stream to the buffered input stream
 
                 player = new Player(BIS);
             } catch (JavaLayerException | FileNotFoundException ex) {
@@ -40,7 +38,7 @@ public class MP3Player {
                 @Override
                 public void run() {
                     try {
-                        player.play();
+                        player.play(); // play
                     } catch (JavaLayerException ex) {
                         System.out.println(ex);
                     }
@@ -49,11 +47,13 @@ public class MP3Player {
         }
     }
 
-    public boolean isComplete() {
-        return player.isComplete();
-    }
-
-    public int getPosition() {
-        return player.getPosition();
+    /**
+     * Method stops the song
+     */
+    public void Stop() {
+        if (player != null) { // if there is something playing
+            player.close(); // stop
+            player = null; // set it to null
+        }
     }
 }
