@@ -14,7 +14,8 @@ public class MP3Player {
 
     FileInputStream FIS;
     BufferedInputStream BIS;
-
+    private boolean stop;
+    
     public Player player;
 
     public void Stop() {

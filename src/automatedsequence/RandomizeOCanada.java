@@ -1,18 +1,20 @@
 package automatedsequence;
 
+import automatedsequence.fileInput.ReadOCanadaFile;
+
 /**
  *
  * @author Brian Ho
  */
 public class RandomizeOCanada {
-    private int oCanadaVersion, numberOfOCanadaVersions;
+    private static int oCanadaVersion, numberOfOCanadaVersions;
     
     /**
      * Method randomly generates an O'Canada version from the imported files
      * @return An integer representation of the O Canada version generated
      */
     public int getVersion() {
-        oCanadaVersion = (int) (Math.random() * getNumberOfOCanadaVersions() + 1); // generates a random number
+        oCanadaVersion = (int) ((Math.random() * getNumberOfOCanadaVersions()) + 0.1); // generates a random number
         return oCanadaVersion;
     }
     
@@ -21,7 +23,7 @@ public class RandomizeOCanada {
      * @return total number of OCanada versions based on imported files
      */
     public int getNumberOfOCanadaVersions() {
-        numberOfOCanadaVersions = 4;
+        numberOfOCanadaVersions = ReadOCanadaFile.getOCanadaVersionData().size() - 1;
         return numberOfOCanadaVersions;
     }
 }

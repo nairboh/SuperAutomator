@@ -2,7 +2,7 @@ package automatedsequence.gui;
 
 import automatedsequence.constants.PathConstants;
 import automatedsequence.fileInput.Line;
-import automatedsequence.fileInput.ReadFile;
+import automatedsequence.fileInput.ReadScheduleFile;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -259,15 +259,15 @@ public class CommandScheduler extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
-        int id = ReadFile.getGenericEventData().size();
+        int id = ReadScheduleFile.getScheduledEventData().size();
         int startTimeInSeconds = (secondDropboxStart.getSelectedIndex() + (minuteDropdownStart.getSelectedIndex() * 60) + (hourDropdownStart.getSelectedIndex() * 3600)); // converts all values into seconds
         int endTimeInSeconds = (secondDropboxEnd.getSelectedIndex() + (minuteDropdownEnd.getSelectedIndex() * 60) + (hourDropdownEnd.getSelectedIndex() * 3600)); // converts all values into seconds
         String date = recurDailyCheckbox.isSelected() ? "EVERYDAY" : (monthDropdownStart.getSelectedIndex() + 1) + "/" + (dayDropdownStart.getSelectedIndex() + 1) + "/" + (yearDropdownStart.getSelectedIndex() + 2014); // formats date string
-        ReadFile.getGenericEventData().add(new Line(id, nameOfEvent.getText(), pathOfMP3.getText(), startTimeInSeconds, endTimeInSeconds, date)); // cretes a new line object and adds to arraylist
-        System.out.println(id + " " + ReadFile.getGenericEventData().get(id).getName() + " " + ReadFile.getGenericEventData().get(id).getPath() + " " + ReadFile.getGenericEventData().get(id).getStartTime() + " " + ReadFile.getGenericEventData().get(id).getEndTime() + " " + ReadFile.getGenericEventData().get(id).getDate()); // DEBUG
+        ReadScheduleFile.getScheduledEventData().add(new Line(id, nameOfEvent.getText(), pathOfMP3.getText(), startTimeInSeconds, endTimeInSeconds, date)); // cretes a new line object and adds to arraylist
+        System.out.println(id + " " + ReadScheduleFile.getScheduledEventData().get(id).getName() + " " + ReadScheduleFile.getScheduledEventData().get(id).getPath() + " " + ReadScheduleFile.getScheduledEventData().get(id).getStartTime() + " " + ReadScheduleFile.getScheduledEventData().get(id).getEndTime() + " " + ReadScheduleFile.getScheduledEventData().get(id).getDate()); // DEBUG
 
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(PathConstants.schedulePathFile))) {
-            for (Line genericEventData : ReadFile.getGenericEventData()) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(PathConstants.scheduleFilePath))) {
+            for (Line genericEventData : ReadScheduleFile.getScheduledEventData()) {
                 bw.write(genericEventData.getEventID() + " @ " + genericEventData.getName() + " @ " + genericEventData.getPath() + " @ " + genericEventData.getStartTime() + " @ " + genericEventData.getEndTime() + " @ " + genericEventData.getDate() + " @ "); 
                 bw.newLine();
             }

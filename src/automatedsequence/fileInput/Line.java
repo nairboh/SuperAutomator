@@ -7,7 +7,6 @@ package automatedsequence.fileInput;
 public class Line {
 
     private int id, startTimeInSeconds, endTimeInSeconds;
-    private boolean isOCanada = false;
     private String name, path, date;
 
     /**

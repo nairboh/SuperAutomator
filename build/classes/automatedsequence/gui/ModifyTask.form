@@ -101,7 +101,7 @@
     <Component class="javax.swing.JTextField" name="pathField">
       <Properties>
         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="ReadFile.getGenericEventData().get(indexOfEvent).getPath()" type="code"/>
+          <Connection code="automatedsequence.fileInput.ReadScheduleFile.getScheduledEventData().get(indexOfEvent).getPath()" type="code"/>
         </Property>
       </Properties>
     </Component>
@@ -121,7 +121,7 @@
     <Component class="javax.swing.JTextField" name="nameField">
       <Properties>
         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="ReadFile.getGenericEventData().get(indexOfEvent).getName()" type="code"/>
+          <Connection code="ReadScheduleFile.getScheduledEventData().get(indexOfEvent).getName()" type="code"/>
         </Property>
       </Properties>
     </Component>
@@ -148,21 +148,21 @@
     <Component class="javax.swing.JTextField" name="startTimeField">
       <Properties>
         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="Line.getFormattedTime(ReadFile.getGenericEventData().get(indexOfEvent).getStartTime())" type="code"/>
+          <Connection code="Line.getFormattedTime(automatedsequence.fileInput.ReadScheduleFile.getScheduledEventData().get(indexOfEvent).getStartTime())" type="code"/>
         </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="endTimeField">
       <Properties>
         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="Line.getFormattedTime(ReadFile.getGenericEventData().get(indexOfEvent).getEndTime())" type="code"/>
+          <Connection code="Line.getFormattedTime(automatedsequence.fileInput.ReadScheduleFile.getScheduledEventData().get(indexOfEvent).getEndTime())" type="code"/>
         </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="dateField">
       <Properties>
         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="ReadFile.getGenericEventData().get(indexOfEvent).getDate()" type="code"/>
+          <Connection code="automatedsequence.fileInput.ReadScheduleFile.getScheduledEventData().get(indexOfEvent).getDate()" type="code"/>
         </Property>
       </Properties>
     </Component>

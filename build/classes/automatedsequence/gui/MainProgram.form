@@ -54,11 +54,8 @@
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="jLabel2" alignment="0" min="-2" pref="159" max="-2" attributes="0"/>
-                          <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jScrollPane4" alignment="0" min="-2" pref="410" max="-2" attributes="0"/>
-                          <Component id="jScrollPane5" alignment="0" min="-2" pref="410" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="overrideToggleButton" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
@@ -70,6 +67,7 @@
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="startNowButton" min="-2" pref="135" max="-2" attributes="0"/>
                           </Group>
+                          <Component id="jScrollPane4" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
@@ -83,11 +81,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jScrollPane4" min="-2" pref="90" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="jScrollPane5" min="-2" pref="90" max="-2" attributes="0"/>
+              <Component id="jScrollPane4" min="-2" pref="208" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
@@ -139,16 +133,16 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTextArea" name="jTextArea1">
+        <Component class="javax.swing.JTextArea" name="informationBox">
           <Properties>
             <Property name="columns" type="int" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
               <Connection code="1" type="code"/>
             </Property>
-            <Property name="rows" type="int" editor="org.netbeans.modules.form.RADConnectionPropertyEditor" postCode="jTextArea1.setEditable(false); // cannot edit text being displayed">
+            <Property name="rows" type="int" editor="org.netbeans.modules.form.RADConnectionPropertyEditor" postCode="informationBox.setEditable(false); // cannot edit text being displayed">
               <Connection code="1" type="code"/>
             </Property>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="&quot;[INFO] O&apos;CANADA VERSION &quot; + oCanada.getVersion() +&quot; SELECTED&quot;" type="code"/>
+              <Connection code="information" type="code"/>
             </Property>
           </Properties>
         </Component>
@@ -156,17 +150,12 @@
     </Container>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Logger"/>
+        <Property name="text" type="java.lang.String" value="Info"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
         <Property name="text" type="java.lang.String" value="SCHEDULED TASKS"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="jLabel3">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="COMPLETED"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="dateAndTimeLabel">
@@ -176,7 +165,7 @@
         </Property>
       </Properties>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="new Thread(){&#xa;public void run(){&#xa;while (true){&#xa;Calendar c= new GregorianCalendar();&#xa;String dayOfWeek = (calendar.getDayOfWeek(c.get(Calendar.DAY_OF_WEEK)));&#xa;String month = (calendar.getMonth(c.get(Calendar.MONTH) + 1)); // because starts at 0&#xa;int dayOfMonth = c.get(Calendar.DAY_OF_MONTH);&#xa;int year = c.get(Calendar.YEAR);&#xa;int hour = c.get(Calendar.HOUR_OF_DAY);&#xa;int minute = c.get(Calendar.MINUTE);&#xa;int sec = c.get(Calendar.SECOND);&#xa;time = dayOfWeek + &quot; &quot; + month + &quot; &quot; + dayOfMonth + &quot; &quot; + year + &quot; [EDT &quot; + hour +&quot;:&quot; + ((minute &lt; 10) ? &quot;0&quot; + minute : minute) + &quot;:&quot; + ((sec &lt; 10) ? &quot;0&quot; + sec : sec) + &quot;]&quot;;&#xa;dateAndTimeLabel.setText(time);&#xa;&#xa;try {&#xa;                Thread.sleep(1000); // loop once every second, reduces toll on cpu&#xa;            } catch (InterruptedException ex) {&#xa;                System.out.println(ex);&#xa;            }&#xa;}&#xa;}&#xa;}.start();"/>
+        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="new Thread(){&#xa;public void run(){&#xa;while (true){&#xa;Calendar c= new GregorianCalendar();&#xa;String dayOfWeek = (calendar.getDayOfWeek(c.get(Calendar.DAY_OF_WEEK)));&#xa;String month = (calendar.getMonth(c.get(Calendar.MONTH) + 1)); // because starts at 0&#xa;int dayOfMonth = c.get(Calendar.DAY_OF_MONTH);&#xa;int year = c.get(Calendar.YEAR);&#xa;int hour = c.get(Calendar.HOUR_OF_DAY);&#xa;int minute = c.get(Calendar.MINUTE);&#xa;int sec = c.get(Calendar.SECOND);&#xa;time = dayOfWeek + &quot; &quot; + month + &quot; &quot; + dayOfMonth + &quot; &quot; + year + &quot; [EDT &quot; + hour +&quot;:&quot; + ((minute &lt; 10) ? &quot;0&quot; + minute : minute) + &quot;:&quot; + ((sec &lt; 10) ? &quot;0&quot; + sec : sec) + &quot;]&quot;;&#xa;dateAndTimeLabel.setText(time);&#xa;information = &quot;[INFO] O&apos;CANADA VERSION &quot; + Timer.getOCanadaVersion() +&quot; SELECTED&quot;;&#xa;informationBox.setText(!Timer.isOCanadaPlaying() ? &quot;Waiting to start O&apos;Canada...&quot; : information);&#xa;&#xa;try {&#xa;                Thread.sleep(1000); // loop once every second, reduces toll on cpu&#xa;            } catch (InterruptedException ex) {&#xa;                System.out.println(ex);&#xa;            }&#xa;}&#xa;}&#xa;}.start();"/>
       </AuxValues>
     </Component>
     <Component class="javax.swing.JToggleButton" name="overrideToggleButton">
@@ -240,25 +229,6 @@
           <Properties>
             <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
               <Connection code="tableModel" type="code"/>
-            </Property>
-          </Properties>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="scheduledTasks.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);"/>
-          </AuxValues>
-        </Component>
-      </SubComponents>
-    </Container>
-    <Container class="javax.swing.JScrollPane" name="jScrollPane5">
-      <AuxValues>
-        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
-      </AuxValues>
-
-      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
-      <SubComponents>
-        <Component class="javax.swing.JList" name="scheduledTasks1">
-          <Properties>
-            <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="new javax.swing.AbstractListModel() {&#xa;    String[] strings = {&quot;[&quot;  + ReadFile.getGenericEventData().get(0).getStartTime()  + &quot; - 8:21:30 AM] &quot; + ReadFile.getGenericEventData().get(0).getName(), &quot;ajshdjan&quot;};&#xa;    //String[] strings = MainProgram.strings.clone();&#xa;    public int getSize() { return strings.length; }&#xa;    public Object getElementAt(int i) { return strings[i]; }&#xa;}" type="code"/>
             </Property>
           </Properties>
           <AuxValues>

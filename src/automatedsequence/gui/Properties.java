@@ -2,7 +2,9 @@ package automatedsequence.gui;
 
 import automatedsequence.constants.PathConstants;
 import automatedsequence.fileInput.Line;
-import automatedsequence.fileInput.ReadFile;
+import automatedsequence.fileInput.OCanada;
+import automatedsequence.fileInput.ReadOCanadaFile;
+import automatedsequence.fileInput.ReadScheduleFile;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -15,9 +17,10 @@ import javax.swing.JFileChooser;
  * @author Brian
  */
 public class Properties extends javax.swing.JFrame {
-    
-    private AbstractListModel tableModel, completedModel;
+
+    private AbstractListModel tableModel;
     private static String[] fileInformation;
+
     /**
      * Creates new form Properties
      */
@@ -25,11 +28,11 @@ public class Properties extends javax.swing.JFrame {
         populatePathBox(false);
         initComponents();
     }
-    
+
     public void populatePathBox(boolean refresh) {
-        fileInformation = new String[ReadFile.getGenericEventData().size()];
-        for (Line genericEventData : ReadFile.getGenericEventData()) {
-            fileInformation[genericEventData.getEventID()] = genericEventData.getPath();
+        fileInformation = new String[ReadOCanadaFile.getOCanadaVersionData().size()];
+        for (OCanada oCanadaVersionData : ReadOCanadaFile.getOCanadaVersionData()) {
+            fileInformation[oCanadaVersionData.getID()] = oCanadaVersionData.getPath();
         }
         tableModel = new AbstractListModel() {
             @Override
@@ -43,9 +46,12 @@ public class Properties extends javax.swing.JFrame {
             }
         };
         if (refresh) {
+            oCanadaVersions.setModel(tableModel);
+            oCanadaVersions.revalidate();
             oCanadaVersions.repaint(); // refreshes
         }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -71,12 +77,7 @@ public class Properties extends javax.swing.JFrame {
 
         jLabel1.setText("Current Morning Rush Song:");
 
-        morningRushPathTextBox.setText(ReadFile.getGenericEventData().get(0).getPath());
-        morningRushPathTextBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                morningRushPathTextBoxActionPerformed(evt);
-            }
-        });
+        morningRushPathTextBox.setText(automatedsequence.fileInput.ReadScheduleFile.getScheduledEventData().get(PathConstants.morningRushEventID).getPath());
 
         browseForMorningRush.setText("Browse");
         browseForMorningRush.addActionListener(new java.awt.event.ActionListener() {
@@ -87,7 +88,7 @@ public class Properties extends javax.swing.JFrame {
 
         jLabel2.setText("\"Please stand up for O'Canada\":");
 
-        oCanadaPathTextBox.setText(ReadFile.getGenericEventData().get(0).getPath());
+        oCanadaPathTextBox.setText(automatedsequence.fileInput.ReadScheduleFile.getScheduledEventData().get(PathConstants.pleaseStandUpForOCanadaEventID).getPath());
 
         browseForOCanada.setText("Browse");
         browseForOCanada.addActionListener(new java.awt.event.ActionListener() {
@@ -99,8 +100,18 @@ public class Properties extends javax.swing.JFrame {
         jLabel3.setText("O'Canada Versions:");
 
         addButton.setText("Add");
+        addButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addButtonActionPerformed(evt);
+            }
+        });
 
         removeButton.setText("Remove");
+        removeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removeButtonActionPerformed(evt);
+            }
+        });
 
         oCanadaVersions.setModel(tableModel);
         jScrollPane2.setViewportView(oCanadaVersions);
@@ -169,12 +180,12 @@ public class Properties extends javax.swing.JFrame {
         JFileChooser chooser = new JFileChooser();
         chooser.showOpenDialog(null);
         File fileToChoose = chooser.getSelectedFile();
-        //ReadFile.getGenericEventData().add(new Line(ReadFile.getGenericEventData().size() , pathOfFile, 100000));
         try {
             String pathOfFile = fileToChoose.getAbsolutePath();
             morningRushPathTextBox.setText(pathOfFile);
-            try (BufferedWriter bw = new BufferedWriter(new FileWriter(PathConstants.schedulePathFile))) {
-                for (Line genericEventData : ReadFile.getGenericEventData()) {
+            ReadScheduleFile.getScheduledEventData().get(PathConstants.morningRushEventID).setPath(morningRushPathTextBox.getText());
+            try (BufferedWriter bw = new BufferedWriter(new FileWriter(PathConstants.scheduleFilePath))) {
+                for (Line genericEventData : ReadScheduleFile.getScheduledEventData()) {
                     bw.write(genericEventData.getEventID() + " @ " + genericEventData.getName() + " @ " + genericEventData.getPath() + " @ " + genericEventData.getStartTime() + " @ " + genericEventData.getEndTime() + " @ " + genericEventData.getDate() + " @ ");
                     bw.newLine();
                 }
@@ -195,9 +206,8 @@ public class Properties extends javax.swing.JFrame {
         try {
             String pathOfFile = fileToChoose.getAbsolutePath();
             oCanadaPathTextBox.setText(pathOfFile);
-            //ReadFile.getGenericEventData().add(new Line(ReadFile.getGenericEventData().size() , pathOfFile, 100000));
-            try (BufferedWriter bw = new BufferedWriter(new FileWriter(PathConstants.schedulePathFile))) {
-                for (Line genericEventData : ReadFile.getGenericEventData()) {
+            try (BufferedWriter bw = new BufferedWriter(new FileWriter(PathConstants.scheduleFilePath))) {
+                for (Line genericEventData : ReadScheduleFile.getScheduledEventData()) {
                     bw.write(genericEventData.getEventID() + " @ " + genericEventData.getName() + " @ " + genericEventData.getPath() + " @ " + genericEventData.getStartTime() + " @ " + genericEventData.getEndTime() + " @ " + genericEventData.getDate() + " @ ");
                     bw.newLine();
                 }
@@ -206,15 +216,54 @@ public class Properties extends javax.swing.JFrame {
             } catch (IOException e) {
                 System.out.println("IO Exception");
             }
-            System.out.println(ReadFile.getGenericEventData().get(0).getPath());
+            System.out.println(ReadScheduleFile.getScheduledEventData().get(0).getPath());
         } catch (NullPointerException e) {
             System.out.println("No File Selected");
         }
     }//GEN-LAST:event_browseForOCanadaActionPerformed
 
-    private void morningRushPathTextBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_morningRushPathTextBoxActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_morningRushPathTextBoxActionPerformed
+    private void removeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeButtonActionPerformed
+        if (oCanadaVersions.getSelectedIndex() >= 0 && oCanadaVersions.getSelectedIndex() < ReadOCanadaFile.getOCanadaVersionData().size()) {
+            ReadOCanadaFile.getOCanadaVersionData().remove(oCanadaVersions.getSelectedIndex());
+            int counter = 0;
+            try (BufferedWriter bw = new BufferedWriter(new FileWriter(PathConstants.oCanadaFilePath))) {
+                for (OCanada oCanadaVersionData : ReadOCanadaFile.getOCanadaVersionData()) {
+                    oCanadaVersionData.setID(counter);
+                    bw.write(oCanadaVersionData.getID() + " @ " + oCanadaVersionData.getPath() + " @ ");
+                    counter++;
+                    bw.newLine();
+                }
+                bw.flush();
+                bw.close();
+            } catch (IOException e) {
+                System.out.println("IO Exception");
+            }
+            populatePathBox(true);
+        }
+    }//GEN-LAST:event_removeButtonActionPerformed
+
+    private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
+        JFileChooser chooser = new JFileChooser();
+        chooser.showOpenDialog(null);
+        File fileToChoose = chooser.getSelectedFile();
+        try {
+            String pathOfFile = fileToChoose.getAbsolutePath();
+            ReadOCanadaFile.getOCanadaVersionData().add(new OCanada(ReadOCanadaFile.getOCanadaVersionData().size(), pathOfFile));
+            try (BufferedWriter bw = new BufferedWriter(new FileWriter(PathConstants.oCanadaFilePath))) {
+                for (OCanada oCanadaVersionData : ReadOCanadaFile.getOCanadaVersionData()) {
+                    bw.write(oCanadaVersionData.getID() + " @ " + oCanadaVersionData.getPath() + " @ ");
+                    bw.newLine();
+                }
+                bw.flush();
+                bw.close();
+            } catch (IOException e) {
+                System.out.println("IO Exception");
+            }
+        } catch (NullPointerException e) {
+            System.out.println("No File Selected");
+        }
+        populatePathBox(true);
+    }//GEN-LAST:event_addButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addButton;

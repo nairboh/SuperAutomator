@@ -2,7 +2,7 @@ package automatedsequence.gui;
 
 import automatedsequence.constants.PathConstants;
 import automatedsequence.fileInput.Line;
-import automatedsequence.fileInput.ReadFile;
+import automatedsequence.fileInput.ReadScheduleFile;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -53,7 +53,7 @@ public class ModifyTask extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        pathField.setText(ReadFile.getGenericEventData().get(indexOfEvent).getPath());
+        pathField.setText(automatedsequence.fileInput.ReadScheduleFile.getScheduledEventData().get(indexOfEvent).getPath());
 
         jLabel1.setText("Path to MP3");
 
@@ -64,7 +64,7 @@ public class ModifyTask extends javax.swing.JFrame {
             }
         });
 
-        nameField.setText(ReadFile.getGenericEventData().get(indexOfEvent).getName());
+        nameField.setText(ReadScheduleFile.getScheduledEventData().get(indexOfEvent).getName());
 
         jLabel2.setText("Name of event");
 
@@ -74,11 +74,11 @@ public class ModifyTask extends javax.swing.JFrame {
 
         jLabel5.setText("Day to Execute");
 
-        startTimeField.setText(Line.getFormattedTime(ReadFile.getGenericEventData().get(indexOfEvent).getStartTime()));
+        startTimeField.setText(Line.getFormattedTime(automatedsequence.fileInput.ReadScheduleFile.getScheduledEventData().get(indexOfEvent).getStartTime()));
 
-        endTimeField.setText(Line.getFormattedTime(ReadFile.getGenericEventData().get(indexOfEvent).getEndTime()));
+        endTimeField.setText(Line.getFormattedTime(automatedsequence.fileInput.ReadScheduleFile.getScheduledEventData().get(indexOfEvent).getEndTime()));
 
-        dateField.setText(ReadFile.getGenericEventData().get(indexOfEvent).getDate());
+        dateField.setText(automatedsequence.fileInput.ReadScheduleFile.getScheduledEventData().get(indexOfEvent).getDate());
 
         recurCheckbox.setText("Recur");
 
@@ -155,23 +155,23 @@ public class ModifyTask extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
-        ReadFile.getGenericEventData().get(indexOfEvent).setName(nameField.getText());
-        ReadFile.getGenericEventData().get(indexOfEvent).setPath(pathField.getText());
+        ReadScheduleFile.getScheduledEventData().get(indexOfEvent).setName(nameField.getText());
+        ReadScheduleFile.getScheduledEventData().get(indexOfEvent).setPath(pathField.getText());
 
         int startHour = ((startTimeField.getText().charAt(0) - 48) * 10 + (startTimeField.getText().charAt(1) - 48)) * 3600;
         int startMin = ((startTimeField.getText().charAt(3) - 48) * 10 + (startTimeField.getText().charAt(4) - 48)) * 60;
         int startSecond = (startTimeField.getText().charAt(6) - 48) * 10 + (startTimeField.getText().charAt(7) - 48);
-        ReadFile.getGenericEventData().get(indexOfEvent).setStartTime(startHour + startMin + startSecond);
+        ReadScheduleFile.getScheduledEventData().get(indexOfEvent).setStartTime(startHour + startMin + startSecond);
 
         int endHour = ((endTimeField.getText().charAt(0) - 48) * 10 + (endTimeField.getText().charAt(1) - 48)) * 3600;
         int endMin = ((endTimeField.getText().charAt(3) - 48) * 10 + (endTimeField.getText().charAt(4) - 48)) * 60;
         int endSecond = (endTimeField.getText().charAt(6) - 48) * 10 + (endTimeField.getText().charAt(7) - 48);
-        ReadFile.getGenericEventData().get(indexOfEvent).setEndTime(endHour + endMin + endSecond);
+        ReadScheduleFile.getScheduledEventData().get(indexOfEvent).setEndTime(endHour + endMin + endSecond);
 
-        ReadFile.getGenericEventData().get(indexOfEvent).setDate(recurCheckbox.isSelected() ? "EVERYDAY" : dateField.getText());
+        ReadScheduleFile.getScheduledEventData().get(indexOfEvent).setDate(recurCheckbox.isSelected() ? "EVERYDAY" : dateField.getText());
 
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(PathConstants.schedulePathFile))) {
-            for (Line genericEventData : ReadFile.getGenericEventData()) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(PathConstants.scheduleFilePath))) {
+            for (Line genericEventData : ReadScheduleFile.getScheduledEventData()) {
                 bw.write(genericEventData.getEventID() + " @ " + genericEventData.getName() + " @ " + genericEventData.getPath() + " @ " + genericEventData.getStartTime() + " @ " + genericEventData.getEndTime() + " @ " + genericEventData.getDate() + " @ ");
                 bw.newLine();
             }

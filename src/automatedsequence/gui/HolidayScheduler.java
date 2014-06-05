@@ -2,7 +2,7 @@ package automatedsequence.gui;
 
 import automatedsequence.constants.PathConstants;
 import automatedsequence.fileInput.Line;
-import automatedsequence.fileInput.ReadFile;
+import automatedsequence.fileInput.ReadScheduleFile;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -126,11 +126,11 @@ public class HolidayScheduler extends javax.swing.JFrame {
      * @param evt 
      */
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
-        int id = ReadFile.getGenericEventData().size();
+        int id = ReadScheduleFile.getScheduledEventData().size();
         String date = recurringYearlyCheckbox.isSelected() ? (monthDropdown.getSelectedIndex() + 1) + "/" + (dayDropdown.getSelectedIndex() + 1) +  "/YEARLY" : (monthDropdown.getSelectedIndex() + 1) + "/" + (dayDropdown.getSelectedIndex() + 1) +  "/" + (yearDropdown.getSelectedIndex() + 2014); // formats date string
-        ReadFile.getGenericEventData().add(new Line(id , "HOLIDAY", "NOPATH", 0, 0 , date)); // cretes a new line object and adds to arraylist
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(PathConstants.schedulePathFile))) {
-            for (Line genericEventData : ReadFile.getGenericEventData()) {
+        ReadScheduleFile.getScheduledEventData().add(new Line(id , "HOLIDAY", "NOPATH", 0, 0 , date)); // cretes a new line object and adds to arraylist
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(PathConstants.scheduleFilePath))) {
+            for (Line genericEventData : ReadScheduleFile.getScheduledEventData()) {
                 bw.write(genericEventData.getEventID() + " @ " + genericEventData.getName() + " @ " + genericEventData.getPath() + " @ " + genericEventData.getStartTime() + " @ " + genericEventData.getEndTime() + " @ " + genericEventData.getDate() + " @ "); 
                 bw.newLine();
             }
@@ -139,6 +139,7 @@ public class HolidayScheduler extends javax.swing.JFrame {
         } catch (IOException e) {
             System.out.println("IO Exception");
         }
+        AuthenticationDialogue.getMainProgramInstance().populateScheduledBox(true);
         dispose(); // close the window
     }//GEN-LAST:event_saveButtonActionPerformed
 
