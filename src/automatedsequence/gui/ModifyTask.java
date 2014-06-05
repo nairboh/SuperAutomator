@@ -174,8 +174,8 @@ public class ModifyTask extends javax.swing.JFrame {
         int endMin = ((endTimeField.getText().charAt(3) - 48) * 10 + (endTimeField.getText().charAt(4) - 48)) * 60; // get the end minute
         int endSecond = (endTimeField.getText().charAt(6) - 48) * 10 + (endTimeField.getText().charAt(7) - 48); // get the end second
         ReadScheduleFile.getScheduledEventData().get(indexOfEvent).setEndTime(endHour + endMin + endSecond); // write end time changes to array index
-
-        ReadScheduleFile.getScheduledEventData().get(indexOfEvent).setDate(recurCheckbox.isSelected() ? "EVERYDAY" : dateField.getText()); // if checkbox is checked write "EVERYDAY" otherwise write the value inside the textbox
+        
+        ReadScheduleFile.getScheduledEventData().get(indexOfEvent).setDate(recurCheckbox.isSelected() ? (ReadScheduleFile.getScheduledEventData().get(indexOfEvent).getPath().equalsIgnoreCase("NOPATH") ? "YEARLY" : "EVERYDAY") : dateField.getText()); // if checkbox is checked write "EVERYDAY" or "YEARLY" otherwise write the value inside the textbox
 
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(PathConstants.scheduleFilePath))) { // write to file
             for (Line genericEventData : ReadScheduleFile.getScheduledEventData()) { // loop through all indexes
