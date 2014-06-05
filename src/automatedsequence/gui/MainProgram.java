@@ -104,7 +104,7 @@ public class MainProgram extends javax.swing.JFrame {
         scheduledTasks = new javax.swing.JList();
         deleteButton = new javax.swing.JButton();
         modifyTasksButton = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
+        logo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Super Automator (Brian Ho, Maxim Romanoff, Conor Norman)");
@@ -186,7 +186,7 @@ public class MainProgram extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pics/pic.png"))); // NOI18N
+        logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pics/pic.png"))); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -229,7 +229,7 @@ public class MainProgram extends javax.swing.JFrame {
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
                         .addGap(125, 125, 125)
-                        .addComponent(jLabel2)
+                        .addComponent(logo)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
@@ -260,7 +260,7 @@ public class MainProgram extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(dateAndTimeLabel))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
+                        .addComponent(logo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(infoLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -432,7 +432,7 @@ public class MainProgram extends javax.swing.JFrame {
     private javax.swing.JLabel infoLabel;
     private javax.swing.JScrollPane infoPane;
     private javax.swing.JTextArea informationBox;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel logo;
     private javax.swing.JLabel minutesLabel;
     private javax.swing.JButton modifyTasksButton;
     private javax.swing.JToggleButton overrideToggleButton;
