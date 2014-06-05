@@ -83,6 +83,8 @@ public class Properties extends javax.swing.JFrame {
         doneButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Properties");
+        setResizable(false);
 
         morningRushLabel.setText("Current Morning Rush Song:");
 

@@ -36,6 +36,7 @@ public class Timer implements Runnable {
             int month = (c.get(Calendar.MONTH) + 1); // because starts at 0
             int dayOfMonth = c.get(Calendar.DAY_OF_MONTH);
             int year = c.get(Calendar.YEAR);
+            String nameOfDayOfWeek = (calendar.getDayOfWeek(c.get(Calendar.DAY_OF_WEEK)));
 
             int hour = c.get(Calendar.HOUR_OF_DAY);
             int minute = c.get(Calendar.MINUTE);
@@ -43,7 +44,7 @@ public class Timer implements Runnable {
 
             for (Line genericEventData : ReadScheduleFile.getScheduledEventData()) { // loop through all arraylist indexes
                 if ((((hour * 3600) + (minute * 60) + sec) == genericEventData.getStartTime()) && ((genericEventData.getDate().equalsIgnoreCase("EVERYDAY") || genericEventData.getDate().equals(month + "/" + dayOfMonth + "/" + year) || genericEventData.getDate().equals(month + "/" + dayOfMonth + "/YEARLY")))) { // if the time and date is the same as listed in the file or if file is set to yearly or everyday (yearly is used for holidays), execute actions below
-                    if (!genericEventData.getPath().equalsIgnoreCase("NOPATH")) { // holidays are assigned no path, therefore on holidays this does nothing
+                    if (!genericEventData.getPath().equalsIgnoreCase("NOPATH") && (!nameOfDayOfWeek.equalsIgnoreCase("Saturday") || !nameOfDayOfWeek.equalsIgnoreCase("Saturday"))) { // holidays are assigned no path, therefore on holidays this does nothing
                         if (genericEventData.getEventID() == PathConstants.oCanadaID) { // get the default id of OCanada
                             oCanadaVersion = randomOCanada.getVersion(); // get randomly generated version
                             genericEventData.setPath(ReadOCanadaFile.getOCanadaVersionData().get(oCanadaVersion).getPath()); // get path of randomly generated version
@@ -54,6 +55,10 @@ public class Timer implements Runnable {
                         isPlaying = true; // set song as playing
                         startTime = genericEventData.getStartTime();
                         endTime = genericEventData.getEndTime();
+                    } else {  // if anything is played during a holiday, kill it (stop)
+                        MainProgram.getMP3PlayerInstance().Stop(); // stops song
+                        isPlaying = false; // reset
+                        isOCanadaPlaying = false; // reset
                     }
                 }
             }

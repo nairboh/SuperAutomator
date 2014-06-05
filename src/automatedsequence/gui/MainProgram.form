@@ -33,35 +33,36 @@
                       <Component id="dateAndTimeLabel" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Component id="scheduleHolidaysButton" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="scheduledTasksLabel" alignment="0" min="-2" pref="159" max="-2" attributes="0"/>
+                  <Component id="scheduledTasksPane" alignment="0" min="-2" pref="440" max="-2" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="scheduleCommandButton" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="scheduleCommandButton" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="propertiesButton" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="overrideToggleButton" min="-2" pref="95" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="postponeToggleButton" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="postponeDurationInMinutes" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="minutesLabel" min="-2" pref="58" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="propertiesButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="modifyTasksButton" alignment="0" max="32767" attributes="0"/>
                           <Component id="deleteButton" max="32767" attributes="0"/>
-                          <Component id="modifyTasksButton" pref="115" max="32767" attributes="0"/>
+                          <Component id="startNowButton" alignment="1" max="32767" attributes="0"/>
                       </Group>
-                  </Group>
-                  <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="scheduledTasksLabel" alignment="0" min="-2" pref="159" max="-2" attributes="0"/>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="overrideToggleButton" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="postponeToggleButton" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="postponeDurationInMinutes" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="minutesLabel" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="startNowButton" min="-2" pref="135" max="-2" attributes="0"/>
-                      </Group>
-                      <Component id="scheduledTasksPane" alignment="0" max="32767" attributes="0"/>
                   </Group>
               </Group>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="8" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="infoPane" min="-2" pref="454" max="-2" attributes="0"/>
                           <Component id="infoLabel" min="-2" pref="52" max="-2" attributes="0"/>
@@ -87,18 +88,25 @@
                   <Group type="102" attributes="0">
                       <Component id="scheduledTasksPane" min="-2" pref="208" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="overrideToggleButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="postponeToggleButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="postponeDurationInMinutes" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="minutesLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="startNowButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="scheduleCommandButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="propertiesButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="modifyTasksButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="overrideToggleButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="postponeToggleButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="postponeDurationInMinutes" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="minutesLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="scheduleCommandButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="propertiesButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Component id="startNowButton" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                              <Component id="modifyTasksButton" min="-2" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="deleteButton" min="-2" max="-2" attributes="0"/>
@@ -173,7 +181,7 @@
     </Component>
     <Component class="javax.swing.JToggleButton" name="overrideToggleButton">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Override"/>
+        <Property name="text" type="java.lang.String" value="Stop"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="overrideToggleButtonActionPerformed"/>

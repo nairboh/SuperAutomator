@@ -62,6 +62,8 @@ public class CommandScheduler extends javax.swing.JFrame {
         endTimeLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Schedule Task");
+        setResizable(false);
 
         startYearLabel.setText("Year");
 
