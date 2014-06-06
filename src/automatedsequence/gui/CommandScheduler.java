@@ -1,12 +1,9 @@
 package automatedsequence.gui;
 
-import automatedsequence.constants.PathConstants;
 import automatedsequence.fileInput.Line;
 import automatedsequence.fileInput.ReadScheduleFile;
-import java.io.BufferedWriter;
+import automatedsequence.fileOutput.WriteToScheduleFile;
 import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import javax.swing.JFileChooser;
 
 /**
@@ -274,16 +271,7 @@ public class CommandScheduler extends javax.swing.JFrame {
         String date = recurDailyCheckbox.isSelected() ? "EVERYDAY" : (monthDropdownStart.getSelectedIndex() + 1) + "/" + (dayDropdownStart.getSelectedIndex() + 1) + "/" + (yearDropdownStart.getSelectedIndex() + 2014); // formats date string
         ReadScheduleFile.getScheduledEventData().add(new Line(id, nameOfEvent.getText(), pathOfMP3.getText(), startTimeInSeconds, endTimeInSeconds, date)); // cretes a new line object and adds to arraylist
 
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(PathConstants.scheduleFilePath))) { // write to file
-            for (Line genericEventData : ReadScheduleFile.getScheduledEventData()) { // loop through all indexes
-                bw.write(genericEventData.getEventID() + " @ " + genericEventData.getName() + " @ " + genericEventData.getPath() + " @ " + genericEventData.getStartTime() + " @ " + genericEventData.getEndTime() + " @ " + genericEventData.getDate() + " @ "); // format and write
-                bw.newLine(); // new line
-            }
-            bw.flush(); // flush stream
-            bw.close(); // close file
-        } catch (IOException e) {
-            System.out.println("IO Exception");
-        }
+        WriteToScheduleFile.write(); // write to schedule file
         AuthenticationDialogue.getMainProgramInstance().populateScheduledBox(true); // update schedule box
         dispose(); // close the window
     }//GEN-LAST:event_saveButtonActionPerformed

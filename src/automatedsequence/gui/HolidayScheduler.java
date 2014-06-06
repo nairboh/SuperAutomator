@@ -1,11 +1,8 @@
 package automatedsequence.gui;
 
-import automatedsequence.constants.PathConstants;
 import automatedsequence.fileInput.Line;
 import automatedsequence.fileInput.ReadScheduleFile;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
+import automatedsequence.fileOutput.WriteToScheduleFile;
 
 /**
  * Purpose: Holiday Scheduler Class
@@ -134,16 +131,7 @@ public class HolidayScheduler extends javax.swing.JFrame {
         int id = ReadScheduleFile.getScheduledEventData().size(); // size of array list
         String date = recurringYearlyCheckbox.isSelected() ? (monthDropdown.getSelectedIndex() + 1) + "/" + (dayDropdown.getSelectedIndex() + 1) + "/YEARLY" : (monthDropdown.getSelectedIndex() + 1) + "/" + (dayDropdown.getSelectedIndex() + 1) + "/" + (yearDropdown.getSelectedIndex() + 2014); // formats date string
         ReadScheduleFile.getScheduledEventData().add(new Line(id, "HOLIDAY", "NOPATH", 0, 0, date)); // cretes a new line object and adds to arraylist
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(PathConstants.scheduleFilePath))) { // writes to file
-            for (Line genericEventData : ReadScheduleFile.getScheduledEventData()) { // loop through all indexes
-                bw.write(genericEventData.getEventID() + " @ " + genericEventData.getName() + " @ " + genericEventData.getPath() + " @ " + genericEventData.getStartTime() + " @ " + genericEventData.getEndTime() + " @ " + genericEventData.getDate() + " @ "); // format and write
-                bw.newLine(); // new line
-            }
-            bw.flush(); // flush the stream
-            bw.close(); // close file
-        } catch (IOException e) {
-            System.out.println("IO Exception");
-        }
+        WriteToScheduleFile.write();
         AuthenticationDialogue.getMainProgramInstance().populateScheduledBox(true); // update scheduled box
         dispose(); // close the window
     }//GEN-LAST:event_saveButtonActionPerformed

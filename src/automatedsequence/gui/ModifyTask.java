@@ -1,12 +1,9 @@
 package automatedsequence.gui;
 
-import automatedsequence.constants.PathConstants;
 import automatedsequence.fileInput.Line;
 import automatedsequence.fileInput.ReadScheduleFile;
-import java.io.BufferedWriter;
+import automatedsequence.fileOutput.WriteToScheduleFile;
 import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import javax.swing.JFileChooser;
 
 /**
@@ -176,19 +173,10 @@ public class ModifyTask extends javax.swing.JFrame {
         int endMin = ((endTimeField.getText().charAt(3) - 48) * 10 + (endTimeField.getText().charAt(4) - 48)) * 60; // get the end minute
         int endSecond = (endTimeField.getText().charAt(6) - 48) * 10 + (endTimeField.getText().charAt(7) - 48); // get the end second
         ReadScheduleFile.getScheduledEventData().get(indexOfEvent).setEndTime(endHour + endMin + endSecond); // write end time changes to array index
-        
+
         ReadScheduleFile.getScheduledEventData().get(indexOfEvent).setDate(recurCheckbox.isSelected() ? (ReadScheduleFile.getScheduledEventData().get(indexOfEvent).getPath().equalsIgnoreCase("NOPATH") ? "1/1/YEARLY" : "EVERYDAY") : dateField.getText()); // if checkbox is checked write "EVERYDAY" or "YEARLY" otherwise write the value inside the textbox
 
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(PathConstants.scheduleFilePath))) { // write to file
-            for (Line genericEventData : ReadScheduleFile.getScheduledEventData()) { // loop through all indexes
-                bw.write(genericEventData.getEventID() + " @ " + genericEventData.getName() + " @ " + genericEventData.getPath() + " @ " + genericEventData.getStartTime() + " @ " + genericEventData.getEndTime() + " @ " + genericEventData.getDate() + " @ "); // format and write
-                bw.newLine(); // new line
-            }
-            bw.flush(); // flush stream
-            bw.close(); // close file
-        } catch (IOException e) {
-            System.out.println("IO Exception");
-        }
+        WriteToScheduleFile.write();
         AuthenticationDialogue.getMainProgramInstance().populateScheduledBox(true); // update scheduled box
         dispose();
     }//GEN-LAST:event_saveButtonActionPerformed

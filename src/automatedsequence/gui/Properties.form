@@ -38,12 +38,12 @@
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="morningRushPathTextBox" max="32767" attributes="0"/>
-                                  <Component id="oCanadaPathTextBox" pref="235" max="32767" attributes="0"/>
+                                  <Component id="standUpForOCanadaPathTextBox" pref="235" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="browseForMorningRush" min="-2" max="-2" attributes="0"/>
-                                  <Component id="browseForOCanada" min="-2" max="-2" attributes="0"/>
+                                  <Component id="browseForStandUpForOCanada" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <Component id="oCanadaVersionsLabel" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -77,8 +77,8 @@
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="oCanadaPathTextBox" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="browseForOCanada" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="standUpForOCanadaPathTextBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="browseForStandUpForOCanada" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="standUpForOCanadaLabel" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -121,19 +121,19 @@
         <Property name="text" type="java.lang.String" value="&quot;Please stand up for O&apos;Canada&quot;:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="oCanadaPathTextBox">
+    <Component class="javax.swing.JTextField" name="standUpForOCanadaPathTextBox">
       <Properties>
         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
           <Connection code="automatedsequence.fileInput.ReadScheduleFile.getScheduledEventData().get(PathConstants.pleaseStandUpForOCanadaEventID).getPath()" type="code"/>
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="browseForOCanada">
+    <Component class="javax.swing.JButton" name="browseForStandUpForOCanada">
       <Properties>
         <Property name="text" type="java.lang.String" value="Browse"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="browseForOCanadaActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="browseForStandUpForOCanadaActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="oCanadaVersionsLabel">

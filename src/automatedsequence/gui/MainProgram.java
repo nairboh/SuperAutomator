@@ -3,14 +3,11 @@ package automatedsequence.gui;
 import automatedsequence.MP3Player;
 import automatedsequence.RandomizeOCanada;
 import automatedsequence.Timer;
-import automatedsequence.constants.PathConstants;
 import automatedsequence.dateAndTime.SuperCalendar;
 import automatedsequence.fileInput.Line;
 import automatedsequence.fileInput.ReadOCanadaFile;
 import automatedsequence.fileInput.ReadScheduleFile;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
+import automatedsequence.fileOutput.WriteToScheduleFile;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import javax.swing.AbstractListModel;
@@ -480,19 +477,7 @@ public class MainProgram extends javax.swing.JFrame {
             if (!postponeToggleButton.isSelected()) { // if postpone button is not selected
                 if (scheduledTasks.getSelectedIndex() >= 0 && scheduledTasks.getSelectedIndex() < ReadScheduleFile.getScheduledEventData().size()) { // if there is a selection
                     ReadScheduleFile.getScheduledEventData().remove(scheduledTasks.getSelectedIndex());
-                    int counter = 0; // counter
-                    try (BufferedWriter bw = new BufferedWriter(new FileWriter(PathConstants.scheduleFilePath))) { // write to file
-                        for (Line genericEventData : ReadScheduleFile.getScheduledEventData()) { // loop through all indexes
-                            genericEventData.setEventID(counter); // make the events in ascending order
-                            bw.write(genericEventData.getEventID() + " @ " + genericEventData.getName() + " @ " + genericEventData.getPath() + " @ " + genericEventData.getStartTime() + " @ " + genericEventData.getEndTime() + " @ " + genericEventData.getDate() + " @ "); // format and write
-                            counter++; // increment
-                            bw.newLine(); // new line
-                        }
-                        bw.flush(); // flush the stream
-                        bw.close(); // close file
-                    } catch (IOException e) {
-                        System.out.println("IO Exception");
-                    }
+                    WriteToScheduleFile.reorderAndWrite();
                     populateScheduledBox(true); // update scheduled box
                 } else { // no selection
                     Error errorPopup = new Error("Please select an item in Scheduled Tasks!"); // passes string
