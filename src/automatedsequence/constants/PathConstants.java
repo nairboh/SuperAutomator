@@ -7,6 +7,6 @@ package automatedsequence.constants;
  * June 5 2014
  */
 public class PathConstants {
-    public static String scheduleFilePath = "/Users/brianho/Music/schedule.txt", oCanadaFilePath = "/Users/brianho/Music/oCanada.txt"; // assuming this is on windows xp 32bit
+    public static String scheduleFilePath = System.getProperty("user.dir") + "/resource/schedule.txt", oCanadaFilePath = System.getProperty("user.dir") + "/resource/oCanada.txt"; // assuming this is on windows xp 32bit
     public static int morningRushEventID = 0, pleaseStandUpForOCanadaEventID = 1, oCanadaID = 2;
 }
