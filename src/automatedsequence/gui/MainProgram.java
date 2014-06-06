@@ -293,10 +293,10 @@ public class MainProgram extends javax.swing.JFrame {
                     hour = c.get(Calendar.HOUR_OF_DAY);
                     minute = c.get(Calendar.MINUTE);
                     sec = c.get(Calendar.SECOND);
-                    time = dayOfWeek + " " + month + " " + dayOfMonth + " " + year + " [EDT " + hour +":" + ((minute < 10) ? "0" + minute : minute) + ":" + ((sec < 10) ? "0" + sec : sec) + "]";
-                    dateAndTimeLabel.setText(time);
-                    information = "[INFO] O'CANADA VERSION " + Timer.getOCanadaVersion() +" SELECTED";
-                    informationBox.setText(!Timer.isOCanadaPlaying() ? "Waiting to start O'Canada..." : information);
+                    time = dayOfWeek + " " + month + " " + dayOfMonth + " " + year + " [EDT " + hour +":" + ((minute < 10) ? "0" + minute : minute) + ":" + ((sec < 10) ? "0" + sec : sec) + "]"; // format and print time
+                    dateAndTimeLabel.setText(time); // updates the time every second
+                    information = "[INFO] O'CANADA VERSION " + Timer.getOCanadaVersion() +" SELECTED"; // shows the version of O'Canada selected, updates every second
+                    informationBox.setText(!Timer.isOCanadaPlaying() ? "Waiting to start O'Canada..." : information); // if O canada is not detected to be playing; display this
 
                     try {
                         Thread.sleep(1000); // loop once every second, reduces toll on cpu
