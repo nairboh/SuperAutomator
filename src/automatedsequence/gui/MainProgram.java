@@ -19,19 +19,21 @@ import javax.swing.ListSelectionModel;
 /**
  * Purpose: Main Program Class
  *
- * @author Brian Ho, Max Romanoff, Conor Norman June 5 2014
+ * @author Brian Ho, Max Romanoff, Conor Norman 
+ * June 5 2014
  */
 public class MainProgram extends javax.swing.JFrame {
 
-    private static MP3Player player = new MP3Player();
+    private MP3Player player = new MP3Player();
     private ReadScheduleFile scheduleFile = new ReadScheduleFile(); // run the constructor
     private ReadOCanadaFile oCanadaFile = new ReadOCanadaFile(); // run the constructor
     private RandomizeOCanada oCanada = new RandomizeOCanada();
     private String time, information; // storing time and ocanada info
     private SuperCalendar calendar = new SuperCalendar();
+    private boolean isForcedStartActive = false; // is any events forced to play
     private String dayOfWeek, month;
     private int dayOfMonth, year, hour, minute, sec;
-    
+
     private AbstractListModel tableModel;
     private String[] fileInformation;
     private boolean isStopped = false; // stopped or not
@@ -49,7 +51,7 @@ public class MainProgram extends javax.swing.JFrame {
      *
      * @return instance of mp3 player
      */
-    public static MP3Player getMP3PlayerInstance() {
+    public MP3Player getMP3PlayerInstance() {
         return player;
     }
 
@@ -78,6 +80,15 @@ public class MainProgram extends javax.swing.JFrame {
             scheduledTasks.revalidate(); // revalidate
             scheduledTasks.repaint(); // refreshes
         }
+    }
+
+    /**
+     * Method returns if there is a manual event executing
+     *
+     * @param isForcedStart is there a manual event executing
+     */
+    public void setForcedStartActive(boolean isForcedStart) {
+        isForcedStartActive = isForcedStart;
     }
 
     /**
@@ -316,6 +327,9 @@ public class MainProgram extends javax.swing.JFrame {
             isStopped = false;
         }
         player.Stop(); // stops the music from playing
+        isForcedStartActive = false; // no songs being manually played
+        Timer.setIsOCanadaPlaying(false); // incase user stops ocanada
+        Timer.isManuallyStopped(true); // resets the time if user stops a manual event
     }//GEN-LAST:event_stopToggleButtonActionPerformed
 
     /**
@@ -324,12 +338,18 @@ public class MainProgram extends javax.swing.JFrame {
      * @param evt
      */
     private void scheduleCommandButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_scheduleCommandButtonActionPerformed
-        if (!postponeToggleButton.isSelected()) { // if postpone button is not selected
-            CommandScheduler commandsGUI = new CommandScheduler(); // command gui object
-            commandsGUI.setLocationRelativeTo(null); // centers window
-            commandsGUI.setVisible(true); // make visible
-        } else { // is postponed
-            Error errorPopup = new Error("Please de-select the postpone button!"); // passes string
+        if (!isForcedStartActive) { // if there is no manual event executing
+            if (!postponeToggleButton.isSelected()) { // if postpone button is not selected
+                CommandScheduler commandsGUI = new CommandScheduler(); // command gui object
+                commandsGUI.setLocationRelativeTo(null); // centers window
+                commandsGUI.setVisible(true); // make visible
+            } else { // is postponed
+                Error errorPopup = new Error("Please de-select the postpone button!"); // passes string
+                errorPopup.setLocationRelativeTo(null); // centers window
+                errorPopup.setVisible(true); // make visible
+            }
+        } else { // manual event is active
+            Error errorPopup = new Error("Please stop the manual event first!"); // passes string
             errorPopup.setLocationRelativeTo(null); // centers window
             errorPopup.setVisible(true); // make visible
         }
@@ -342,22 +362,28 @@ public class MainProgram extends javax.swing.JFrame {
      * @param evt
      */
     private void postponeToggleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_postponeToggleButtonActionPerformed
-        for (Line genericEventData : ReadScheduleFile.getScheduledEventData()) { // loop through all indexes
-            if (postponeToggleButton.isSelected()) {
-                if (!genericEventData.getPath().equalsIgnoreCase("NOPATH")) { // if it is not a holiday
-                    genericEventData.postponeStartTime(Integer.parseInt(postponeDurationInMinutes.getText()));
-                    genericEventData.postponeEndTime(Integer.parseInt(postponeDurationInMinutes.getText()));
+        if (!isForcedStartActive) { // if there is no manual event executing
+            for (Line genericEventData : ReadScheduleFile.getScheduledEventData()) { // loop through all indexes
+                if (postponeToggleButton.isSelected()) {
+                    if (!genericEventData.getPath().equalsIgnoreCase("NOPATH")) { // if it is not a holiday
+                        genericEventData.postponeStartTime(Integer.parseInt(postponeDurationInMinutes.getText()));
+                        genericEventData.postponeEndTime(Integer.parseInt(postponeDurationInMinutes.getText()));
+                    }
+                    postponeDurationInMinutes.setEditable(false); // avoid potential bug, does not let user change value after button is pressed
+                    populateScheduledBox(true); // refreshes info box
+                } else {
+                    if (!genericEventData.getPath().equalsIgnoreCase("NOPATH")) { // if it is not a holiday
+                        genericEventData.postponeStartTime(-Integer.parseInt(postponeDurationInMinutes.getText()));
+                        genericEventData.postponeEndTime(-Integer.parseInt(postponeDurationInMinutes.getText()));
+                    }
+                    postponeDurationInMinutes.setEditable(true);
+                    populateScheduledBox(true); // refreshes info box
                 }
-                postponeDurationInMinutes.setEditable(false); // avoid potential bug, does not let user change value after button is pressed
-                populateScheduledBox(true); // refreshes info box
-            } else {
-                if (!genericEventData.getPath().equalsIgnoreCase("NOPATH")) { // if it is not a holiday
-                    genericEventData.postponeStartTime(-Integer.parseInt(postponeDurationInMinutes.getText()));
-                    genericEventData.postponeEndTime(-Integer.parseInt(postponeDurationInMinutes.getText()));
-                }
-                postponeDurationInMinutes.setEditable(true);
-                populateScheduledBox(true); // refreshes info box
             }
+        } else { // manual event is active
+            Error errorPopup = new Error("Please stop the manual event first!"); // passes string
+            errorPopup.setLocationRelativeTo(null); // centers window
+            errorPopup.setVisible(true); // make visible
         }
     }//GEN-LAST:event_postponeToggleButtonActionPerformed
 
@@ -367,12 +393,18 @@ public class MainProgram extends javax.swing.JFrame {
      * @param evt
      */
     private void propertiesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_propertiesButtonActionPerformed
-        if (!postponeToggleButton.isSelected()) { // if postpone button is not selected
-            Properties propertiesGUI = new Properties(); // properties gui object
-            propertiesGUI.setLocationRelativeTo(null); // centers window
-            propertiesGUI.setVisible(true); // make visible
-        } else { // is postponed
-            Error errorPopup = new Error("Please de-select the postpone button!"); // passes string
+        if (!isForcedStartActive) { // if there is no manual event executing
+            if (!postponeToggleButton.isSelected()) { // if postpone button is not selected
+                Properties propertiesGUI = new Properties(); // properties gui object
+                propertiesGUI.setLocationRelativeTo(null); // centers window
+                propertiesGUI.setVisible(true); // make visible
+            } else { // is postponed
+                Error errorPopup = new Error("Please de-select the postpone button!"); // passes string
+                errorPopup.setLocationRelativeTo(null); // centers window
+                errorPopup.setVisible(true); // make visible
+            }
+        } else { // manual event is active
+            Error errorPopup = new Error("Please stop the manual event first!"); // passes string
             errorPopup.setLocationRelativeTo(null); // centers window
             errorPopup.setVisible(true); // make visible
         }
@@ -386,16 +418,23 @@ public class MainProgram extends javax.swing.JFrame {
     private void startNowButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startNowButtonActionPerformed
         if (!stopToggleButton.isSelected()) { // if the override button is not selected
             if (scheduledTasks.getSelectedIndex() >= 0 && scheduledTasks.getSelectedIndex() < ReadScheduleFile.getScheduledEventData().size()) {
-                int durationOfEvent = ReadScheduleFile.getScheduledEventData().get(scheduledTasks.getSelectedIndex()).getDuration(); // get duration of event
-                int currentTimeInSeconds = Timer.getCurrentTimeInSeconds(); // get current time in seconds
-                int initialStartTime = ReadScheduleFile.getScheduledEventData().get(scheduledTasks.getSelectedIndex()).getStartTime(); // save the original start time to memory
-                int initialEndTime = ReadScheduleFile.getScheduledEventData().get(scheduledTasks.getSelectedIndex()).getEndTime(); // save the original end time to memory
-                
-                ReadScheduleFile.getScheduledEventData().get(scheduledTasks.getSelectedIndex()).setStartTime(currentTimeInSeconds + 1); // set time to now (1 sec delay incase of latency)
-                ReadScheduleFile.getScheduledEventData().get(scheduledTasks.getSelectedIndex()).setEndTime(currentTimeInSeconds + durationOfEvent + 1); // set end time (1 sec delay incase of latency)
-                
-                Timer.isForcedStart(true, scheduledTasks.getSelectedIndex(), initialStartTime, initialEndTime); // passes information to timer to know it is a forced start
-                populateScheduledBox(true); // resets the box
+                if (!isForcedStartActive && !Timer.getIsPlaying()) { // if nothing is playing
+                    isForcedStartActive = true;
+                    int durationOfEvent = ReadScheduleFile.getScheduledEventData().get(scheduledTasks.getSelectedIndex()).getDuration(); // get duration of event
+                    int currentTimeInSeconds = Timer.getCurrentTimeInSeconds(); // get current time in seconds
+                    int initialStartTime = ReadScheduleFile.getScheduledEventData().get(scheduledTasks.getSelectedIndex()).getStartTime(); // save the original start time to memory
+                    int initialEndTime = ReadScheduleFile.getScheduledEventData().get(scheduledTasks.getSelectedIndex()).getEndTime(); // save the original end time to memory
+
+                    ReadScheduleFile.getScheduledEventData().get(scheduledTasks.getSelectedIndex()).setStartTime(currentTimeInSeconds + 1); // set time to now (1 sec delay incase of latency)
+                    ReadScheduleFile.getScheduledEventData().get(scheduledTasks.getSelectedIndex()).setEndTime(currentTimeInSeconds + durationOfEvent + 1); // set end time (1 sec delay incase of latency)
+
+                    Timer.isManuallyStarted(true, scheduledTasks.getSelectedIndex(), initialStartTime, initialEndTime); // passes information to timer to know it is a forced start
+                    populateScheduledBox(true); // resets the box
+                } else {
+                    Error errorPopup = new Error("An event is currently playing!"); // passes string
+                    errorPopup.setLocationRelativeTo(null); // centers window
+                    errorPopup.setVisible(true); // make visible
+                }
             } else { // no selection
                 Error errorPopup = new Error("Please select an item in Scheduled Tasks!"); // passes string
                 errorPopup.setLocationRelativeTo(null); // centers window
@@ -414,12 +453,18 @@ public class MainProgram extends javax.swing.JFrame {
      * @param evt
      */
     private void scheduleHolidaysButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_scheduleHolidaysButtonActionPerformed
-        if (!postponeToggleButton.isSelected()) { // if postpone button is not selected
-            HolidayScheduler holidaysGUI = new HolidayScheduler(); // holiday gui object
-            holidaysGUI.setLocationRelativeTo(null); // centers window
-            holidaysGUI.setVisible(true); // make visible
-        } else { // is postponed
-            Error errorPopup = new Error("Please de-select the postpone button!"); // passes string
+        if (!isForcedStartActive) { // if there is no manual event executing
+            if (!postponeToggleButton.isSelected()) { // if postpone button is not selected
+                HolidayScheduler holidaysGUI = new HolidayScheduler(); // holiday gui object
+                holidaysGUI.setLocationRelativeTo(null); // centers window
+                holidaysGUI.setVisible(true); // make visible
+            } else { // is postponed
+                Error errorPopup = new Error("Please de-select the postpone button!"); // passes string
+                errorPopup.setLocationRelativeTo(null); // centers window
+                errorPopup.setVisible(true); // make visible
+            }
+        } else { // manual event is active
+            Error errorPopup = new Error("Please stop the manual event first!"); // passes string
             errorPopup.setLocationRelativeTo(null); // centers window
             errorPopup.setVisible(true); // make visible
         }
@@ -431,30 +476,36 @@ public class MainProgram extends javax.swing.JFrame {
      * @param evt
      */
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
-        if (!postponeToggleButton.isSelected()) { // if postpone button is not selected
-            if (scheduledTasks.getSelectedIndex() >= 0 && scheduledTasks.getSelectedIndex() < ReadScheduleFile.getScheduledEventData().size()) { // if there is a selection
-                ReadScheduleFile.getScheduledEventData().remove(scheduledTasks.getSelectedIndex());
-                int counter = 0; // counter
-                try (BufferedWriter bw = new BufferedWriter(new FileWriter(PathConstants.scheduleFilePath))) { // write to file
-                    for (Line genericEventData : ReadScheduleFile.getScheduledEventData()) { // loop through all indexes
-                        genericEventData.setEventID(counter); // make the events in ascending order
-                        bw.write(genericEventData.getEventID() + " @ " + genericEventData.getName() + " @ " + genericEventData.getPath() + " @ " + genericEventData.getStartTime() + " @ " + genericEventData.getEndTime() + " @ " + genericEventData.getDate() + " @ "); // format and write
-                        counter++; // increment
-                        bw.newLine(); // new line
+        if (!isForcedStartActive) { // if there is no manual event executing
+            if (!postponeToggleButton.isSelected()) { // if postpone button is not selected
+                if (scheduledTasks.getSelectedIndex() >= 0 && scheduledTasks.getSelectedIndex() < ReadScheduleFile.getScheduledEventData().size()) { // if there is a selection
+                    ReadScheduleFile.getScheduledEventData().remove(scheduledTasks.getSelectedIndex());
+                    int counter = 0; // counter
+                    try (BufferedWriter bw = new BufferedWriter(new FileWriter(PathConstants.scheduleFilePath))) { // write to file
+                        for (Line genericEventData : ReadScheduleFile.getScheduledEventData()) { // loop through all indexes
+                            genericEventData.setEventID(counter); // make the events in ascending order
+                            bw.write(genericEventData.getEventID() + " @ " + genericEventData.getName() + " @ " + genericEventData.getPath() + " @ " + genericEventData.getStartTime() + " @ " + genericEventData.getEndTime() + " @ " + genericEventData.getDate() + " @ "); // format and write
+                            counter++; // increment
+                            bw.newLine(); // new line
+                        }
+                        bw.flush(); // flush the stream
+                        bw.close(); // close file
+                    } catch (IOException e) {
+                        System.out.println("IO Exception");
                     }
-                    bw.flush(); // flush the stream
-                    bw.close(); // close file
-                } catch (IOException e) {
-                    System.out.println("IO Exception");
+                    populateScheduledBox(true); // update scheduled box
+                } else { // no selection
+                    Error errorPopup = new Error("Please select an item in Scheduled Tasks!"); // passes string
+                    errorPopup.setLocationRelativeTo(null); // centers window
+                    errorPopup.setVisible(true); // make visible
                 }
-                populateScheduledBox(true); // update scheduled box
-            } else { // no selection
-                Error errorPopup = new Error("Please select an item in Scheduled Tasks!"); // passes string
+            } else { // is postponed
+                Error errorPopup = new Error("Please de-select the postpone button!"); // passes string
                 errorPopup.setLocationRelativeTo(null); // centers window
                 errorPopup.setVisible(true); // make visible
             }
-        } else { // is postponed
-            Error errorPopup = new Error("Please de-select the postpone button!"); // passes string
+        } else { // manual event is active
+            Error errorPopup = new Error("Please stop the manual event first!"); // passes string
             errorPopup.setLocationRelativeTo(null); // centers window
             errorPopup.setVisible(true); // make visible
         }
@@ -466,18 +517,24 @@ public class MainProgram extends javax.swing.JFrame {
      * @param evt
      */
     private void modifyTasksButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modifyTasksButtonActionPerformed
-        if (!postponeToggleButton.isSelected()) { // if postpone button is not selected
-            if (scheduledTasks.getSelectedIndex() >= 0) { // if there is a selection
-                ModifyTask modifyGUI = new ModifyTask(scheduledTasks.getSelectedIndex()); // modify task gui object
-                modifyGUI.setLocationRelativeTo(null); // centers window
-                modifyGUI.setVisible(true); // make visible
-            } else { // no selection
-                Error errorPopup = new Error("Please select an item in Scheduled Tasks!"); // passes string
+        if (!isForcedStartActive) { // if there is no manual event executing
+            if (!postponeToggleButton.isSelected()) { // if postpone button is not selected
+                if (scheduledTasks.getSelectedIndex() >= 0) { // if there is a selection
+                    ModifyTask modifyGUI = new ModifyTask(scheduledTasks.getSelectedIndex()); // modify task gui object
+                    modifyGUI.setLocationRelativeTo(null); // centers window
+                    modifyGUI.setVisible(true); // make visible
+                } else { // no selection
+                    Error errorPopup = new Error("Please select an item in Scheduled Tasks!"); // passes string
+                    errorPopup.setLocationRelativeTo(null); // centers window
+                    errorPopup.setVisible(true); // make visible
+                }
+            } else { // is postponed
+                Error errorPopup = new Error("Please de-select the postpone button!"); // passes string
                 errorPopup.setLocationRelativeTo(null); // centers window
                 errorPopup.setVisible(true); // make visible
             }
-        } else { // is postponed
-            Error errorPopup = new Error("Please de-select the postpone button!"); // passes string
+        } else { // manual event is active
+            Error errorPopup = new Error("Please stop the manual event first!"); // passes string
             errorPopup.setLocationRelativeTo(null); // centers window
             errorPopup.setVisible(true); // make visible
         }
