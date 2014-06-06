@@ -13,7 +13,7 @@ import java.util.Arrays;
  */
 public class AuthenticationDialogue extends javax.swing.JFrame {
 
-    private char[] password = new char[]{'t', 'e', 's', 't'};
+    private char[] password = new char[]{'s', 't', 'm', 'a', 'x'};
     private static MainProgram mainProgram;
     private static Timer timer;
 
