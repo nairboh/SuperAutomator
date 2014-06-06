@@ -421,11 +421,13 @@ public class MainProgram extends javax.swing.JFrame {
                     int currentTimeInSeconds = Timer.getCurrentTimeInSeconds(); // get current time in seconds
                     int initialStartTime = ReadScheduleFile.getScheduledEventData().get(scheduledTasks.getSelectedIndex()).getStartTime(); // save the original start time to memory
                     int initialEndTime = ReadScheduleFile.getScheduledEventData().get(scheduledTasks.getSelectedIndex()).getEndTime(); // save the original end time to memory
-
+                    String initialExecutionDate = ReadScheduleFile.getScheduledEventData().get(scheduledTasks.getSelectedIndex()).getDate(); // save the original execution date to memory
+                    
                     ReadScheduleFile.getScheduledEventData().get(scheduledTasks.getSelectedIndex()).setStartTime(currentTimeInSeconds + 1); // set time to now (1 sec delay incase of latency)
                     ReadScheduleFile.getScheduledEventData().get(scheduledTasks.getSelectedIndex()).setEndTime(currentTimeInSeconds + durationOfEvent + 1); // set end time (1 sec delay incase of latency)
+                    ReadScheduleFile.getScheduledEventData().get(scheduledTasks.getSelectedIndex()).setDate(Timer.getCurrentDate());
 
-                    Timer.isManuallyStarted(true, scheduledTasks.getSelectedIndex(), initialStartTime, initialEndTime); // passes information to timer to know it is a forced start
+                    Timer.isManuallyStarted(true, scheduledTasks.getSelectedIndex(), initialStartTime, initialEndTime, initialExecutionDate); // passes information to timer to know it is a forced start
                     populateScheduledBox(true); // resets the box
                 } else {
                     Error errorPopup = new Error("An event is currently playing!"); // passes string

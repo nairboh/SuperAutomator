@@ -12,7 +12,8 @@ import java.util.GregorianCalendar;
 /**
  * Purpose: Timer Class; runs in background and starts events automatically
  *
- * @author Brian Ho, Max Romanoff, Conor Norman June 5 2014
+ * @author Brian Ho, Max Romanoff, Conor Norman 
+ * June 5 2014
  */
 public class Timer implements Runnable {
 
@@ -22,6 +23,8 @@ public class Timer implements Runnable {
     private static int currentTimeInSeconds = 0;
     private static int oCanadaVersion; // to hold random number
     private static int id = 0, originalStartTime = 0, originalEndTime = 0; // information for forced start events
+    private static String originalExecutionDate; // information for forced start event
+    private static String currentDate;
     private static boolean isManuallyStarted = false, isManuallyStopped = false; // is the event manually initiated
     private static boolean isPlaying = false; // is there an audio file currently playing
     private static boolean isOCanadaPlaying = false;
@@ -44,9 +47,9 @@ public class Timer implements Runnable {
             int minute = c.get(Calendar.MINUTE);
             int sec = c.get(Calendar.SECOND);
             currentTimeInSeconds = ((hour * 3600) + (minute * 60) + sec);
-
+            currentDate = month + "/" + dayOfMonth + "/" + year;
             for (Line genericEventData : ReadScheduleFile.getScheduledEventData()) { // loop through all arraylist indexes
-                if ((currentTimeInSeconds == genericEventData.getStartTime()) && ((genericEventData.getDate().equalsIgnoreCase("EVERYDAY") || genericEventData.getDate().equals(month + "/" + dayOfMonth + "/" + year) || genericEventData.getDate().equals(month + "/" + dayOfMonth + "/YEARLY")))) { // if the time and date is the same as listed in the file or if file is set to yearly or everyday (yearly is used for holidays), execute actions below
+                if ((currentTimeInSeconds == genericEventData.getStartTime()) && ((genericEventData.getDate().equalsIgnoreCase("EVERYDAY") || genericEventData.getDate().equals(currentDate) || genericEventData.getDate().equals(month + "/" + dayOfMonth + "/YEARLY")))) { // if the time and date is the same as listed in the file or if file is set to yearly or everyday (yearly is used for holidays), execute actions below
                     if (!genericEventData.getPath().equalsIgnoreCase("NOPATH") && (!nameOfDayOfWeek.equalsIgnoreCase("Saturday") || !nameOfDayOfWeek.equalsIgnoreCase("Saturday"))) { // holidays are assigned no path, therefore on holidays this does nothing
                         if (genericEventData.getEventID() == PathConstants.oCanadaID) { // get the default id of OCanada
                             oCanadaVersion = randomOCanada.getVersion(); // get randomly generated version
@@ -81,6 +84,7 @@ public class Timer implements Runnable {
                     if (isManuallyStarted) { // if this is a manual event and not an automatic
                         ReadScheduleFile.getScheduledEventData().get(id).setStartTime(originalStartTime); // set the time back to original
                         ReadScheduleFile.getScheduledEventData().get(id).setEndTime(originalEndTime); // set the end time back to original
+                        ReadScheduleFile.getScheduledEventData().get(id).setDate(originalExecutionDate); // reset the date back to original
                         AuthenticationDialogue.getMainProgramInstance().populateScheduledBox(true); // reset box to show updated changes
                         AuthenticationDialogue.getMainProgramInstance().setForcedStartActive(false); // allows for another event to be manually started without error
                     }
@@ -117,7 +121,7 @@ public class Timer implements Runnable {
     public static boolean isOCanadaPlaying() {
         return isOCanadaPlaying;
     }
-    
+
     /**
      * Method sets if OCanada is playing or not
      *
@@ -135,37 +139,48 @@ public class Timer implements Runnable {
     public static int getCurrentTimeInSeconds() {
         return currentTimeInSeconds;
     }
-    
+
     /**
      * Method gets information on manually started events
-     * 
+     *
      * @param isManual is the event manually started
      * @param idOfForcedStart what is the event started
      * @param initialStartTime what is the original event start time
-     * @param initialEndTime  what is the original event end time
+     * @param initialEndTime what is the original event end time
+     * @param initialStartDate what is the original event start date
      */
-    public static void isManuallyStarted(boolean isManual, int idOfForcedStart, int initialStartTime, int initialEndTime) {
+    public static void isManuallyStarted(boolean isManual, int idOfForcedStart, int initialStartTime, int initialEndTime, String initialStartDate) {
         isManuallyStarted = true;
         id = idOfForcedStart;
         originalStartTime = initialStartTime;
         originalEndTime = initialEndTime;
+        originalExecutionDate = initialStartDate;
     }
-    
+
     /**
      * Method gets information if event is manually event is manually stopped
-     * 
+     *
      * @param isManual is manual event manually stopped?
      */
     public static void isManuallyStopped(boolean isManual) {
         isManuallyStopped = isManual;
     }
-    
+
     /**
-     * Methods returns if there is an event currently playing 
-     * 
+     * Methods returns if there is an event currently playing
+     *
      * @return true if something is playing
      */
     public static boolean getIsPlaying() {
         return isPlaying;
+    }
+
+    /**
+     * Method returns the current date
+     *
+     * @return the current date today
+     */
+    public static String getCurrentDate() {
+        return currentDate;
     }
 }
