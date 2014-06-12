@@ -78,7 +78,16 @@ public class MainProgram extends javax.swing.JFrame {
             scheduledTasks.repaint(); // refreshes
         }
     }
-
+    
+    /**
+     * Method returns if the program is supposed to be halted or not
+     * 
+     * @return if the program is currently halted or not
+     */
+    public boolean isStopped() {
+        return stopToggleButton.isSelected();
+    }
+    
     /**
      * Method returns if there is a manual event executing
      *
