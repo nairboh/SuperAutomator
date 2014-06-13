@@ -25,6 +25,7 @@ public class Timer implements Runnable {
     private static int id = 0, originalStartTime = 0, originalEndTime = 0; // information for forced start events
     private static String originalExecutionDate; // information for forced start event
     private static String currentDate;
+    private static String currentTaskName; // the name of the current task
     private static boolean isManuallyStarted = false, isManuallyStopped = false; // is the event manually initiated
     private static boolean isPlaying = false; // is there an audio file currently playing
     private static boolean isOCanadaPlaying = false;
@@ -50,7 +51,7 @@ public class Timer implements Runnable {
             currentDate = month + "/" + dayOfMonth + "/" + year;
             for (Line genericEventData : ReadScheduleFile.getScheduledEventData()) { // loop through all arraylist indexes
                 if ((!AuthenticationDialogue.getMainProgramInstance().isStopped()) && (currentTimeInSeconds == genericEventData.getStartTime()) && ((genericEventData.getDate().equalsIgnoreCase("EVERYDAY") || genericEventData.getDate().equals(currentDate) || genericEventData.getDate().equals(month + "/" + dayOfMonth + "/YEARLY")))) { // if the time and date is the same as listed in the file or if file is set to yearly or everyday (yearly is used for holidays) and the program is not stopped, execute actions below
-                    if (!genericEventData.getPath().equalsIgnoreCase("NOPATH") && (!nameOfDayOfWeek.equalsIgnoreCase("Saturday") || !nameOfDayOfWeek.equalsIgnoreCase("Saturday"))) { // holidays are assigned no path, therefore on holidays this does nothing
+                    if (!genericEventData.getPath().equalsIgnoreCase("NOPATH") && (!nameOfDayOfWeek.equalsIgnoreCase("Saturday") || !nameOfDayOfWeek.equalsIgnoreCase("Sunday"))) { // holidays are assigned no path, therefore on holidays this does nothing
                         if (genericEventData.getEventID() == PathConstants.oCanadaID) { // get the default id of OCanada
                             oCanadaVersion = randomOCanada.getVersion(); // get randomly generated version
                             genericEventData.setPath(ReadOCanadaFile.getOCanadaVersionData().get(oCanadaVersion).getPath()); // get path of randomly generated version
@@ -63,6 +64,7 @@ public class Timer implements Runnable {
                         }
                         elaspedTimeInSeconds = 0; // reset the elasped time to 0
                         isPlaying = true; // set song as playing
+                        currentTaskName = genericEventData.getName();
                         startTime = genericEventData.getStartTime();
                         endTime = genericEventData.getEndTime();
                     } else {  // if anything is played during a holiday, and it is not a forced start, kill it (stop)
@@ -111,6 +113,15 @@ public class Timer implements Runnable {
      */
     public static int getOCanadaVersion() {
         return oCanadaVersion + 1; // dont want it to say version 0
+    }
+
+    /**
+     * Method returns the name of the task currently being played
+     *
+     * @return name of task
+     */
+    public static String getCurrentTaskName() {
+        return currentTaskName;
     }
 
     /**
