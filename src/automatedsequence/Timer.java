@@ -24,7 +24,7 @@ public class Timer implements Runnable {
     private static int oCanadaVersion; // to hold random number
     private static int id = 0, originalStartTime = 0, originalEndTime = 0; // information for forced start events
     private static String originalExecutionDate; // information for forced start event
-    private static String currentDate;
+    private static String currentDate; // current date
     private static String currentTaskName; // the name of the current task
     private static boolean isManuallyStarted = false, isManuallyStopped = false; // is the event manually initiated
     private static boolean isPlaying = false; // is there an audio file currently playing
@@ -64,9 +64,9 @@ public class Timer implements Runnable {
                         }
                         elaspedTimeInSeconds = 0; // reset the elasped time to 0
                         isPlaying = true; // set song as playing
-                        currentTaskName = genericEventData.getName();
-                        startTime = genericEventData.getStartTime();
-                        endTime = genericEventData.getEndTime();
+                        currentTaskName = genericEventData.getName(); // get current task name
+                        startTime = genericEventData.getStartTime(); // get current task start time
+                        endTime = genericEventData.getEndTime(); // get current task end time
                     } else {  // if anything is played during a holiday, and it is not a forced start, kill it (stop)
                         AuthenticationDialogue.getMainProgramInstance().getMP3PlayerInstance().Stop(); // stops song
                         isPlaying = false; // reset
