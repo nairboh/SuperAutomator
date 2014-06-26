@@ -203,6 +203,8 @@ public class Properties extends javax.swing.JFrame {
     private void browseForMorningRushActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browseForMorningRushActionPerformed
         JFileChooser chooser = new JFileChooser(); // makes a new file chooser window appear
         FileFilter filter = new FileNameExtensionFilter("MP3 Files", "mp3", "mpeg3"); // mp3
+        File dir = new File(System.getProperty("user.dir"));        
+        chooser.setCurrentDirectory(dir); // set current directory to program location folder
         chooser.setFileFilter(filter); // sets the filter
         chooser.setAcceptAllFileFilterUsed(false); // disallows all files option
         chooser.showOpenDialog(null);
@@ -226,6 +228,8 @@ public class Properties extends javax.swing.JFrame {
     private void browseForStandUpForOCanadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browseForStandUpForOCanadaActionPerformed
         JFileChooser chooser = new JFileChooser(); // make a new file choose window appear
         FileFilter filter = new FileNameExtensionFilter("MP3 Files", "mp3", "mpeg3"); // mp3
+        File dir = new File(System.getProperty("user.dir"));        
+        chooser.setCurrentDirectory(dir); // set current directory to program location folder
         chooser.setFileFilter(filter); // sets the filter
         chooser.setAcceptAllFileFilterUsed(false); // disallows all files option
         chooser.showOpenDialog(null);
@@ -266,6 +270,8 @@ public class Properties extends javax.swing.JFrame {
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
         JFileChooser chooser = new JFileChooser(); // file chooser window
         FileFilter filter = new FileNameExtensionFilter("MP3 Files", "mp3", "mpeg3"); // mp3
+        File dir = new File(System.getProperty("user.dir"));        
+        chooser.setCurrentDirectory(dir); // set current directory to program location folder
         chooser.setFileFilter(filter); // sets the filter
         chooser.setAcceptAllFileFilterUsed(false); // disallows all files option
         chooser.showOpenDialog(null);

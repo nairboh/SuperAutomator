@@ -13,7 +13,7 @@ import java.util.Arrays;
  */
 public class AuthenticationDialogue extends javax.swing.JFrame {
 
-    private char[] password = new char[]{'s', 't', 'm', 'a', 'x'};
+    private final char[] PASSWORD = new char[]{'s', 't', 'm', 'a', 'x'};
     private static MainProgram mainProgram;
     private static Timer timer;
 
@@ -115,7 +115,7 @@ public class AuthenticationDialogue extends javax.swing.JFrame {
     private void passwordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordFieldActionPerformed
         mainProgram = new MainProgram(); // mainprogram object; opens gui
         timer = new Timer(); // timer object
-        if (Arrays.equals(passwordField.getPassword(), password)) { // if the array is equal to password
+        if (Arrays.equals(passwordField.getPassword(), PASSWORD)) { // if the array is equal to password
             dispose(); // kills the authentication window
             mainProgram.setLocationRelativeTo(null); // centers the main gui 
             mainProgram.setVisible(true); // makes the main gui visible
@@ -145,7 +145,7 @@ public class AuthenticationDialogue extends javax.swing.JFrame {
     }
 
     /**
-     * Main method for running gui
+     * Main method for running GUI
      *
      * @param args the command line arguments
      */
@@ -163,15 +163,14 @@ public class AuthenticationDialogue extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AuthenticationDialogue.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AuthenticationDialogue.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AuthenticationDialogue.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(AuthenticationDialogue.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        /**try {
+            javax.swing.UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(AuthenticationDialogue.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }**/
         //</editor-fold>
 
         /* Create and display the form */

@@ -1,4 +1,4 @@
-package automatedsequence.dateAndTime;
+package automatedsequence.dateandtime;
 
 /**
  * Purpose: Super Calendar Class; returns strings of the date

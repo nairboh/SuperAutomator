@@ -74,7 +74,7 @@
     <Component class="javax.swing.JLabel" name="instructionalLabel">
       <Properties>
         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="errorMessage" type="code"/>
+          <Connection code="ERROR_MESSAGE" type="code"/>
         </Property>
       </Properties>
     </Component>

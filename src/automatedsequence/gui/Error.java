@@ -8,7 +8,7 @@ package automatedsequence.gui;
  */
 public class Error extends javax.swing.JFrame {
 
-    private String errorMessage;
+    private final String ERROR_MESSAGE;
 
     /**
      * Creates new form Error
@@ -17,7 +17,7 @@ public class Error extends javax.swing.JFrame {
      * error
      */
     public Error(String errorMessage) {
-        this.errorMessage = errorMessage;
+        this.ERROR_MESSAGE = errorMessage;
         initComponents();
     }
 
@@ -41,7 +41,7 @@ public class Error extends javax.swing.JFrame {
 
         errorLabel.setText("Error! ");
 
-        instructionalLabel.setText(errorMessage);
+        instructionalLabel.setText(ERROR_MESSAGE);
 
         okButton.setText("OK");
         okButton.addActionListener(new java.awt.event.ActionListener() {

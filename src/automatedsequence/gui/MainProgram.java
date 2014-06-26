@@ -3,7 +3,7 @@ package automatedsequence.gui;
 import automatedsequence.MP3Player;
 import automatedsequence.RandomizeOCanada;
 import automatedsequence.Timer;
-import automatedsequence.dateAndTime.SuperCalendar;
+import automatedsequence.dateandtime.SuperCalendar;
 import automatedsequence.fileInput.Line;
 import automatedsequence.fileInput.ReadOCanadaFile;
 import automatedsequence.fileInput.ReadScheduleFile;
