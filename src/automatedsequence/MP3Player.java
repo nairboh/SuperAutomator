@@ -16,14 +16,14 @@ public class MP3Player {
 
     private FileInputStream FIS;
     private BufferedInputStream BIS;
-    public Player player;
+    private Player player;
 
     /**
      * Method starts the song
      *
      * @param path path of the song
      */
-    public void Play(String path) {
+    public void play(String path) {
         if (player == null) { // if there is no player
             try {
                 FIS = new FileInputStream(path); // assigns path to the file input stream 
@@ -50,10 +50,14 @@ public class MP3Player {
     /**
      * Method stops the song
      */
-    public void Stop() {
+    public void stop() {
         if (player != null) { // if there is something playing
             player.close(); // stop
             player = null; // set it to null
         }
+    }
+    
+    public void pause() {
+        //player.play(3300);
     }
 }

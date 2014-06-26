@@ -5,6 +5,8 @@ import automatedsequence.fileInput.ReadScheduleFile;
 import automatedsequence.fileOutput.WriteToScheduleFile;
 import java.io.File;
 import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  * Purpose: Modify Events Class
@@ -188,6 +190,9 @@ public class ModifyTask extends javax.swing.JFrame {
      */
     private void browseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browseButtonActionPerformed
         JFileChooser chooser = new JFileChooser(); // new file chooser window
+        FileFilter filter = new FileNameExtensionFilter("MP3 Files", "mp3", "mpeg3"); // mp3
+        chooser.setFileFilter(filter); // sets the filter
+        chooser.setAcceptAllFileFilterUsed(false); // disallows all files option
         chooser.showOpenDialog(null);
         File fileToChoose = chooser.getSelectedFile(); // get file
         try {

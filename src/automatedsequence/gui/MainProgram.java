@@ -332,7 +332,7 @@ public class MainProgram extends javax.swing.JFrame {
             stopToggleButton.setText("Stop");
             isStopped = false;
         }
-        player.Stop(); // stops the music from playing
+        player.stop(); // stops the music from playing
         isForcedStartActive = false; // no songs being manually played
         Timer.setIsOCanadaPlaying(false); // incase user stops ocanada
         Timer.isManuallyStopped(true); // resets the time if user stops a manual event

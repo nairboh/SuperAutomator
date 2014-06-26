@@ -58,9 +58,9 @@ public class Timer implements Runnable {
                             isOCanadaPlaying = true; // set ocanada as playing for logger update
                         }
                         if (!isManuallyStarted) { // if event is not manually started
-                            AuthenticationDialogue.getMainProgramInstance().getMP3PlayerInstance().Play(genericEventData.getPath()); // play song
+                            AuthenticationDialogue.getMainProgramInstance().getMP3PlayerInstance().play(genericEventData.getPath()); // play song
                         } else {
-                            AuthenticationDialogue.getMainProgramInstance().getMP3PlayerInstance().Play(ReadScheduleFile.getScheduledEventData().get(id).getPath()); // ensure that manually initiated event takes priority
+                            AuthenticationDialogue.getMainProgramInstance().getMP3PlayerInstance().play(ReadScheduleFile.getScheduledEventData().get(id).getPath()); // ensure that manually initiated event takes priority
                         }
                         elaspedTimeInSeconds = 0; // reset the elasped time to 0
                         isPlaying = true; // set song as playing
@@ -68,7 +68,7 @@ public class Timer implements Runnable {
                         startTime = genericEventData.getStartTime(); // get current task start time
                         endTime = genericEventData.getEndTime(); // get current task end time
                     } else {  // if anything is played during a holiday, and it is not a forced start, kill it (stop)
-                        AuthenticationDialogue.getMainProgramInstance().getMP3PlayerInstance().Stop(); // stops song
+                        AuthenticationDialogue.getMainProgramInstance().getMP3PlayerInstance().stop(); // stops song
                         isPlaying = false; // reset
                         isOCanadaPlaying = false; // reset
                     }
@@ -77,7 +77,7 @@ public class Timer implements Runnable {
 
             if (elaspedTimeInSeconds == (endTime - startTime) || isManuallyStopped) { // calculate elasped time, used for stopping the song
                 if (!isManuallyStopped) { // since main program already stops it
-                    AuthenticationDialogue.getMainProgramInstance().getMP3PlayerInstance().Stop(); // stops song
+                    AuthenticationDialogue.getMainProgramInstance().getMP3PlayerInstance().stop(); // stops song
                 }
                 elaspedTimeInSeconds = 0; // reset the elasped time to 0
                 isPlaying = false; // reset
