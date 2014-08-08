@@ -54,7 +54,11 @@ public class ModifyTask extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Modify Task");
+        setAlwaysOnTop(true);
+        setMaximumSize(new java.awt.Dimension(360, 177));
+        setMinimumSize(new java.awt.Dimension(360, 177));
         setResizable(false);
+        setType(java.awt.Window.Type.UTILITY);
 
         pathField.setText(automatedsequence.fileInput.ReadScheduleFile.getScheduledEventData().get(indexOfEvent).getPath());
 
@@ -68,6 +72,7 @@ public class ModifyTask extends javax.swing.JFrame {
         });
 
         nameField.setText(ReadScheduleFile.getScheduledEventData().get(indexOfEvent).getName());
+        nameField.setMaximumSize(new java.awt.Dimension(72, 20));
 
         nameLabel.setText("Name of event");
 
@@ -108,13 +113,13 @@ public class ModifyTask extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(4, 4, 4)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(startTimeField, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(nameField, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(pathField)
-                            .addComponent(endTimeField, javax.swing.GroupLayout.Alignment.LEADING)))
+                            .addComponent(startTimeField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(pathField, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(endTimeField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(nameField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(dateField, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)))
+                        .addComponent(dateField, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(browseButton)
@@ -150,8 +155,9 @@ public class ModifyTask extends javax.swing.JFrame {
                     .addComponent(dateField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(recurCheckbox)
                     .addComponent(dateLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
-                .addComponent(saveButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(saveButton)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();

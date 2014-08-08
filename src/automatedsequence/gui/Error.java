@@ -36,6 +36,10 @@ public class Error extends javax.swing.JFrame {
         okButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("ERROR");
+        setAlwaysOnTop(true);
+        setResizable(false);
+        setType(java.awt.Window.Type.UTILITY);
 
         icon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pics/error.png"))); // NOI18N
 

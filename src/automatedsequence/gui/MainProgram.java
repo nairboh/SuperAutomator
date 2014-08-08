@@ -33,7 +33,6 @@ public class MainProgram extends javax.swing.JFrame {
 
     private AbstractListModel tableModel;
     private String[] fileInformation;
-    private boolean isStopped = false; // stopped or not
 
     /**
      * Creates new form MainProgram
@@ -106,35 +105,34 @@ public class MainProgram extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        scheduleCommandButton = new javax.swing.JButton();
         infoPane = new javax.swing.JScrollPane();
         informationBox = new javax.swing.JTextArea();
         infoLabel = new javax.swing.JLabel();
         scheduledTasksLabel = new javax.swing.JLabel();
         dateAndTimeLabel = new javax.swing.JLabel();
-        stopToggleButton = new javax.swing.JToggleButton();
         propertiesButton = new javax.swing.JButton();
         postponeToggleButton = new javax.swing.JToggleButton();
-        postponeDurationInMinutes = new javax.swing.JTextField();
         minutesLabel = new javax.swing.JLabel();
-        scheduleHolidaysButton = new javax.swing.JButton();
-        startNowButton = new javax.swing.JButton();
         scheduledTasksPane = new javax.swing.JScrollPane();
         scheduledTasks = new javax.swing.JList();
-        deleteButton = new javax.swing.JButton();
-        modifyTasksButton = new javax.swing.JButton();
         logo = new javax.swing.JLabel();
+        postponeDurationInMinutesSpinner = new javax.swing.JSpinner();
+        jLabel1 = new javax.swing.JLabel();
+        scheduleTasksPanel = new javax.swing.JPanel();
+        scheduleHolidaysButton = new javax.swing.JButton();
+        scheduleCommandButton = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        stopToggleButton = new javax.swing.JToggleButton();
+        modifyTasksButton = new javax.swing.JButton();
+        deleteButton = new javax.swing.JButton();
+        startNowButton = new javax.swing.JButton();
+        byLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Super Automator (Brian Ho, Maxim Romanoff, Conor Norman)");
+        setMaximumSize(new java.awt.Dimension(800, 390));
+        setMinimumSize(new java.awt.Dimension(800, 390));
         setResizable(false);
-
-        scheduleCommandButton.setText("Schedule Command");
-        scheduleCommandButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                scheduleCommandButtonActionPerformed(evt);
-            }
-        });
 
         informationBox.setColumns(1);
         informationBox.setRows(1);
@@ -144,16 +142,11 @@ public class MainProgram extends javax.swing.JFrame {
 
         infoLabel.setText("Info");
 
+        scheduledTasksLabel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         scheduledTasksLabel.setText("SCHEDULED TASKS");
 
+        dateAndTimeLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         dateAndTimeLabel.setText(time);
-
-        stopToggleButton.setText("Stop");
-        stopToggleButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                stopToggleButtonActionPerformed(evt);
-            }
-        });
 
         propertiesButton.setText("Properties");
         propertiesButton.addActionListener(new java.awt.event.ActionListener() {
@@ -162,16 +155,29 @@ public class MainProgram extends javax.swing.JFrame {
             }
         });
 
-        postponeToggleButton.setText("Postpone");
+        postponeToggleButton.setText("POSTPONE ALL TASKS");
         postponeToggleButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 postponeToggleButtonActionPerformed(evt);
             }
         });
 
-        postponeDurationInMinutes.setText("5");
-
         minutesLabel.setText("Minutes");
+
+        scheduledTasks.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        scheduledTasks.setModel(tableModel);
+        scheduledTasksPane.setViewportView(scheduledTasks);
+
+        logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pics/pic.png"))); // NOI18N
+
+        postponeDurationInMinutesSpinner.setValue((int) -1); // set default value to -1
+        postponeDurationInMinutesSpinner.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        postponeDurationInMinutesSpinner.setMaximumSize(new java.awt.Dimension(29, 20));
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
+        jLabel1.setText("Super Automator v1.3");
+
+        scheduleTasksPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Schedule Tasks"));
 
         scheduleHolidaysButton.setText("Schedule Holidays");
         scheduleHolidaysButton.addActionListener(new java.awt.event.ActionListener() {
@@ -180,21 +186,40 @@ public class MainProgram extends javax.swing.JFrame {
             }
         });
 
-        startNowButton.setText("START NOW");
-        startNowButton.addActionListener(new java.awt.event.ActionListener() {
+        scheduleCommandButton.setText("Schedule Command");
+        scheduleCommandButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                startNowButtonActionPerformed(evt);
+                scheduleCommandButtonActionPerformed(evt);
             }
         });
 
-        scheduledTasks.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        scheduledTasks.setModel(tableModel);
-        scheduledTasksPane.setViewportView(scheduledTasks);
+        javax.swing.GroupLayout scheduleTasksPanelLayout = new javax.swing.GroupLayout(scheduleTasksPanel);
+        scheduleTasksPanel.setLayout(scheduleTasksPanelLayout);
+        scheduleTasksPanelLayout.setHorizontalGroup(
+            scheduleTasksPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(scheduleTasksPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(scheduleTasksPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(scheduleHolidaysButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(scheduleCommandButton, javax.swing.GroupLayout.Alignment.LEADING))
+                .addContainerGap())
+        );
+        scheduleTasksPanelLayout.setVerticalGroup(
+            scheduleTasksPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(scheduleTasksPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(scheduleCommandButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(scheduleHolidaysButton)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
-        deleteButton.setText("DELETE");
-        deleteButton.addActionListener(new java.awt.event.ActionListener() {
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Task Control Panel"));
+
+        stopToggleButton.setText("STOP");
+        stopToggleButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                deleteButtonActionPerformed(evt);
+                stopToggleButtonActionPerformed(evt);
             }
         });
 
@@ -205,7 +230,52 @@ public class MainProgram extends javax.swing.JFrame {
             }
         });
 
-        logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pics/pic.png"))); // NOI18N
+        deleteButton.setText("DELETE");
+        deleteButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteButtonActionPerformed(evt);
+            }
+        });
+
+        startNowButton.setText("START NOW");
+        startNowButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                startNowButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(startNowButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(modifyTasksButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(stopToggleButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(deleteButton, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(startNowButton)
+                        .addComponent(stopToggleButton))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(modifyTasksButton)
+                            .addComponent(deleteButton))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        byLabel.setText("By");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -215,80 +285,75 @@ public class MainProgram extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addComponent(dateAndTimeLabel))
-                    .addComponent(scheduleHolidaysButton)
-                    .addComponent(scheduledTasksLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(scheduledTasksPane, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(scheduleCommandButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(propertiesButton))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(stopToggleButton, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(postponeToggleButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(postponeDurationInMinutes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(minutesLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(modifyTasksButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(deleteButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(startNowButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(infoPane, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(infoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(dateAndTimeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(125, 125, 125)
-                        .addComponent(logo)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(scheduledTasksLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(postponeToggleButton, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(byLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(postponeDurationInMinutesSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(minutesLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(scheduleTasksPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(propertiesButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(scheduledTasksPane))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(infoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(infoPane, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addContainerGap())
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(101, 101, 101)
+                                .addComponent(logo)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(scheduledTasksLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(5, 5, 5)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(scheduledTasksLabel)
+                            .addComponent(postponeToggleButton)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(byLabel)
+                        .addComponent(postponeDurationInMinutesSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(minutesLabel)))
+                .addGap(13, 13, 13)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(scheduledTasksPane, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(14, 14, 14)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(16, 16, 16)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(stopToggleButton)
-                                    .addComponent(postponeToggleButton)
-                                    .addComponent(postponeDurationInMinutes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(minutesLabel))
-                                .addGap(10, 10, 10)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(scheduleCommandButton)
-                                    .addComponent(propertiesButton)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(startNowButton)
-                                .addGap(10, 10, 10)
-                                .addComponent(modifyTasksButton)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(deleteButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
-                        .addComponent(scheduleHolidaysButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(dateAndTimeLabel))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(logo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(infoLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(infoPane, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(12, 12, 12))
+                                .addComponent(infoLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(infoPane, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(scheduleTasksPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(propertiesButton, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addComponent(logo))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(dateAndTimeLabel)
+                        .addContainerGap())))
         );
 
         new Thread(){
@@ -325,12 +390,10 @@ public class MainProgram extends javax.swing.JFrame {
      * @param evt
      */
     private void stopToggleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stopToggleButtonActionPerformed
-        if (!isStopped) {
-            stopToggleButton.setText("Stopped");
-            isStopped = true;
+        if (stopToggleButton.isSelected()) {
+            stopToggleButton.setText("STOPPED");
         } else { // reset text
-            stopToggleButton.setText("Stop");
-            isStopped = false;
+            stopToggleButton.setText("STOP");
         }
         player.stop(); // stops the music from playing
         isForcedStartActive = false; // no songs being manually played
@@ -371,18 +434,20 @@ public class MainProgram extends javax.swing.JFrame {
         if (!isForcedStartActive) { // if there is no manual event executing
             for (Line genericEventData : ReadScheduleFile.getScheduledEventData()) { // loop through all indexes
                 if (postponeToggleButton.isSelected()) {
+                    postponeToggleButton.setText("UN-POSTPONE ALL TASKS");
                     if (!genericEventData.getPath().equalsIgnoreCase("NOPATH")) { // if it is not a holiday
-                        genericEventData.postponeStartTime(Integer.parseInt(postponeDurationInMinutes.getText()));
-                        genericEventData.postponeEndTime(Integer.parseInt(postponeDurationInMinutes.getText()));
+                        genericEventData.postponeStartTime((int) postponeDurationInMinutesSpinner.getValue());
+                        genericEventData.postponeEndTime((int) postponeDurationInMinutesSpinner.getValue());
                     }
-                    postponeDurationInMinutes.setEditable(false); // avoid potential bug, does not let user change value after button is pressed
+                    postponeDurationInMinutesSpinner.setEnabled(false); // avoid potential bug, does not let user change value after button is pressed
                     populateScheduledBox(true); // refreshes info box
                 } else {
+                    postponeToggleButton.setText("POSTPONE ALL TASKS");
                     if (!genericEventData.getPath().equalsIgnoreCase("NOPATH")) { // if it is not a holiday
-                        genericEventData.postponeStartTime(-Integer.parseInt(postponeDurationInMinutes.getText()));
-                        genericEventData.postponeEndTime(-Integer.parseInt(postponeDurationInMinutes.getText()));
+                        genericEventData.postponeStartTime(-(int) postponeDurationInMinutesSpinner.getValue());
+                        genericEventData.postponeEndTime(-(int) postponeDurationInMinutesSpinner.getValue());
                     }
-                    postponeDurationInMinutes.setEditable(true);
+                    postponeDurationInMinutesSpinner.setEnabled(true);
                     populateScheduledBox(true); // refreshes info box
                 }
             }
@@ -538,19 +603,23 @@ public class MainProgram extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel byLabel;
     private javax.swing.JLabel dateAndTimeLabel;
     private javax.swing.JButton deleteButton;
     private javax.swing.JLabel infoLabel;
     private javax.swing.JScrollPane infoPane;
     private javax.swing.JTextArea informationBox;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel logo;
     private javax.swing.JLabel minutesLabel;
     private javax.swing.JButton modifyTasksButton;
-    private javax.swing.JTextField postponeDurationInMinutes;
+    private javax.swing.JSpinner postponeDurationInMinutesSpinner;
     private javax.swing.JToggleButton postponeToggleButton;
     private javax.swing.JButton propertiesButton;
     private javax.swing.JButton scheduleCommandButton;
     private javax.swing.JButton scheduleHolidaysButton;
+    private javax.swing.JPanel scheduleTasksPanel;
     private javax.swing.JList scheduledTasks;
     private javax.swing.JLabel scheduledTasksLabel;
     private javax.swing.JScrollPane scheduledTasksPane;

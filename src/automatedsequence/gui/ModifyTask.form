@@ -4,7 +4,17 @@
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="2"/>
     <Property name="title" type="java.lang.String" value="Modify Task"/>
+    <Property name="alwaysOnTop" type="boolean" value="true"/>
+    <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+      <Dimension value="[360, 177]"/>
+    </Property>
+    <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+      <Dimension value="[360, 177]"/>
+    </Property>
     <Property name="resizable" type="boolean" value="false"/>
+    <Property name="type" type="java.awt.Window$Type" editor="org.netbeans.modules.form.editors.EnumEditor">
+      <Value id="UTILITY"/>
+    </Property>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -38,15 +48,15 @@
                   <Group type="102" attributes="0">
                       <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="startTimeField" alignment="0" max="32767" attributes="0"/>
-                          <Component id="nameField" alignment="0" max="32767" attributes="0"/>
-                          <Component id="pathField" max="32767" attributes="0"/>
-                          <Component id="endTimeField" alignment="0" max="32767" attributes="0"/>
+                          <Component id="startTimeField" alignment="0" min="-2" pref="300" max="-2" attributes="0"/>
+                          <Component id="pathField" min="-2" pref="300" max="-2" attributes="0"/>
+                          <Component id="endTimeField" alignment="0" min="-2" pref="300" max="-2" attributes="0"/>
+                          <Component id="nameField" alignment="0" min="-2" pref="300" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="dateField" pref="158" max="32767" attributes="0"/>
+                      <Component id="dateField" min="-2" pref="300" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -93,8 +103,9 @@
                   <Component id="recurCheckbox" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="dateLabel" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="14" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Component id="saveButton" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -124,6 +135,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
           <Connection code="ReadScheduleFile.getScheduledEventData().get(indexOfEvent).getName()" type="code"/>
+        </Property>
+        <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[72, 20]"/>
         </Property>
       </Properties>
     </Component>
