@@ -33,30 +33,12 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="standUpForOCanadaLabel" min="-2" max="-2" attributes="0"/>
-                                  <Component id="morningRushLabel" max="32767" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="morningRushPathTextBox" min="-2" pref="275" max="-2" attributes="0"/>
-                                  <Component id="standUpForOCanadaPathTextBox" min="-2" pref="275" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="browseForMorningRush" min="-2" max="-2" attributes="0"/>
-                                  <Component id="browseForStandUpForOCanada" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <Component id="oCanadaVersionsLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+                      <Component id="oCanadaVersionsLabel" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="480" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
                       <Component id="jScrollPane2" min="-2" pref="564" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="addButton" min="-2" max="-2" attributes="0"/>
@@ -64,9 +46,9 @@
                       <Component id="removeButton" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="doneButton" min="-2" pref="93" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -74,18 +56,6 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="morningRushLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="morningRushPathTextBox" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="browseForMorningRush" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="standUpForOCanadaPathTextBox" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="browseForStandUpForOCanada" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="standUpForOCanadaLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="oCanadaVersionsLabel" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jScrollPane2" min="-2" pref="90" max="-2" attributes="0"/>
@@ -105,46 +75,6 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JLabel" name="morningRushLabel">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Current Morning Rush Song:"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="morningRushPathTextBox">
-      <Properties>
-        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="automatedsequence.fileInput.ReadScheduleFile.getScheduledEventData().get(PathConstants.morningRushEventID).getPath()" type="code"/>
-        </Property>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JButton" name="browseForMorningRush">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Browse"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="browseForMorningRushActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JLabel" name="standUpForOCanadaLabel">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="&quot;Please stand up for O&apos;Canada&quot;:"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="standUpForOCanadaPathTextBox">
-      <Properties>
-        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="automatedsequence.fileInput.ReadScheduleFile.getScheduledEventData().get(PathConstants.pleaseStandUpForOCanadaEventID).getPath()" type="code"/>
-        </Property>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JButton" name="browseForStandUpForOCanada">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Browse"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="browseForStandUpForOCanadaActionPerformed"/>
-      </Events>
-    </Component>
     <Component class="javax.swing.JLabel" name="oCanadaVersionsLabel">
       <Properties>
         <Property name="text" type="java.lang.String" value="O&apos;Canada Versions:"/>

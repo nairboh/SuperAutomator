@@ -18,7 +18,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  * @author Brian Ho, Max Romanoff, Conor Norman 
  * June 5 2014
  */
-public class Properties extends javax.swing.JFrame {
+public class OCanadaVersionProperties extends javax.swing.JFrame {
 
     private AbstractListModel tableModel;
     private String[] fileInformation;
@@ -26,7 +26,7 @@ public class Properties extends javax.swing.JFrame {
     /**
      * Creates new form Properties and initializes it's components
      */
-    public Properties() {
+    public OCanadaVersionProperties() {
         populatePathBox(false);
         initComponents();
     }
@@ -69,12 +69,6 @@ public class Properties extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        morningRushLabel = new javax.swing.JLabel();
-        morningRushPathTextBox = new javax.swing.JTextField();
-        browseForMorningRush = new javax.swing.JButton();
-        standUpForOCanadaLabel = new javax.swing.JLabel();
-        standUpForOCanadaPathTextBox = new javax.swing.JTextField();
-        browseForStandUpForOCanada = new javax.swing.JButton();
         oCanadaVersionsLabel = new javax.swing.JLabel();
         addButton = new javax.swing.JButton();
         removeButton = new javax.swing.JButton();
@@ -87,28 +81,6 @@ public class Properties extends javax.swing.JFrame {
         setAlwaysOnTop(true);
         setResizable(false);
         setType(java.awt.Window.Type.UTILITY);
-
-        morningRushLabel.setText("Current Morning Rush Song:");
-
-        morningRushPathTextBox.setText(automatedsequence.fileInput.ReadScheduleFile.getScheduledEventData().get(PathConstants.morningRushEventID).getPath());
-
-        browseForMorningRush.setText("Browse");
-        browseForMorningRush.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                browseForMorningRushActionPerformed(evt);
-            }
-        });
-
-        standUpForOCanadaLabel.setText("\"Please stand up for O'Canada\":");
-
-        standUpForOCanadaPathTextBox.setText(automatedsequence.fileInput.ReadScheduleFile.getScheduledEventData().get(PathConstants.pleaseStandUpForOCanadaEventID).getPath());
-
-        browseForStandUpForOCanada.setText("Browse");
-        browseForStandUpForOCanada.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                browseForStandUpForOCanadaActionPerformed(evt);
-            }
-        });
 
         oCanadaVersionsLabel.setText("O'Canada Versions:");
 
@@ -144,46 +116,23 @@ public class Properties extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(standUpForOCanadaLabel)
-                                    .addComponent(morningRushLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(morningRushPathTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(standUpForOCanadaPathTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(browseForMorningRush)
-                                    .addComponent(browseForStandUpForOCanada)))
-                            .addComponent(oCanadaVersionsLabel))
-                        .addGap(22, 22, 22))
+                        .addComponent(oCanadaVersionsLabel)
+                        .addGap(480, 480, 480))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 564, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(addButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(removeButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(doneButton, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                        .addComponent(doneButton, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(morningRushLabel)
-                    .addComponent(morningRushPathTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(browseForMorningRush))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(standUpForOCanadaPathTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(browseForStandUpForOCanada)
-                    .addComponent(standUpForOCanadaLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(oCanadaVersionsLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -199,55 +148,6 @@ public class Properties extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    /**
-     * Action performed method for browse button for morning rush song
-     *
-     * @param evt
-     */
-    private void browseForMorningRushActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browseForMorningRushActionPerformed
-        JFileChooser chooser = new JFileChooser(); // makes a new file chooser window appear
-        FileFilter filter = new FileNameExtensionFilter("MP3 Files", "mp3", "mpeg3"); // mp3
-        File dir = new File(System.getProperty("user.dir"));        
-        chooser.setCurrentDirectory(dir); // set current directory to program location folder
-        chooser.setFileFilter(filter); // sets the filter
-        chooser.setAcceptAllFileFilterUsed(false); // disallows all files option
-        chooser.showOpenDialog(null);
-        File fileToChoose = chooser.getSelectedFile(); // get the file
-        try {
-            String pathOfFile = fileToChoose.getAbsolutePath(); // get the path of the file
-            morningRushPathTextBox.setText(pathOfFile); // write the path into the text field
-            ReadScheduleFile.getScheduledEventData().get(PathConstants.morningRushEventID).setPath(morningRushPathTextBox.getText()); // change the path in the List arraylist
-            WriteToScheduleFile.write(); // write to schedule file
-        } catch (NullPointerException e) {
-            System.out.println("No File Selected");
-        }
-    }//GEN-LAST:event_browseForMorningRushActionPerformed
-
-    /**
-     * Action performed method for browse button for browse button for stand up
-     * for oCanada song
-     *
-     * @param evt
-     */
-    private void browseForStandUpForOCanadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browseForStandUpForOCanadaActionPerformed
-        JFileChooser chooser = new JFileChooser(); // make a new file choose window appear
-        FileFilter filter = new FileNameExtensionFilter("MP3 Files", "mp3", "mpeg3"); // mp3
-        File dir = new File(System.getProperty("user.dir"));        
-        chooser.setCurrentDirectory(dir); // set current directory to program location folder
-        chooser.setFileFilter(filter); // sets the filter
-        chooser.setAcceptAllFileFilterUsed(false); // disallows all files option
-        chooser.showOpenDialog(null);
-        File fileToChoose = chooser.getSelectedFile(); // get the file
-        try {
-            String pathOfFile = fileToChoose.getAbsolutePath(); // get the path of the file
-            standUpForOCanadaPathTextBox.setText(pathOfFile); // write the path into the text field
-            ReadScheduleFile.getScheduledEventData().get(PathConstants.pleaseStandUpForOCanadaEventID).setPath(standUpForOCanadaPathTextBox.getText()); // change the path in the List arraylist
-            WriteToScheduleFile.write(); // write to schedule file
-        } catch (NullPointerException e) {
-            System.out.println("No File Selected");
-        }
-    }//GEN-LAST:event_browseForStandUpForOCanadaActionPerformed
 
     /**
      * Action performed method for the remove button, it removes any selected
@@ -302,16 +202,10 @@ public class Properties extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addButton;
-    private javax.swing.JButton browseForMorningRush;
-    private javax.swing.JButton browseForStandUpForOCanada;
     private javax.swing.JButton doneButton;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JLabel morningRushLabel;
-    private javax.swing.JTextField morningRushPathTextBox;
     private javax.swing.JList oCanadaVersions;
     private javax.swing.JLabel oCanadaVersionsLabel;
     private javax.swing.JButton removeButton;
-    private javax.swing.JLabel standUpForOCanadaLabel;
-    private javax.swing.JTextField standUpForOCanadaPathTextBox;
     // End of variables declaration//GEN-END:variables
 }
