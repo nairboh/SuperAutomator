@@ -62,7 +62,6 @@ public class CommandScheduler extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Schedule Task");
-        setAlwaysOnTop(true);
         setResizable(false);
         setType(java.awt.Window.Type.UTILITY);
 

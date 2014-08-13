@@ -54,7 +54,6 @@ public class ModifyTask extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Modify Task");
-        setAlwaysOnTop(true);
         setMaximumSize(new java.awt.Dimension(360, 177));
         setMinimumSize(new java.awt.Dimension(360, 177));
         setResizable(false);
