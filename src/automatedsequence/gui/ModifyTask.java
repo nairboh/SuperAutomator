@@ -27,6 +27,9 @@ public class ModifyTask extends javax.swing.JFrame {
     public ModifyTask(int indexOfEvent) {
         this.indexOfEvent = indexOfEvent; // gets the index of event from mainprogram
         initComponents();
+        if (dateField.getText().equalsIgnoreCase("EVERYDAY")) {
+            recurCheckbox.setSelected(true);
+        }
         setLocationRelativeTo(null); // centres window
         setVisible(true); // make visible
     }
@@ -210,7 +213,6 @@ public class ModifyTask extends javax.swing.JFrame {
             System.out.println("No File Selected");
         }
     }//GEN-LAST:event_browseButtonActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton browseButton;
