@@ -147,9 +147,7 @@ public class AuthenticationDialogue extends javax.swing.JFrame {
                     System.exit(0); // terminate
                     break;
                 default:
-                    mainProgram = new MainProgram(); // mainprogram object; opens gui
-                    timer = new Timer(); // timer object
-                    (new Thread(timer)).start(); // starts the timer thread
+                    break;
             }
         } else {
             instructionalText.setForeground(Color.red); // makes text below appear red
@@ -207,7 +205,9 @@ public class AuthenticationDialogue extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AuthenticationDialogue(""); // creates an object of this class (non-static methods)
+                mainProgram = new MainProgram(); // mainprogram object; opens gui
+                timer = new Timer(); // timer object
+                (new Thread(timer)).start(); // starts the timer thread
             }
         });
     }
