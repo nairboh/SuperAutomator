@@ -27,6 +27,8 @@ public class ModifyTask extends javax.swing.JFrame {
     public ModifyTask(int indexOfEvent) {
         this.indexOfEvent = indexOfEvent; // gets the index of event from mainprogram
         initComponents();
+        setLocationRelativeTo(null); // centres window
+        setVisible(true); // make visible
     }
 
     /**
@@ -57,7 +59,6 @@ public class ModifyTask extends javax.swing.JFrame {
         setMaximumSize(new java.awt.Dimension(360, 177));
         setMinimumSize(new java.awt.Dimension(360, 177));
         setResizable(false);
-        setType(java.awt.Window.Type.UTILITY);
 
         pathField.setText(automatedsequence.fileInput.ReadScheduleFile.getScheduledEventData().get(indexOfEvent).getPath());
 

@@ -1,11 +1,8 @@
 package automatedsequence.gui;
 
-import automatedsequence.constants.PathConstants;
 import automatedsequence.fileInput.OCanada;
 import automatedsequence.fileInput.ReadOCanadaFile;
-import automatedsequence.fileInput.ReadScheduleFile;
 import automatedsequence.fileOutput.WriteToOCanadaFile;
-import automatedsequence.fileOutput.WriteToScheduleFile;
 import java.io.File;
 import javax.swing.AbstractListModel;
 import javax.swing.JFileChooser;
@@ -15,8 +12,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 /**
  * Purpose: Properties Class
  *
- * @author Brian Ho, Max Romanoff, Conor Norman 
- * June 5 2014
+ * @author Brian Ho, Max Romanoff, Conor Norman June 5 2014
  */
 public class OCanadaVersionProperties extends javax.swing.JFrame {
 
@@ -29,6 +25,8 @@ public class OCanadaVersionProperties extends javax.swing.JFrame {
     public OCanadaVersionProperties() {
         populatePathBox(false);
         initComponents();
+        setLocationRelativeTo(null); // centres window
+        setVisible(true); // make visible
     }
 
     /**
@@ -79,7 +77,6 @@ public class OCanadaVersionProperties extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Properties");
         setResizable(false);
-        setType(java.awt.Window.Type.UTILITY);
 
         oCanadaVersionsLabel.setText("O'Canada Versions:");
 
@@ -157,16 +154,18 @@ public class OCanadaVersionProperties extends javax.swing.JFrame {
      * @param evt
      */
     private void removeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeButtonActionPerformed
+        new AuthenticationDialogue("REMOVE_OCANADA_VERSION");
+    }//GEN-LAST:event_removeButtonActionPerformed
+
+    public void removeOCanadaVersion() {
         if (oCanadaVersions.getSelectedIndex() >= 0 && oCanadaVersions.getSelectedIndex() < ReadOCanadaFile.getOCanadaVersionData().size()) { // if there is a selection
             ReadOCanadaFile.getOCanadaVersionData().remove(oCanadaVersions.getSelectedIndex()); // remove the index
             WriteToOCanadaFile.reorderAndWrite(); // deletes, reorders indexes and writes to ocanada file
             populatePathBox(true); // update the box to show deletion
         } else { // nothing selected
-            Error errorPopup = new Error("Please select an item to remove!"); // passes string
-            errorPopup.setLocationRelativeTo(null); // centers window
-            errorPopup.setVisible(true); // make visible
+            new Error("Please select an item to remove!"); // passes string
         }
-    }//GEN-LAST:event_removeButtonActionPerformed
+    }
 
     /**
      * Action performed method for the add button, opens a browse window
@@ -174,9 +173,13 @@ public class OCanadaVersionProperties extends javax.swing.JFrame {
      * @param evt
      */
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
+        new AuthenticationDialogue("ADD_OCANADA_VERSION");
+    }//GEN-LAST:event_addButtonActionPerformed
+
+    public void addOCanadaVersion() {
         JFileChooser chooser = new JFileChooser(); // file chooser window
         FileFilter filter = new FileNameExtensionFilter("MP3 Files", "mp3", "mpeg3"); // mp3
-        File dir = new File(System.getProperty("user.dir"));        
+        File dir = new File(System.getProperty("user.dir"));
         chooser.setCurrentDirectory(dir); // set current directory to program location folder
         chooser.setFileFilter(filter); // sets the filter
         chooser.setAcceptAllFileFilterUsed(false); // disallows all files option
@@ -190,7 +193,7 @@ public class OCanadaVersionProperties extends javax.swing.JFrame {
             System.out.println("No File Selected");
         }
         populatePathBox(true); // update box to show addition
-    }//GEN-LAST:event_addButtonActionPerformed
+    }
 
     /**
      * Action performed method for done button

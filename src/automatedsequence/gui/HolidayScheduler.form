@@ -5,9 +5,6 @@
     <Property name="defaultCloseOperation" type="int" value="2"/>
     <Property name="title" type="java.lang.String" value="Schedule Holiday"/>
     <Property name="resizable" type="boolean" value="false"/>
-    <Property name="type" type="java.awt.Window$Type" editor="org.netbeans.modules.form.editors.EnumEditor">
-      <Value id="UTILITY"/>
-    </Property>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -33,34 +30,28 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="recurringYearlyCheckbox" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="54" max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="17" pref="17" max="-2" attributes="0"/>
-                              <Component id="saveButton" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="dayDropdown" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="yearDropdown" alignment="1" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="saveButton" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Component id="noteLabel" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="yearLabel" min="-2" pref="42" max="-2" attributes="0"/>
-                          <Component id="dayLabel" min="-2" pref="41" max="-2" attributes="0"/>
-                          <Component id="noteLabel" min="-2" max="-2" attributes="0"/>
+                          <Component id="yearLabel" alignment="0" min="-2" pref="42" max="-2" attributes="0"/>
+                          <Component id="dayLabel" alignment="0" min="-2" pref="41" max="-2" attributes="0"/>
+                          <Component id="monthLabel" alignment="0" min="-2" pref="57" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="monthLabel" min="-2" pref="57" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="monthDropdown" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="dayDropdown" alignment="0" max="32767" attributes="0"/>
+                          <Component id="yearDropdown" alignment="0" max="32767" attributes="0"/>
+                          <Component id="monthDropdown" max="32767" attributes="0"/>
+                      </Group>
                   </Group>
               </Group>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -83,9 +74,9 @@
                   <Component id="dayDropdown" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="recurringYearlyCheckbox" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="saveButton" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="saveButton" min="-2" max="-2" attributes="0"/>
+                  <Component id="recurringYearlyCheckbox" alignment="1" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="noteLabel" min="-2" max="-2" attributes="0"/>
@@ -146,7 +137,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="noteLabel">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Note: Weekends are already set as holidays"/>
+        <Property name="text" type="java.lang.String" value="Note: Tasks Do Not Run On Weekends"/>
       </Properties>
     </Component>
   </SubComponents>

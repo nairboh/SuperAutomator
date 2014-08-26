@@ -9,20 +9,28 @@ import javax.swing.UIManager;
  * Purpose: Authentication Dialogue (accepts password form user before launching
  * main program)
  *
- * @author Brian Ho, Max Romanoff, Conor Norman 
- * June 5 2014
+ * @author Brian Ho, Max Romanoff, Conor Norman June 5 2014
  */
 public class AuthenticationDialogue extends javax.swing.JFrame {
 
     private final char[] PASSWORD = new char[]{'s', 't', 'm', 'a', 'x'};
     private static MainProgram mainProgram;
     private static Timer timer;
+    private String task;
 
     /**
      * Creates new form AuthenticationDialogue
+     *
+     * @param task the task that is being authenticated for
      */
-    public AuthenticationDialogue() {
+    public AuthenticationDialogue(String task) {
         initComponents();
+        this.task = task;
+        if (task.equalsIgnoreCase("")) {
+            setDefaultCloseOperation(EXIT_ON_CLOSE); // incase someone closes it on the first authentication, it does end the program without this, but this makes it faster
+        }
+        setLocationRelativeTo(null); // centres window
+        setVisible(true); // make visible
     }
 
     /**
@@ -39,7 +47,7 @@ public class AuthenticationDialogue extends javax.swing.JFrame {
         submitPasswordButton = new javax.swing.JButton();
         instructionalText = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Authentication");
         setResizable(false);
         setType(java.awt.Window.Type.POPUP);
@@ -114,13 +122,35 @@ public class AuthenticationDialogue extends javax.swing.JFrame {
      * @param evt
      */
     private void passwordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordFieldActionPerformed
-        mainProgram = new MainProgram(); // mainprogram object; opens gui
-        timer = new Timer(); // timer object
         if (Arrays.equals(passwordField.getPassword(), PASSWORD)) { // if the array is equal to password
             dispose(); // kills the authentication window
-            mainProgram.setLocationRelativeTo(null); // centers the main gui 
-            mainProgram.setVisible(true); // makes the main gui visible
-            (new Thread(timer)).start(); // starts the timer thread
+            switch (task.toUpperCase()) {
+                case "SCHEDULE_TASK":
+                    mainProgram.launchTaskSchedulerWindow();
+                    break;
+                case "SCHEDULE_HOLIDAY":
+                    mainProgram.launchHolidaySchedulerWindow();
+                    break;
+                case "DELETE_SCHEDULED_TASK":
+                    mainProgram.deleteScheduledTask();
+                    break;
+                case "MODIFY_SCHEDULED_TASK":
+                    mainProgram.modifyScheduledTask();
+                    break;
+                case "ADD_OCANADA_VERSION":
+                    mainProgram.getOCanadaProperties().addOCanadaVersion();
+                    break;
+                case "REMOVE_OCANADA_VERSION":
+                    mainProgram.getOCanadaProperties().removeOCanadaVersion();
+                    break;
+                case "EXIT_MAIN_PROGRAM":
+                    System.exit(0); // terminate
+                    break;
+                default:
+                    mainProgram = new MainProgram(); // mainprogram object; opens gui
+                    timer = new Timer(); // timer object
+                    (new Thread(timer)).start(); // starts the timer thread
+            }
         } else {
             instructionalText.setForeground(Color.red); // makes text below appear red
             instructionalText.setText("You have entered the wrong password, Try Again!");
@@ -158,15 +188,15 @@ public class AuthenticationDialogue extends javax.swing.JFrame {
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
         /*try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AuthenticationDialogue.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }*/
+         for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+         if ("Nimbus".equals(info.getName())) {
+         javax.swing.UIManager.setLookAndFeel(info.getClassName());
+         break;
+         }
+         }
+         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
+         java.util.logging.Logger.getLogger(AuthenticationDialogue.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+         }*/
         try {
             javax.swing.UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
@@ -177,9 +207,7 @@ public class AuthenticationDialogue extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                AuthenticationDialogue window = new AuthenticationDialogue(); // creates an object of this class (non-static methods)
-                window.setLocationRelativeTo(null); // centers the authentication window
-                window.setVisible(true); // makes the authentication window visible
+                new AuthenticationDialogue(""); // creates an object of this class (non-static methods)
             }
         });
     }

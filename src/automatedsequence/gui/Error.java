@@ -19,6 +19,8 @@ public class Error extends javax.swing.JFrame {
     public Error(String errorMessage) {
         this.ERROR_MESSAGE = errorMessage;
         initComponents();
+        setLocationRelativeTo(null); // centres window
+        setVisible(true); // make visible
     }
 
     /**
