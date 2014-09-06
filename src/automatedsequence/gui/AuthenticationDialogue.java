@@ -61,7 +61,7 @@ public class AuthenticationDialogue extends javax.swing.JFrame {
             }
         });
 
-        submitPasswordButton.setText("Start Program");
+        submitPasswordButton.setText("Enter");
         submitPasswordButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 submitPasswordButtonActionPerformed(evt);
@@ -77,7 +77,7 @@ public class AuthenticationDialogue extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(221, Short.MAX_VALUE)
+                        .addContainerGap(261, Short.MAX_VALUE)
                         .addComponent(submitPasswordButton))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(21, 21, 21)

@@ -31,7 +31,7 @@
           <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace pref="221" max="32767" attributes="0"/>
+                      <EmptySpace pref="261" max="32767" attributes="0"/>
                       <Component id="submitPasswordButton" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
@@ -80,7 +80,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="submitPasswordButton">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Start Program"/>
+        <Property name="text" type="java.lang.String" value="Enter"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="submitPasswordButtonActionPerformed"/>
