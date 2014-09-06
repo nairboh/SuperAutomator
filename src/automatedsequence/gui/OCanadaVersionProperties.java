@@ -12,7 +12,8 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 /**
  * Purpose: Properties Class
  *
- * @author Brian Ho, Max Romanoff, Conor Norman June 5 2014
+ * @author Brian Ho, Max Romanoff, Conor Norman 
+ * June 5 2014
  */
 public class OCanadaVersionProperties extends javax.swing.JFrame {
 

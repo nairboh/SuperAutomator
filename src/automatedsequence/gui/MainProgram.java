@@ -19,7 +19,8 @@ import javax.swing.ListSelectionModel;
 /**
  * Purpose: Main Program Class
  *
- * @author Brian Ho, Max Romanoff, Conor Norman June 5 2014
+ * @author Brian Ho, Max Romanoff, Conor Norman 
+ * June 5 2014
  */
 public class MainProgram extends javax.swing.JFrame {
 
@@ -280,11 +281,11 @@ public class MainProgram extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(modifyTasksButton, javax.swing.GroupLayout.DEFAULT_SIZE, 93, Short.MAX_VALUE)
+                    .addComponent(modifyTasksButton, javax.swing.GroupLayout.PREFERRED_SIZE, 93, Short.MAX_VALUE)
                     .addComponent(deleteButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(stopToggleButton, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
+                    .addComponent(stopToggleButton, javax.swing.GroupLayout.PREFERRED_SIZE, 134, Short.MAX_VALUE)
                     .addComponent(startNowButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(7, 7, 7))
         );
@@ -391,7 +392,7 @@ public class MainProgram extends javax.swing.JFrame {
                     hour = c.get(Calendar.HOUR_OF_DAY);
                     minute = c.get(Calendar.MINUTE);
                     sec = c.get(Calendar.SECOND);
-                    time = dayOfWeek + " " + month + " " + dayOfMonth + " " + year + " [EST " + (hour > 12 ? hour-12 : (hour == 0 ? 12 : hour)) +":" + ((minute < 10) ? "0" + minute : minute) + ":" + ((sec < 10) ? "0" + sec : sec) + (hour > 12 ? " PM]" : " AM]"); // format and print time
+                    time = dayOfWeek + " " + month + " " + dayOfMonth + " " + year + " [EST " + hour + ":" + ((minute < 10) ? "0" + minute : minute) + ":" + ((sec < 10) ? "0" + sec : sec) + "]"; // format and print time
                     dateAndTimeLabel.setText(time); // updates the time every second
                     information = "[INFO] O'CANADA VERSION " + Timer.getOCanadaVersion() +" SELECTED"; // shows the version of O'Canada selected, updates every second
                     informationBox.setText((!Timer.isOCanadaPlaying() ? "[INFO] Waiting to start O'Canada..." : information) + "\n" + (Timer.getIsPlaying() ? "[INFO] Currently Executing Task: " + Timer.getCurrentTaskName() : "")); // if O canada is not detected to be playing; display this, if there is an event playing display name, otherwise leave blank

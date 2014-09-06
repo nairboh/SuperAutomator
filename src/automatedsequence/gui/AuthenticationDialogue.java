@@ -9,7 +9,8 @@ import javax.swing.UIManager;
  * Purpose: Authentication Dialogue (accepts password form user before launching
  * main program)
  *
- * @author Brian Ho, Max Romanoff, Conor Norman June 5 2014
+ * @author Brian Ho, Max Romanoff, Conor Norman 
+ * June 5 2014
  */
 public class AuthenticationDialogue extends javax.swing.JFrame {
 
