@@ -36,9 +36,8 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="dateAndTimeLabel" max="32767" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jLabel1" min="-2" pref="123" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+                      <Component id="jLabel1" min="-2" pref="171" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -174,7 +173,7 @@
         </Property>
       </Properties>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="new Thread(){&#xa;public void run(){&#xa;while (true){&#xa;Calendar c = new GregorianCalendar();&#xa;dayOfWeek = (calendar.getDayOfWeek(c.get(Calendar.DAY_OF_WEEK)));&#xa;month = (calendar.getMonth(c.get(Calendar.MONTH) + 1)); // because starts at 0&#xa;dayOfMonth = c.get(Calendar.DAY_OF_MONTH);&#xa;year = c.get(Calendar.YEAR);&#xa;hour = c.get(Calendar.HOUR_OF_DAY);&#xa;minute = c.get(Calendar.MINUTE);&#xa;sec = c.get(Calendar.SECOND);&#xa;time = dayOfWeek + &quot; &quot; + month + &quot; &quot; + dayOfMonth + &quot; &quot; + year + &quot; [EST &quot; + hour + &quot;:&quot; + ((minute &lt; 10) ? &quot;0&quot; + minute : minute) + &quot;:&quot; + ((sec &lt; 10) ? &quot;0&quot; + sec : sec) + &quot;]&quot;; // format and print time&#xa;dateAndTimeLabel.setText(time); // updates the time every second&#xa;information = &quot;[INFO] O&apos;CANADA VERSION &quot; + Timer.getOCanadaVersion() +&quot; SELECTED&quot;; // shows the version of O&apos;Canada selected, updates every second&#xa;informationBox.setText((!Timer.isOCanadaPlaying() ? &quot;[INFO] Waiting to start O&apos;Canada...&quot; : information) + &quot;\n&quot; + (Timer.getIsPlaying() ? &quot;[INFO] Currently Executing Task: &quot; + Timer.getCurrentTaskName() : &quot;&quot;)); // if O canada is not detected to be playing; display this, if there is an event playing display name, otherwise leave blank&#xa;&#xa;try {&#xa;                Thread.sleep(1000); // loop once every second, reduces toll on cpu&#xa;            } catch (InterruptedException ex) {&#xa;                System.out.println(ex);&#xa;            }&#xa;}&#xa;}&#xa;}.start();"/>
+        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="new Thread(){&#xa;public void run(){&#xa;while (true){&#xa;Calendar c = new GregorianCalendar();&#xa;dayOfWeek = (calendar.getDayOfWeek(c.get(Calendar.DAY_OF_WEEK)));&#xa;month = (calendar.getMonth(c.get(Calendar.MONTH) + 1)); // because starts at 0&#xa;dayOfMonth = c.get(Calendar.DAY_OF_MONTH);&#xa;year = c.get(Calendar.YEAR);&#xa;hour = c.get(Calendar.HOUR_OF_DAY);&#xa;minute = c.get(Calendar.MINUTE);&#xa;sec = c.get(Calendar.SECOND);&#xa;time = dayOfWeek + &quot; &quot; + month + &quot; &quot; + dayOfMonth + &quot; &quot; + year + &quot; [EST &quot; + hour + &quot;:&quot; + ((minute &lt; 10) ? &quot;0&quot; + minute : minute) + &quot;:&quot; + ((sec &lt; 10) ? &quot;0&quot; + sec : sec) + &quot;]&quot;; // format and print time&#xa;dateAndTimeLabel.setText(time); // updates the time every second&#xa;information = &quot;[INFO] O&apos;CANADA VERSION &quot; + Timer.getOCanadaVersion() +&quot; SELECTED&quot;; // shows the version of O&apos;Canada selected, updates every second&#xa;informationBox.setText((!haltToggleButton.isSelected() ? (!Timer.isOCanadaPlaying() ? &quot;[STATUS] FULLY-OPERATIONAL; AWAITING TASKS&quot; : information) : &quot;[WARNING] *******ALL TASKS HALTED*******\nNOTHING WILL PLAY AUTOMATICALLY UNTIL\nUN-HALTED!!!&quot;) + &quot;\n&quot; + (Timer.getIsPlaying() ? &quot;[INFO] Currently Executing Task: &quot; + Timer.getCurrentTaskName() : &quot;&quot;)); // if O canada is not detected to be playing; display this, if there is an event playing display name, otherwise leave blank&#xa;&#xa;try {&#xa;                Thread.sleep(1000); // loop once every second, reduces toll on cpu&#xa;            } catch (InterruptedException ex) {&#xa;                System.out.println(ex);&#xa;            }&#xa;}&#xa;}&#xa;}.start();"/>
       </AuxValues>
     </Component>
     <Component class="javax.swing.JButton" name="propertiesButton">
@@ -245,7 +244,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="11" style="2"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Super Automator v1.3"/>
+        <Property name="text" type="java.lang.String" value="Super Automator Build: Sept 2014"/>
       </Properties>
     </Component>
     <Container class="javax.swing.JPanel" name="scheduleTasksPanel">
@@ -322,8 +321,8 @@
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="stopToggleButton" pref="134" max="32767" attributes="0"/>
-                      <Component id="startNowButton" max="32767" attributes="0"/>
+                      <Component id="haltToggleButton" pref="134" max="32767" attributes="0"/>
+                      <Component id="startNowToggleButton" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
               </Group>
@@ -334,12 +333,12 @@
               <Group type="102" attributes="0">
                   <EmptySpace max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="startNowButton" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="modifyTasksButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="startNowToggleButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="stopToggleButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="haltToggleButton" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="deleteButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -347,13 +346,13 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JToggleButton" name="stopToggleButton">
+        <Component class="javax.swing.JToggleButton" name="haltToggleButton">
           <Properties>
-            <Property name="text" type="java.lang.String" value="STOP ALL TASKS"/>
+            <Property name="text" type="java.lang.String" value="HALT ALL TASKS"/>
             <Property name="toolTipText" type="java.lang.String" value="Pressing this halts the whole program, no tasks will be executed until it is clicked again! (Must be resumed before a task is scheduled to start, or the task will not execute!)"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="stopToggleButtonActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="haltToggleButtonActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="modifyTasksButton">
@@ -374,13 +373,12 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deleteButtonActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="startNowButton">
+        <Component class="javax.swing.JToggleButton" name="startNowToggleButton">
           <Properties>
             <Property name="text" type="java.lang.String" value="START NOW"/>
-            <Property name="toolTipText" type="java.lang.String" value="This button overides the time for ONE task only! Highlight a task above and click this to start the event instantly! (This must be done multiple times if you wish to manually start multiple events!)"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="startNowButtonActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="startNowToggleButtonActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

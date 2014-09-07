@@ -7,7 +7,7 @@ package automatedsequence.constants;
  * June 5 2014
  */
 public class PathConstants {
-    public static String scheduleFilePath = "C:/Users/Brian/Desktop/SuperAutomator/resource/schedule.txt", oCanadaFilePath = "C:/Users/Brian/Desktop/SuperAutomator/resource/oCanada.txt"; 
-    //public static String scheduleFilePath = System.getProperty("user.dir") + "/resource/schedule.txt", oCanadaFilePath = System.getProperty("user.dir") + "/resource/oCanada.txt"; 
+    //public static String scheduleFilePath = "C:/Users/Brian/Desktop/SuperAutomator/resource/schedule.txt", oCanadaFilePath = "C:/Users/Brian/Desktop/SuperAutomator/resource/oCanada.txt"; 
+    public static String scheduleFilePath = System.getProperty("user.dir") + "/resource/schedule.txt", oCanadaFilePath = System.getProperty("user.dir") + "/resource/oCanada.txt"; 
     public static int morningRushEventID = 0, pleaseStandUpForOCanadaEventID = 1, oCanadaID = 2;
 }

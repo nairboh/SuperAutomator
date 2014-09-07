@@ -19,8 +19,7 @@ import javax.swing.ListSelectionModel;
 /**
  * Purpose: Main Program Class
  *
- * @author Brian Ho, Max Romanoff, Conor Norman 
- * June 5 2014
+ * @author Brian Ho, Max Romanoff, Conor Norman June 5 2014
  */
 public class MainProgram extends javax.swing.JFrame {
 
@@ -71,7 +70,7 @@ public class MainProgram extends javax.swing.JFrame {
         };
         addWindowListener(listener);
     }
-    
+
     /**
      * Method updates the scheduled box
      *
@@ -104,8 +103,8 @@ public class MainProgram extends javax.swing.JFrame {
      *
      * @return if the program is currently halted or not
      */
-    public boolean isStopped() {
-        return stopToggleButton.isSelected();
+    public boolean isHalted() {
+        return haltToggleButton.isSelected();
     }
 
     /**
@@ -143,10 +142,10 @@ public class MainProgram extends javax.swing.JFrame {
         scheduleHolidaysButton = new javax.swing.JButton();
         scheduleCommandButton = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
-        stopToggleButton = new javax.swing.JToggleButton();
+        haltToggleButton = new javax.swing.JToggleButton();
         modifyTasksButton = new javax.swing.JButton();
         deleteButton = new javax.swing.JButton();
-        startNowButton = new javax.swing.JButton();
+        startNowToggleButton = new javax.swing.JToggleButton();
         byLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -200,7 +199,7 @@ public class MainProgram extends javax.swing.JFrame {
         postponeDurationInMinutesSpinner.setMaximumSize(new java.awt.Dimension(29, 20));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
-        jLabel1.setText("Super Automator v1.3");
+        jLabel1.setText("Super Automator Build: Sept 2014");
 
         scheduleTasksPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Schedule Tasks"));
 
@@ -242,11 +241,11 @@ public class MainProgram extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Task Control Panel"));
 
-        stopToggleButton.setText("STOP ALL TASKS");
-        stopToggleButton.setToolTipText("Pressing this halts the whole program, no tasks will be executed until it is clicked again! (Must be resumed before a task is scheduled to start, or the task will not execute!)");
-        stopToggleButton.addActionListener(new java.awt.event.ActionListener() {
+        haltToggleButton.setText("HALT ALL TASKS");
+        haltToggleButton.setToolTipText("Pressing this halts the whole program, no tasks will be executed until it is clicked again! (Must be resumed before a task is scheduled to start, or the task will not execute!)");
+        haltToggleButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                stopToggleButtonActionPerformed(evt);
+                haltToggleButtonActionPerformed(evt);
             }
         });
 
@@ -266,11 +265,10 @@ public class MainProgram extends javax.swing.JFrame {
             }
         });
 
-        startNowButton.setText("START NOW");
-        startNowButton.setToolTipText("This button overides the time for ONE task only! Highlight a task above and click this to start the event instantly! (This must be done multiple times if you wish to manually start multiple events!)");
-        startNowButton.addActionListener(new java.awt.event.ActionListener() {
+        startNowToggleButton.setText("START NOW");
+        startNowToggleButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                startNowButtonActionPerformed(evt);
+                startNowToggleButtonActionPerformed(evt);
             }
         });
 
@@ -281,12 +279,12 @@ public class MainProgram extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(modifyTasksButton, javax.swing.GroupLayout.PREFERRED_SIZE, 93, Short.MAX_VALUE)
+                    .addComponent(modifyTasksButton, javax.swing.GroupLayout.DEFAULT_SIZE, 93, Short.MAX_VALUE)
                     .addComponent(deleteButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(stopToggleButton, javax.swing.GroupLayout.PREFERRED_SIZE, 134, Short.MAX_VALUE)
-                    .addComponent(startNowButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(haltToggleButton, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
+                    .addComponent(startNowToggleButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(7, 7, 7))
         );
         jPanel1Layout.setVerticalGroup(
@@ -294,11 +292,11 @@ public class MainProgram extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(startNowButton)
-                    .addComponent(modifyTasksButton))
+                    .addComponent(modifyTasksButton)
+                    .addComponent(startNowToggleButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(stopToggleButton)
+                    .addComponent(haltToggleButton)
                     .addComponent(deleteButton)))
         );
 
@@ -313,9 +311,8 @@ public class MainProgram extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(dateAndTimeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
+                        .addGap(35, 35, 35)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -395,7 +392,7 @@ public class MainProgram extends javax.swing.JFrame {
                     time = dayOfWeek + " " + month + " " + dayOfMonth + " " + year + " [EST " + hour + ":" + ((minute < 10) ? "0" + minute : minute) + ":" + ((sec < 10) ? "0" + sec : sec) + "]"; // format and print time
                     dateAndTimeLabel.setText(time); // updates the time every second
                     information = "[INFO] O'CANADA VERSION " + Timer.getOCanadaVersion() +" SELECTED"; // shows the version of O'Canada selected, updates every second
-                    informationBox.setText((!Timer.isOCanadaPlaying() ? "[INFO] Waiting to start O'Canada..." : information) + "\n" + (Timer.getIsPlaying() ? "[INFO] Currently Executing Task: " + Timer.getCurrentTaskName() : "")); // if O canada is not detected to be playing; display this, if there is an event playing display name, otherwise leave blank
+                    informationBox.setText((!haltToggleButton.isSelected() ? (!Timer.isOCanadaPlaying() ? "[STATUS] FULLY-OPERATIONAL; AWAITING TASKS" : information) : "[WARNING] *******ALL TASKS HALTED*******\nNOTHING WILL PLAY AUTOMATICALLY UNTIL\nUN-HALTED!!!") + "\n" + (Timer.getIsPlaying() ? "[INFO] Currently Executing Task: " + Timer.getCurrentTaskName() : "")); // if O canada is not detected to be playing; display this, if there is an event playing display name, otherwise leave blank
 
                     try {
                         Thread.sleep(1000); // loop once every second, reduces toll on cpu
@@ -414,17 +411,17 @@ public class MainProgram extends javax.swing.JFrame {
      *
      * @param evt
      */
-    private void stopToggleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stopToggleButtonActionPerformed
-        if (stopToggleButton.isSelected()) {
-            stopToggleButton.setText("RESUME ALL TASKS");
+    private void haltToggleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_haltToggleButtonActionPerformed
+        if (haltToggleButton.isSelected()) {
+            haltToggleButton.setText("UN-HALT ALL TASKS");
         } else { // reset text
-            stopToggleButton.setText("STOP ALL TASKS");
+            haltToggleButton.setText("HALT ALL TASKS");
         }
         player.stop(); // stops the music from playing
         isForcedStartActive = false; // no songs being manually played
         Timer.setIsOCanadaPlaying(false); // incase user stops ocanada
         Timer.isManuallyStopped(true); // resets the time if user stops a manual event
-    }//GEN-LAST:event_stopToggleButtonActionPerformed
+    }//GEN-LAST:event_haltToggleButtonActionPerformed
 
     /**
      * Method creates a commandsGUI object and launches a new window
@@ -506,39 +503,6 @@ public class MainProgram extends javax.swing.JFrame {
     }
 
     /**
-     * Method plays selected file in "SCHEDULED TASKS" box when clicked
-     *
-     * @param evt
-     */
-    private void startNowButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startNowButtonActionPerformed
-        if (!stopToggleButton.isSelected()) { // if the override button is not selected
-            if (scheduledTasks.getSelectedIndex() >= 0 && scheduledTasks.getSelectedIndex() < ReadScheduleFile.getScheduledEventData().size()) {
-                if (!isForcedStartActive && !Timer.getIsPlaying()) { // if nothing is playing
-                    isForcedStartActive = true;
-                    int durationOfEvent = ReadScheduleFile.getScheduledEventData().get(scheduledTasks.getSelectedIndex()).getDuration(); // get duration of event
-                    int currentTimeInSeconds = Timer.getCurrentTimeInSeconds(); // get current time in seconds
-                    int initialStartTime = ReadScheduleFile.getScheduledEventData().get(scheduledTasks.getSelectedIndex()).getStartTime(); // save the original start time to memory
-                    int initialEndTime = ReadScheduleFile.getScheduledEventData().get(scheduledTasks.getSelectedIndex()).getEndTime(); // save the original end time to memory
-                    String initialExecutionDate = ReadScheduleFile.getScheduledEventData().get(scheduledTasks.getSelectedIndex()).getDate(); // save the original execution date to memory
-
-                    ReadScheduleFile.getScheduledEventData().get(scheduledTasks.getSelectedIndex()).setStartTime(currentTimeInSeconds + 1); // set time to now (1 sec delay incase of latency)
-                    ReadScheduleFile.getScheduledEventData().get(scheduledTasks.getSelectedIndex()).setEndTime(currentTimeInSeconds + durationOfEvent + 1); // set end time (1 sec delay incase of latency)
-                    ReadScheduleFile.getScheduledEventData().get(scheduledTasks.getSelectedIndex()).setDate(Timer.getCurrentDate());
-
-                    Timer.isManuallyStarted(true, scheduledTasks.getSelectedIndex(), initialStartTime, initialEndTime, initialExecutionDate); // passes information to timer to know it is a forced start
-                    populateScheduledBox(true); // resets the box
-                } else {
-                    new Error("An event is currently active (playing)!"); // passes string
-                }
-            } else { // no selection
-                new Error("Please first select an item in the \"Scheduled Tasks\" box above!"); // passes string
-            }
-        } else { // schedule stopped
-            new Error("Please press the \"RESUME ALL TASKS\" button first!"); // passes string
-        }
-    }//GEN-LAST:event_startNowButtonActionPerformed
-
-    /**
      * Method launches the authentication dialogue before the holidaysGUI object
      * is launched
      *
@@ -604,6 +568,43 @@ public class MainProgram extends javax.swing.JFrame {
         new AuthenticationDialogue("MODIFY_SCHEDULED_TASK");
     }//GEN-LAST:event_modifyTasksButtonActionPerformed
 
+    private void startNowToggleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startNowToggleButtonActionPerformed
+         if (startNowToggleButton.isSelected()) {
+            if (!haltToggleButton.isSelected()) { // if the override button is not selected
+                if (scheduledTasks.getSelectedIndex() >= 0 && scheduledTasks.getSelectedIndex() < ReadScheduleFile.getScheduledEventData().size()) {
+                    if (!isForcedStartActive && !Timer.getIsPlaying()) { // if nothing is playing
+                        isForcedStartActive = true;
+                        int durationOfEvent = ReadScheduleFile.getScheduledEventData().get(scheduledTasks.getSelectedIndex()).getDuration(); // get duration of event
+                        int currentTimeInSeconds = Timer.getCurrentTimeInSeconds(); // get current time in seconds
+                        int initialStartTime = ReadScheduleFile.getScheduledEventData().get(scheduledTasks.getSelectedIndex()).getStartTime(); // save the original start time to memory
+                        int initialEndTime = ReadScheduleFile.getScheduledEventData().get(scheduledTasks.getSelectedIndex()).getEndTime(); // save the original end time to memory
+                        String initialExecutionDate = ReadScheduleFile.getScheduledEventData().get(scheduledTasks.getSelectedIndex()).getDate(); // save the original execution date to memory
+
+                        ReadScheduleFile.getScheduledEventData().get(scheduledTasks.getSelectedIndex()).setStartTime(currentTimeInSeconds + 1); // set time to now (1 sec delay incase of latency)
+                        ReadScheduleFile.getScheduledEventData().get(scheduledTasks.getSelectedIndex()).setEndTime(currentTimeInSeconds + durationOfEvent + 1); // set end time (1 sec delay incase of latency)
+                        ReadScheduleFile.getScheduledEventData().get(scheduledTasks.getSelectedIndex()).setDate(Timer.getCurrentDate());
+
+                        Timer.isManuallyStarted(true, scheduledTasks.getSelectedIndex(), initialStartTime, initialEndTime, initialExecutionDate); // passes information to timer to know it is a forced start
+                        populateScheduledBox(true); // resets the box
+                        startNowToggleButton.setText("STOP NOW");
+                    } else {
+                        new Error("An event is currently active (playing)!"); // passes string
+                    }
+                } else { // no selection
+                    new Error("Please first select an item in the \"Scheduled Tasks\" box above!"); // passes string
+                }
+            } else { // schedule stopped
+                new Error("Please press the \"RESUME ALL TASKS\" button first!"); // passes string
+            }
+        } else {
+            player.stop(); // stops the music from playing
+            isForcedStartActive = false; // no songs being manually played
+            Timer.setIsOCanadaPlaying(false); // incase user stops ocanada
+            Timer.isManuallyStopped(true); // resets the time if user stops a manual event
+            startNowToggleButton.setText("START NOW");
+        }
+    }//GEN-LAST:event_startNowToggleButtonActionPerformed
+
     public void modifyScheduledTask() {
         if (!isForcedStartActive) { // if there is no manual event executing
             if (!postponeToggleButton.isSelected()) { // if postpone button is not selected
@@ -624,6 +625,7 @@ public class MainProgram extends javax.swing.JFrame {
     private javax.swing.JLabel byLabel;
     private javax.swing.JLabel dateAndTimeLabel;
     private javax.swing.JButton deleteButton;
+    private javax.swing.JToggleButton haltToggleButton;
     private javax.swing.JLabel infoLabel;
     private javax.swing.JScrollPane infoPane;
     private javax.swing.JTextArea informationBox;
@@ -641,7 +643,6 @@ public class MainProgram extends javax.swing.JFrame {
     private javax.swing.JList scheduledTasks;
     private javax.swing.JLabel scheduledTasksLabel;
     private javax.swing.JScrollPane scheduledTasksPane;
-    private javax.swing.JButton startNowButton;
-    private javax.swing.JToggleButton stopToggleButton;
+    private javax.swing.JToggleButton startNowToggleButton;
     // End of variables declaration//GEN-END:variables
 }
