@@ -2,7 +2,7 @@ SuperAutomator was programmed using Java, using swing, and designed with object 
 
 All the events in this program is an object each with its own set of start times and end times, path, repeat flag, and more.
 
-
+![alt text](https://raw.githubusercontent.com/nairboh/SuperAutomator/master/screenshots/SuperAutomator-Main.png "Main")
 
 More screenshots are located at the bottom of this page!
 
@@ -60,6 +60,10 @@ SuperAutomator is designed to increase productivity for the user. The program is
 
 <b>Here are some other Screenshots of the Program:</b>
 
- 
+![alt text](https://raw.githubusercontent.com/nairboh/SuperAutomator/master/screenshots/holiday.png "Main")
+![alt text](https://raw.githubusercontent.com/nairboh/SuperAutomator/master/screenshots/task.png "Main")
+![alt text](https://raw.githubusercontent.com/nairboh/SuperAutomator/master/screenshots/properties.png "Main")
+![alt text](https://raw.githubusercontent.com/nairboh/SuperAutomator/master/screenshots/modify.png "Main")
+
 
  
